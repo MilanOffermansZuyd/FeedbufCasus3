@@ -9,7 +9,7 @@ namespace FeedBuf
     class UserAction
     {
         public int Id { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } // Eventueel updaten naar Title aangezien dit in de ERD ook zo is (Evt ook aanpassen in klassendiagram)
         public Student Student { get; set; }
         public Goal Goal { get; set; }
         public bool IsFinished { get; set; }
