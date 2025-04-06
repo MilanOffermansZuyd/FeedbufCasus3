@@ -67,3 +67,17 @@ C:\Users\milan\OneDrive\Documenten\GitHub\FeedbufCasus3\FeedBuf\FeedBuf\bin\Debu
 C:\Users\milan\OneDrive\Documenten\GitHub\FeedbufCasus3\FeedBuf\FeedBuf\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\milan\OneDrive\Documenten\GitHub\FeedbufCasus3\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.csproj.AssemblyReference.cache
 C:\Users\milan\OneDrive\Documenten\GitHub\FeedbufCasus3\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.csproj.Up2Date
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.csproj.AssemblyReference.cache
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf_MarkupCompile.cache
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.g.resources
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.AssemblyInfoInputs.cache
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.AssemblyInfo.cs
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.csproj.CoreCompileInputs.cache
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.sourcelink.json
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.dll
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\refint\FeedBuf.dll
+C:\Users\robbi\Desktop\GroepsFeedbuf\FeedBuf\FeedBuf\obj\Debug\net8.0-windows\FeedBuf.pdb
