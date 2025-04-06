@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FeedBuf")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01f22686a00e92cbaadf03a3a5a89439bbb6bbb8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a77124a5d2de1141a0799a140af10f1d16c11b96")]
 [assembly: System.Reflection.AssemblyProductAttribute("FeedBuf")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FeedBuf")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
