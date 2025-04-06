@@ -1666,23 +1666,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\robbi\\.nuget\\packages\\": {},
+    "C:\\Users\\milan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
+      "projectUniqueName": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
       "projectName": "FeedBuf",
-      "projectPath": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
-      "packagesPath": "C:\\Users\\robbi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\obj\\",
+      "projectPath": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
+      "packagesPath": "C:\\Users\\milan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\robbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\milan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1709,8 +1709,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -1740,8 +1739,16 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

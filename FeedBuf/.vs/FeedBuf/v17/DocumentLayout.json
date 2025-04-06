@@ -1,14 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\",
+  "WorkspaceRootPath": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\groepsfeedbuf\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\milan\\onedrive\\documenten\\github\\feedbufcasus3\\feedbuf\\feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\milan\\onedrive\\documenten\\github\\feedbufcasus3\\feedbuf\\feedbuf\\category\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\category\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\milan\\onedrive\\documenten\\github\\feedbufcasus3\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\groepsfeedbuf\\feedbuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,37 +36,83 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T15:37:10.538Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\GroepsFeedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-06T15:37:06.824Z",
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\.gitignore",
+              "RelativeDocumentMoniker": "..\\.gitignore",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\.gitignore",
+              "RelativeToolTip": "..\\.gitignore",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFoAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-05T18:21:31.77Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Category\\Category.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Category\\Category.cs",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Category\\Category.cs",
+              "RelativeToolTip": "FeedBuf\\Category\\Category.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAwAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T17:55:59.879Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DAL.cs",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\DAL.cs",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeToolTip": "FeedBuf\\DAL.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwCkAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T17:30:21.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainWindow.g.cs",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs",
+              "RelativeToolTip": "FeedBuf\\obj\\Debug\\net8.0-windows\\MainWindow.g.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T17:25:52.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-02T13:35:26.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\milan\\OneDrive\\Documenten\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T13:35:26.831Z"
             }
           ]
         }
