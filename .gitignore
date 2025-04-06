@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/FeedbufCasus3/FileContentIndex/15a851dc-8680-4e1b-9ac7-51f92495ff7a.vsidx
+/.vs/FeedbufCasus3/FileContentIndex
+/FeedBuf/.vs/FeedBuf/FileContentIndex
+/.vs/slnx.sqlite
+/FeedBuf/FeedBuf/obj
