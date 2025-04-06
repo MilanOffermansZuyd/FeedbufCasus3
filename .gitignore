@@ -398,3 +398,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/.vs/slnx.sqlite
+/FeedBuf/FeedBuf/obj/Debug/net8.0-windows/FeedBuf.AssemblyInfo.cs
+/FeedBuf/FeedBuf/obj/Debug/net8.0-windows/FeedBuf.AssemblyInfoInputs.cache
+/FeedBuf/FeedBuf/obj/Debug/net8.0-windows/FeedBuf_MarkupCompile.cache
+/FeedBuf/FeedBuf/obj/Debug/net8.0-windows/MainWindow.baml
+/FeedBuf/FeedBuf/obj/Release/net8.0-windows/FeedBuf.AssemblyInfo.cs
+/FeedBuf/FeedBuf/obj/Release/net8.0-windows/FeedBuf.AssemblyInfoInputs.cache
+/FeedBuf/FeedBuf/obj/Release/net8.0-windows/FeedBuf_MarkupCompile.cache
