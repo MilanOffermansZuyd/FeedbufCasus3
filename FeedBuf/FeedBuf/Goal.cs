@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FeedBuf
 {
-    class Goal
+    public class Goal
     {
         public int Id { get; set; }
         public string Text { get; set; }
