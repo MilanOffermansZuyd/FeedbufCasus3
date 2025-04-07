@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FeedBuf
 {
-    class UserAction
+    public class UserAction : Message
     {
         public int Id { get; set; }
-        public string Text { get; set; } // Evt veranderen naar Title ivm ERD (Ook aanpassen naar klassendiagram)
-        public Student Student { get; set; }
         public Goal Goal { get; set; }
         public bool IsFinished { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -20,17 +19,15 @@ namespace FeedBuf
 
 
         // Constructor
-        public UserAction(int id, string text, Student student, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline)
+        public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, string text, ZuydUser student, ZuydUser author) 
+            : base(0, text,student , author)
         {
             Id = id;
-            Text = text;
-            Student = student;
             Goal = goal;
             CreatedOn = createdOn;
             SoftDeadline = softDeadline;
             HardDeadline = hardDeadline;
             IsFinished = false;
-            Feedbacks = new List<Feedback>();
         }
 
         // Mark as finished

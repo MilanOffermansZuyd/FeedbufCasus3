@@ -8,6 +8,8 @@ namespace FeedBuf.Catagory
 {
     public class Category
     {
+        public int Id { get; set; }
+        public string Type { get; set; }
         public Category(int id ,string type)
         {
             Id = id;
@@ -17,8 +19,6 @@ namespace FeedBuf.Catagory
         {
             Type = type;
         }
-        public int Id { get; set; } 
-        public string Type { get; set; }
 
         public void GetCategoryTypes()
         {

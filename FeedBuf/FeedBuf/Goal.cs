@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace FeedBuf
 {
-    public class Goal
+    public class Goal : Message
     {
         public int Id { get; set; }
-        public string Text { get; set; }
-        public ZuydUser Author { get; set; } // Eventueel pleite nog niet over eens
-        public Student Student { get; set; }
         public DateTime SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public bool IsFinished { get; set; }
@@ -21,12 +18,10 @@ namespace FeedBuf
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, string text, ZuydUser author, Student student, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category)
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author)
+            : base(0, text, student, author)
         {
             Id = id;
-            Text = text;
-            Author = author;
-            Student = student;
             SoftDeadline = softDeadline;
             HardDeadline = hardDeadline;
             IsFinished = isFinished;
@@ -35,29 +30,6 @@ namespace FeedBuf
             Actions = new List<UserAction>();
         }
 
-        // Add Feedback
-        public void AddFeedback(Feedback feedback)
-        {
-            Feedbacks.Add(feedback);
-        }
-
-        // Remove Feedback
-        public void RemoveFeedback(Feedback feedback)
-        {
-            Feedbacks.Remove(feedback);
-        }
-
-        // Add Action
-        public void AddAction(UserAction action)
-        {
-            Actions.Add(action);
-        }
-
-        // Remove Action
-        public void RemoveAction(UserAction action)
-        {
-            Actions.Remove(action);
-        }
-
+        
     }
 }
