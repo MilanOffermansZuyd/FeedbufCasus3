@@ -13,6 +13,7 @@ namespace FeedBuf
         public ZuydUser Student { get; set; }
         public ZuydUser Author { get; set; }
 
+        /// Constructor
         public Message(int id, string text, ZuydUser student, ZuydUser author)
         {
             Id = id;

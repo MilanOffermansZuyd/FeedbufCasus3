@@ -13,8 +13,11 @@ namespace FeedBuf
         public int Id { get; set; }
         public Goal Goal { get; set; }
         public List<UserAction> UserActions { get; set; }
+
+
+        // Constructor
         public Feedback(int id, Goal goal, string text, ZuydUser student, ZuydUser author)
-            : base(0, text, student, author)
+            : base(id, text, student, author)
         {
             Id = id;
             Goal = goal;
