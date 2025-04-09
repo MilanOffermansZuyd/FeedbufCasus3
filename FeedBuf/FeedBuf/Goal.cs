@@ -19,7 +19,7 @@ namespace FeedBuf
 
         // Constructor
         public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author)
-            : base(0, text, student, author)
+            : base(id, text, student, author)
         {
             Id = id;
             SoftDeadline = softDeadline;
