@@ -86,3 +86,6 @@ Migrations/
 obj/
 *.v2
 /.vs/FeedbufCasus3/v17/DocumentLayout.backup.json
+/.vs/FeedbufCasus3/v17/.wsuo
+/.vs/FeedbufCasus3/v17/DocumentLayout.json
+*.json
