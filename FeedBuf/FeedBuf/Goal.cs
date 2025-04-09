@@ -9,7 +9,6 @@ namespace FeedBuf
 {
     public class Goal : Message
     {
-        public int Id { get; set; }
         public DateTime SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public bool IsFinished { get; set; }
@@ -18,8 +17,8 @@ namespace FeedBuf
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author)
-            : base(0, text, student, author)
+        public Goal(int id , DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author)
+            : base(id, text, student, author)
         {
             Id = id;
             SoftDeadline = softDeadline;

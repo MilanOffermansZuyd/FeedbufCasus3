@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ez+8RvsbRRE=",
+  "dgSpecHash": "+5clmM15bDc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
+  "projectFilePath": "C:\\Users\\juria\\Source\\Repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\juria\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\juria\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

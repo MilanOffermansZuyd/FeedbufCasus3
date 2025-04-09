@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj": {}
+    "C:\\Users\\juria\\Source\\Repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj": {}
   },
   "projects": {
-    "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj": {
+    "C:\\Users\\juria\\Source\\Repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
+        "projectUniqueName": "C:\\Users\\juria\\Source\\Repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
         "projectName": "FeedBuf",
-        "projectPath": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
+        "projectPath": "C:\\Users\\juria\\Source\\Repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\FeedBuf.csproj",
         "packagesPath": "C:\\Users\\juria\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\obj\\",
         "projectStyle": "PackageReference",

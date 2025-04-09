@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\useraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\useraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\zuyduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\zuyduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\feedbufcasus3.1\\feedbuf\\feedbuf\\category\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\category\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +34,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Category\\Category.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Category\\Category.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Category\\Category.cs",
+              "RelativeToolTip": "FeedBuf\\Category\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:48:39.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Feedback.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Feedback.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Feedback.cs",
+              "RelativeToolTip": "FeedBuf\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:36:50.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Goal.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Goal.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Goal.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Goal.cs",
+              "RelativeToolTip": "FeedBuf\\Goal.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAADwvxAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:36:38.963Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -18,6 +82,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Message.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Message.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\Message.cs",
+              "RelativeToolTip": "FeedBuf\\Message.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswBUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:36:12.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserAction.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\UserAction.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\UserAction.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\UserAction.cs",
+              "RelativeToolTip": "FeedBuf\\UserAction.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:26:46.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ZuydUser.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\ZuydUser.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\ZuydUser.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\FeedbufCasus3.1\\FeedBuf\\FeedBuf\\ZuydUser.cs",
+              "RelativeToolTip": "FeedBuf\\ZuydUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:26:42.622Z",
+              "EditorCaption": ""
             }
           ]
         }

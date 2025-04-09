@@ -9,7 +9,6 @@ namespace FeedBuf
 {
     public class UserAction : Message
     {
-        public int Id { get; set; }
         public Goal Goal { get; set; }
         public bool IsFinished { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -20,7 +19,7 @@ namespace FeedBuf
 
         // Constructor
         public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, string text, ZuydUser student, ZuydUser author) 
-            : base(0, text,student , author)
+            : base(id, text,student , author)
         {
             Id = id;
             Goal = goal;
