@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FeedBuf"
+    "\\FeedBuf",
+    "\\FeedBuf\\FeedBuf"
   ],
-  "SelectedNode": "\\FeedBuf\\FeedBuf.sln",
+  "SelectedNode": "\\FeedBuf\\FeedBuf\\Goal.cs",
   "PreviewInSolutionExplorer": false
 }
