@@ -652,7 +652,7 @@ namespace FeedBuf
                             var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
                             var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                             var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
-                            var isFinished = GetGoalFromDatabaseBy(int.Parse(reader[4].ToString()));
+                            var isFinished = bool.Parse(reader[4].ToString());
                             var createdOn = DateTime.Parse(reader[5].ToString());
                             var softDeadline = DateTime.Parse(reader[6].ToString());
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
