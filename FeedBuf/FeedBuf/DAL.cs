@@ -490,9 +490,9 @@ namespace FeedBuf
                         {
                             var id = int.Parse(reader[0].ToString());
                             var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var text = reader[2].ToString();
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                             var student = GetZuydUserFromDatabaseBy( int.Parse(reader[3].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[4].ToString()));
+                            var text = reader[4].ToString();
 
                             feedbacks.Add(new Feedback(id, goal, text, student, student));
                         }
@@ -585,7 +585,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET Id = @Id, GoalId = @GoalId, StudentId = @StudentId, AuthorId = @AuthorId , Message = @Message WHERE Id = @Id";
+                    command.CommandText = "UPDATE Feedback SET GoalId = @GoalId, StudentId = @StudentId, AuthorId = @AuthorId , Message = @Message WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", feedback.Id);
                     command.Parameters.AddWithValue("@GoalId", feedback.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", feedback.Student.Id);
