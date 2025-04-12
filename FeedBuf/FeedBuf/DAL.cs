@@ -5,7 +5,7 @@ namespace FeedBuf
 {
     public class DAL
     {
-        string connectionString = "Data Source=LAPTOP-T4RLVBV6;Initial Catalog=Feedbuf;Integrated Security=True;Trust Server Certificate=True";
+        string connectionString = "Server=localhost;Database=Feedbuf;Trusted_Connection=True;TrustServerCertificate=True;";
         List<Category> categories = new List<Category>();
         List<ActionFeedback> actionFeedbacks = new List<ActionFeedback>();
         List<Feedback> feedbacks = new List<Feedback>();
