@@ -307,18 +307,51 @@ namespace FeedBuf
                         while (reader.Read())
                         {
                             var id = int.Parse(reader[0].ToString());
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var softDeadline = DateTime.Parse(reader[3].ToString());
-                            var hardDeadline = DateTime.Parse(reader[4].ToString());
-                            var isFinished = bool.Parse(reader[5].ToString());
-                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[6].ToString()));
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
 
                             return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback);
                         }
                         return null;
+                    }
+                }
+            }
+        }
+
+        public List<Goal> GetAllFinishedGoalsFromDatabaseBy(int Id)
+        {
+            goals.Clear();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM Goal WHERE IsFinished = 1 and StudentId = @Id";
+                    command.Parameters.AddWithValue("@Id", Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
+
+                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                        }
+                        return goals;
                     }
                 }
             }
@@ -333,19 +366,19 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT* FROM Goal WHERE Id = @Id and OpenForFeedback = true and IsFinished = false";
+                    command.CommandText = "SELECT* FROM Goal WHERE Id = @Id and OpenForFeedback = 1 and IsFinished = 0";
                     command.Parameters.AddWithValue("@Id", Id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             var id = int.Parse(reader[0].ToString());
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var softDeadline = DateTime.Parse(reader[3].ToString());
-                            var hardDeadline = DateTime.Parse(reader[4].ToString());
-                            var isFinished = bool.Parse(reader[5].ToString());
-                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[6].ToString()));
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
 
@@ -367,7 +400,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Goal (CategoryId,StudentId,AuthorId,SoftDeadline,HardDeadline, IsFinished,Category,Message,OpenForFeedback) VALUES (@Category,@StudentId,@AuthorId,@SoftDeadline, @HardDeadline, @IsFinished,@Text, @OpenForFeedback) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO Goal (CategoryId,StudentId,AuthorId,SoftDeadline,HardDeadline, IsFinished,Message,OpenForFeedback) VALUES (@CategoryId,@StudentId,@AuthorId,@SoftDeadline, @HardDeadline, @IsFinished,@Text, @OpenForFeedback) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
                     command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
                     command.Parameters.AddWithValue("@CategoryId", goal.Category.Id);
