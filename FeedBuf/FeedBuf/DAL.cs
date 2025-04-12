@@ -830,9 +830,10 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET userActionId = @userActionId,FeedbackId = @FeedbackId WHERE Id = @Id";
-                    command.Parameters.AddWithValue("@userActionId", actionFeedback.UserAction.Id);
+                    command.CommandText = "UPDATE UserActionFeedback SET ActionId = @ActionId,FeedbackId = @FeedbackId WHERE Id = @Id";
+                    command.Parameters.AddWithValue("@ActionId", actionFeedback.UserAction.Id);
                     command.Parameters.AddWithValue("@FeedbackId", actionFeedback.Feedback.Id);
+                    command.Parameters.AddWithValue("@Id", actionFeedback.Id);
 
                     command.ExecuteNonQuery();
 
