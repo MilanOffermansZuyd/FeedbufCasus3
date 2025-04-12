@@ -811,7 +811,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "DELETE FROM UserAction WHERE Id = @Id";
+                    command.CommandText = "DELETE FROM UserActionFeedback WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", actionFeedbackId);
                     command.ExecuteNonQuery();
 
