@@ -97,7 +97,10 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "DELETE FROM Category WHERE Id = @Id";
+                    command.CommandText = """
+                        DELETE FROM Goal WHERE CategoryId = @id; 
+                        DELETE FROM Category WHERE Id = @id;
+                        """;
                     command.Parameters.AddWithValue("@Id", categoryId);
                     command.ExecuteNonQuery();
 
