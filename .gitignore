@@ -89,3 +89,7 @@ obj/
 /.vs/FeedbufCasus3/v17/.wsuo
 /.vs/FeedbufCasus3/v17/DocumentLayout.json
 *.json
+*.wsuo
+/FeedBuf/.vs/ProjectEvaluation/feedbuf.metadata.v9.bin
+/FeedBuf/.vs/ProjectEvaluation/feedbuf.projects.v9.bin
+/FeedBuf/.vs/ProjectEvaluation/feedbuf.strings.v9.bin
