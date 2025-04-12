@@ -22,7 +22,36 @@ namespace FeedBuf
         public MainWindow()
         {
             InitializeComponent();
+
+            // Login ---- Comment dit uit als je de login tijdelijk weg wil
+            LoginPanel.Visibility = Visibility.Visible;
+            DashboardPanel.Visibility = Visibility.Collapsed;
+            GoalsPanel.Visibility = Visibility.Collapsed;
+            ActionPanel.Visibility = Visibility.Collapsed;
         }
+
+
+        // Login ---- Comment dit uit als je de login tijdelijk weg wil
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            string email = EmailBox.Text.Trim();
+            string password = PasswordBox.Password.Trim();
+
+            var users = dal.FillZuydUsersFromDatabase();
+            var user = users.FirstOrDefault(u => u.Email == email && u.Password == password);
+
+            if (user != null)
+            {
+                LoginPanel.Visibility = Visibility.Collapsed;
+                DashboardPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorText.Text = "Ongeldig e-mailadres of wachtwoord.";
+                ErrorText.Visibility = Visibility.Visible;
+            }
+        }
+
 
         //Add goal
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
