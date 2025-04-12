@@ -43,19 +43,30 @@
         <!-- Sidebar -->
         <Border Background="#ebebeb" Grid.Column="0" CornerRadius="10" Margin="10" Padding="10">
             <StackPanel>
+                <TextBlock x:Name="WelcomeTextBlock"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="#444"
+                    Margin="0,0,0,10"
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    MaxWidth="150" 
+                    Text="Welkom!" />
+
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
-                <Button x:Name="LogoutButton" Content="Log Out"/>
+                <Button x:Name="LogoutButton" Content="Log Out" Click="LogoutButton_Click"/>
             </StackPanel>
         </Border>
 
-        <!-- Login Panel Comment dit uit als je de login tijdelijk weg wil-->
+
+        <!-- Login Panel Temporarily remove the login by commenting it.-->
         <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
                 <TextBlock Text="Login" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
-                <TextBox x:Name="EmailBox" Margin="0,5"/>
-                <PasswordBox x:Name="PasswordBox" Margin="0,5"/>
+                <TextBox x:Name="EmailBox" Margin="0,5" KeyDown="LoginField_KeyDown"/>
+                <PasswordBox x:Name="PasswordBox" Margin="0,5" KeyDown="LoginField_KeyDown"/>
                 <Button Content="Login" Click="Login_Click"/>
                 <TextBlock x:Name="ErrorText" Foreground="Red" TextAlignment="Center" Visibility="Collapsed"/>
             </StackPanel>
