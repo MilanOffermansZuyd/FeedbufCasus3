@@ -455,7 +455,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET AuthorId = @AuthorId, StudentId = @StudentId SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, Category = @Category, Message = @Text, OpenForFeedback = @OpenForFeedback WHERE Id = @Id";
+                    command.CommandText = "UPDATE Goal SET AuthorId = @AuthorId, StudentId = @StudentId, SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, CategoryId = @CategoryId, Message = @Text, OpenForFeedback = @OpenForFeedback WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", goal.Id);
                     command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
                     command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
@@ -464,7 +464,7 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@HardDeadline", goal.HardDeadline);
                     command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
                     command.Parameters.AddWithValue("@Text", goal.Text);
-                    command.Parameters.AddWithValue("@OpenForFeedback", goal.Text);
+                    command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
                     command.ExecuteNonQuery();
 
                     return FillGoalsFromDatabase();
