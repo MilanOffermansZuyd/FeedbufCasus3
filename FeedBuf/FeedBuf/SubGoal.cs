@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedBuf.Catagory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace FeedBuf
         public int SubId { get; set; }
         public Goal Goal { get; set; }
 
-        public Goal (int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId, Goal goal)
+        public SubGoal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId, Goal goal)
             : base(id, softDeadline, hardDeadline, isFinished, category, text, student, author, openForFeedback)
         {
             Id = id;

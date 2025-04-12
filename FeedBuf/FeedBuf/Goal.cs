@@ -14,7 +14,7 @@ namespace FeedBuf
         public DateTime HardDeadline { get; set; }
         public bool IsFinished { get; set; }
         public bool OpenForFeedback { get; set; }
-        public int SubId { get; set; }
+        public int? SubId { get; set; }
         public Category Category { get; set; }
         public List<Feedback> Feedbacks { get; set; }
         public List<UserAction> Actions { get; set; }
