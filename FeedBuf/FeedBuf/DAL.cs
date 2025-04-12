@@ -619,7 +619,7 @@ namespace FeedBuf
                             var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
                             var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                             var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
-                            var isFinished = GetGoalFromDatabaseBy(int.Parse(reader[4].ToString()));
+                            var isFinished = bool.Parse(reader[4].ToString());
                             var createdOn = DateTime.Parse(reader[5].ToString());
                             var softDeadline = DateTime.Parse(reader[6].ToString());
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
@@ -730,7 +730,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET GoalId = @GoalId,StudentId = StudentId , AuthorId = @AuthorId ,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, Message = @Message WHERE Id = @Id";
+                    command.CommandText = "UPDATE UserAction SET GoalId = @GoalId,StudentId = StudentId , AuthorId = @AuthorId ,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, Message = @Message WHERE Id = @Id";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
@@ -739,6 +739,7 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@SoftDeadline", userAction.SoftDeadline);
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
                     command.Parameters.AddWithValue("@Message", userAction.Text);
+                    command.Parameters.AddWithValue("@Id", userAction.Id);
 
                     command.ExecuteNonQuery();
 
