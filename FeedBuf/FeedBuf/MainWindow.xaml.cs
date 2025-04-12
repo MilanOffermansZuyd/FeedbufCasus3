@@ -79,5 +79,48 @@ namespace FeedBuf
 
             dal.AddUserActionFromDatabase(Useraction);
         }
+
+        private void ActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Hidden;
+            GoalsPanel.Visibility = Visibility.Hidden;
+            ActionPanel.Visibility = Visibility.Visible;
+        }
+
+
+        private void DashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Visible;
+            GoalsPanel.Visibility = Visibility.Hidden;
+            ActionPanel.Visibility = Visibility.Hidden;
+
+        }
+
+        private void GoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Hidden;
+            GoalsPanel.Visibility = Visibility.Visible;
+            ActionPanel.Visibility = Visibility.Hidden;
+            //FillListView(GoalsListView);
+
+        }
+
+        private void FillListView(ListView listView)
+        {
+            // Clear the ListView
+            listView.Items.Clear();
+
+            var test = dal.FillGoalsFromDatabase();
+            // Get the data from the database
+            foreach (var goal in test)
+            {
+                // Create a new ListViewItem
+                ListViewItem item = new ListViewItem();
+                item.Content = goal.Text;
+                // Add the item to the ListView
+                listView.Items.Add(item);
+            }
+
+        }
     }
 }
