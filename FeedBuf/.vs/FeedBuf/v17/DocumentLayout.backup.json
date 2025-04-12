@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +30,23 @@
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowCwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-12T13:03:56.328Z",
+              "WhenOpened": "2025-04-12T19:32:09.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-12T19:29:36.419Z",
               "EditorCaption": ""
             }
           ]
