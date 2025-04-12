@@ -20,7 +20,7 @@ namespace FeedBuf
 
         // Constructor
         public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, string text, ZuydUser student, ZuydUser author) 
-            : base(0, text,student , author)
+            : base(id, text,student , author)
         {
             Id = id;
             Goal = goal;

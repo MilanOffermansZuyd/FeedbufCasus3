@@ -13,19 +13,22 @@ namespace FeedBuf
         public DateTime SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public bool IsFinished { get; set; }
+        public bool OpenForFeedback { get; set; }
+        public int SubId { get; set; }
         public Category Category { get; set; }
         public List<Feedback> Feedbacks { get; set; }
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author)
-            : base(0, text, student, author)
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
+            : base(id, text, student, author)
         {
             Id = id;
             SoftDeadline = softDeadline;
             HardDeadline = hardDeadline;
             IsFinished = isFinished;
             Category = category;
+            OpenForFeedback = openForFeedback;
             Feedbacks = new List<Feedback>();
             Actions = new List<UserAction>();
         }

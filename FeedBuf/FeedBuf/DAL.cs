@@ -258,102 +258,6 @@ namespace FeedBuf
             }
         }
 
-        //Message
-        public List<Message> FillMessageFromDatabase()
-        {
-            messages.Clear();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    connection.Open();
-                    command.Connection = connection;
-                    command.CommandText = "SELECT* FROM Message";
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var id = int.Parse(reader[0].ToString());
-                            var text = reader[1].ToString();
-                            var studentId = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var authorId = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
-
-                            messages.Add(new Message(id, text, studentId, authorId));
-                        }
-                    }
-                    return messages;
-                }
-            }
-        }
-
-        public List<Message> AddMessageFromDatabase(Message message)
-        {
-            messages.Clear();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    connection.Open();
-                    command.Connection = connection;
-                    command.CommandText = "INSERT INTO Message (Text,StudentId, AuthorId) VALUES (@Text, @StudentId, @AuthorId) SELECT @@IDENTITY";
-                    command.Parameters.AddWithValue("@Text", message.Text);
-                    command.Parameters.AddWithValue("@StudentId", message.Student.Id);
-                    command.Parameters.AddWithValue("@AuthorId", message.Author.Id);
-                    var newId = Convert.ToInt32(command.ExecuteScalar());
-                    var text = message.Text;
-                    var studentId = message.Student;
-                    var author = message.Author;
-
-                    messages.Add(new Message(newId, text, studentId, author));
-
-                    return messages;
-                }
-            }
-        }
-
-        public List<Message> DeleteMessageFromDatabase(int messageId)
-        {
-            messages.Clear();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    connection.Open();
-                    command.Connection = connection;
-                    command.CommandText = "DELETE FROM Message WHERE Id = @Id";
-                    command.Parameters.AddWithValue("@Id", messageId);
-                    command.ExecuteNonQuery();
-
-                    return FillMessageFromDatabase();
-                }
-            }
-        }
-
-        public List<Message> UpdateMessageFromDatabase(Message message)
-        {
-            messages.Clear();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    connection.Open();
-                    command.Connection = connection;
-                    command.CommandText = "UPDATE Category SET Type = @Type, Text = @Text, StudentId = @StudentId, AuthorId = @AuthorId WHERE Id = @Id";
-                    command.Parameters.AddWithValue("@Id", message.Id);
-                    command.Parameters.AddWithValue("@Text", message.Text);
-                    command.Parameters.AddWithValue("@StudentId", message.Student.Id);
-                    command.Parameters.AddWithValue("@AuthorId", message.Author.Id);
-                    command.ExecuteNonQuery();
-
-                    return FillMessageFromDatabase();
-                }
-            }
-        }
-
         //Goal
         public List<Goal> FillGoalsFromDatabase()
         {
@@ -371,13 +275,16 @@ namespace FeedBuf
                         while (reader.Read())
                         {
                             var id = int.Parse(reader[0].ToString());
-                            var softDeadline = DateTime.Parse(reader[1].ToString());
-                            var hardDeadline = DateTime.Parse(reader[2].ToString());
-                            var isFinished = bool.Parse(reader[3].ToString());
-                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[4].ToString()));
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[5].ToString()));
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline,isFinished , category, null , student, student));
+                            goals.Add(new Goal(id, softDeadline, hardDeadline,isFinished , category, message, student, author, openForFeedback));
                         }
                     }
                     return goals;
@@ -400,15 +307,84 @@ namespace FeedBuf
                         while (reader.Read())
                         {
                             var id = int.Parse(reader[0].ToString());
-                            var softDeadline = DateTime.Parse(reader[1].ToString());
-                            var hardDeadline = DateTime.Parse(reader[2].ToString());
-                            var isFinished = bool.Parse(reader[3].ToString());
-                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[4].ToString()));
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[5].ToString()));
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
 
-                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, null, student, student);
+                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback);
                         }
                         return null;
+                    }
+                }
+            }
+        }
+
+        public List<Goal> GetAllFinishedGoalsFromDatabaseBy(int Id)
+        {
+            goals.Clear();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM Goal WHERE IsFinished = 1 and StudentId = @Id";
+                    command.Parameters.AddWithValue("@Id", Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
+
+                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                        }
+                        return goals;
+                    }
+                }
+            }
+        }
+
+        public List<Goal> GetAllOpenGoalsFromDatabaseBy(int Id)
+        {
+            goals.Clear();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM Goal WHERE Id = @Id and OpenForFeedback = 1 and IsFinished = 0";
+                    command.Parameters.AddWithValue("@Id", Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
+
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                        }
+                        return goals;
                     }
                 }
             }
@@ -424,23 +400,26 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Goal (SoftDeadline,HardDeadline, IsFinished,Category,Student,Author,Text) VALUES (@SoftDeadline, @HardDeadline, @IsFinished,@Category,@Author,@Text) SELECT @@IDENTITY";
-                    command.Parameters.AddWithValue("@SoftDeadline", goal.Text);
-                    command.Parameters.AddWithValue("@HardDeadline", goal.Student.Id);
-                    command.Parameters.AddWithValue("@IsFinished", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Category", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Author", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Text", goal.Author.Id);
+                    command.CommandText = "INSERT INTO Goal (CategoryId,StudentId,AuthorId,SoftDeadline,HardDeadline, IsFinished,Message,OpenForFeedback) VALUES (@CategoryId,@StudentId,@AuthorId,@SoftDeadline, @HardDeadline, @IsFinished,@Text, @OpenForFeedback) SELECT @@IDENTITY";
+                    command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
+                    command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
+                    command.Parameters.AddWithValue("@CategoryId", goal.Category.Id);
+                    command.Parameters.AddWithValue("@SoftDeadline", goal.SoftDeadline);
+                    command.Parameters.AddWithValue("@HardDeadline", goal.HardDeadline);
+                    command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
+                    command.Parameters.AddWithValue("@Text", goal.Text);
+                    command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
                     var newId = Convert.ToInt32(command.ExecuteScalar());
-                    var softDeadline = goal.SoftDeadline;
-                    var hardDeadline = goal.HardDeadline;
-                    var isFinished = goal.IsFinished;
                     var category = goal.Category;
                     var student = goal.Student;
                     var author = goal.Author;
+                    var softDeadline = goal.SoftDeadline;
+                    var hardDeadline = goal.HardDeadline;
+                    var isFinished = goal.IsFinished;
                     var text = goal.Text;
+                    var openForFeedback = goal.OpenForFeedback;
 
-                    goals.Add(new Goal(newId, softDeadline, hardDeadline, isFinished, category, text, student, author));
+                    goals.Add(new Goal(newId, softDeadline, hardDeadline, isFinished, category, text, student, author, openForFeedback));
 
                     return goals;
                 }
@@ -476,14 +455,16 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, Category = @Category, Author = @Author, Text = @Text WHERE Id = @Id";
+                    command.CommandText = "UPDATE Goal SET AuthorId = @AuthorId, StudentId = @StudentId SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, Category = @Category, Message = @Text, OpenForFeedback = @OpenForFeedback WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", goal.Id);
-                    command.Parameters.AddWithValue("@SoftDeadline", goal.Text);
-                    command.Parameters.AddWithValue("@HardDeadline", goal.Student.Id);
-                    command.Parameters.AddWithValue("@IsFinished", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Category", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Author", goal.Author.Id);
-                    command.Parameters.AddWithValue("@Text", goal.Author.Id);
+                    command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
+                    command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
+                    command.Parameters.AddWithValue("@CategoryId", goal.Category.Id);
+                    command.Parameters.AddWithValue("@SoftDeadline", goal.SoftDeadline);
+                    command.Parameters.AddWithValue("@HardDeadline", goal.HardDeadline);
+                    command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
+                    command.Parameters.AddWithValue("@Text", goal.Text);
+                    command.Parameters.AddWithValue("@OpenForFeedback", goal.Text);
                     command.ExecuteNonQuery();
 
                     return FillGoalsFromDatabase();
@@ -559,9 +540,11 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Goal (GoalId,UserId) VALUES (@GoalId, @UserId) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO Feedback (GoalId,StudentId,AuthorId,Message) VALUES (@GoalId, @StudentId, @AuthorId,@Message) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", feedback.Goal.Id);
-                    command.Parameters.AddWithValue("@UserId", feedback.Student.Id);
+                    command.Parameters.AddWithValue("@StudentId", feedback.Student.Id);
+                    command.Parameters.AddWithValue("@AuthorId", feedback.Author.Id);
+                    command.Parameters.AddWithValue("@Message", feedback.Text);
                     var newId = Convert.ToInt32(command.ExecuteScalar());
                     var Goal = feedback.Goal;
                     var User = feedback.Student;
@@ -602,10 +585,12 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET Id = @Id, GoalId = @GoalId, UserId = @UserId WHERE Id = @Id";
+                    command.CommandText = "UPDATE Goal SET Id = @Id, GoalId = @GoalId, StudentId = @StudentId, AuthorId = @AuthorId , Message = @Message WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", feedback.Id);
                     command.Parameters.AddWithValue("@GoalId", feedback.Goal.Id);
-                    command.Parameters.AddWithValue("@UserId", feedback.Student.Id);
+                    command.Parameters.AddWithValue("@StudentId", feedback.Student.Id);
+                    command.Parameters.AddWithValue("@AuthorId", feedback.Author.Id);
+                    command.Parameters.AddWithValue("@Message", feedback.Text);
 
                     command.ExecuteNonQuery();
 
@@ -632,13 +617,14 @@ namespace FeedBuf
                         {
                             var id = int.Parse(reader[0].ToString());
                             var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var isFinished = GetGoalFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var createdOn = DateTime.Parse(reader[3].ToString());
-                            var softDeadline = DateTime.Parse(reader[4].ToString());
-                            var hardDeadline = DateTime.Parse(reader[5].ToString());
-                            var text = reader[6].ToString();
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[7].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[8].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var isFinished = GetGoalFromDatabaseBy(int.Parse(reader[4].ToString()));
+                            var createdOn = DateTime.Parse(reader[5].ToString());
+                            var softDeadline = DateTime.Parse(reader[6].ToString());
+                            var hardDeadline = DateTime.Parse(reader[7].ToString());
+                            var text = reader[8].ToString();
+
 
                             userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, text, student, student));
                         }
@@ -664,12 +650,13 @@ namespace FeedBuf
                         {
                             var id = int.Parse(reader[0].ToString());
                             var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var createdOn = DateTime.Parse(reader[2].ToString());
-                            var softDeadline = DateTime.Parse(reader[3].ToString());
-                            var hardDeadline = DateTime.Parse(reader[4].ToString());
-                            var text = reader[5].ToString();
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[6].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[7].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var isFinished = bool.Parse(reader[4].ToString());
+                            var createdOn = DateTime.Parse(reader[5].ToString());
+                            var softDeadline = DateTime.Parse(reader[6].ToString());
+                            var hardDeadline = DateTime.Parse(reader[7].ToString());
+                            var text = reader[8].ToString();
 
                             return new UserAction(id, goal, createdOn, softDeadline, hardDeadline, text, student, student);
                         }
@@ -689,13 +676,15 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO UserAction (GoalId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,StudentId) VALUES (@GoalId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@StudentId) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
+                    command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
+                    command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
                     command.Parameters.AddWithValue("@IsFinished", userAction.IsFinished);
                     command.Parameters.AddWithValue("@CreatedOn", userAction.CreatedOn);
                     command.Parameters.AddWithValue("@SoftDeadline", userAction.SoftDeadline);
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
-                    command.Parameters.AddWithValue("@StudentId", userAction.Student);
+                    command.Parameters.AddWithValue("@Message", userAction.Text);
                     var newId = Convert.ToInt32(command.ExecuteScalar());
                     var goal = userAction.Goal;
                     var isFinished = userAction.IsFinished;
@@ -703,8 +692,9 @@ namespace FeedBuf
                     var softDeadline = userAction.SoftDeadline;
                     var hardDeadline = userAction.HardDeadline;
                     var student = userAction.Student;
+                    var Message = userAction.Text;
 
-                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, goal.Text, student, student));
+                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, Message, student, student));
 
                     return userActions;
                 }
@@ -740,13 +730,15 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET GoalId = @GoalId,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, StudentId = StudentId WHERE Id = @Id";
+                    command.CommandText = "UPDATE Goal SET GoalId = @GoalId,StudentId = StudentId , AuthorId = @AuthorId ,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, Message = @Message WHERE Id = @Id";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
+                    command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
+                    command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
                     command.Parameters.AddWithValue("@IsFinished", userAction.IsFinished);
                     command.Parameters.AddWithValue("@CreatedOn", userAction.CreatedOn);
                     command.Parameters.AddWithValue("@SoftDeadline", userAction.SoftDeadline);
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
-                    command.Parameters.AddWithValue("@StudentId", userAction.Student);
+                    command.Parameters.AddWithValue("@Message", userAction.Text);
 
                     command.ExecuteNonQuery();
 
@@ -756,7 +748,7 @@ namespace FeedBuf
         }
 
         //ActionFeedback
-        private List<ActionFeedback> FillActionFeedBacksFromDatabase()
+        internal List<ActionFeedback> FillActionFeedBacksFromDatabase()
         {
             actionFeedbacks.Clear();
 
@@ -784,7 +776,7 @@ namespace FeedBuf
             }
         }
 
-        private List<ActionFeedback> AddActionFeedBackFromDatabase(ActionFeedback actionFeedback)
+        internal List<ActionFeedback> AddActionFeedBackFromDatabase(ActionFeedback actionFeedback)
         {
             actionFeedbacks.Clear();
 
@@ -808,7 +800,7 @@ namespace FeedBuf
             }
         }
 
-        private List<ActionFeedback> DeleteActionFeedBackFromDatabase(int actionFeedbackId)
+        internal List<ActionFeedback> DeleteActionFeedBackFromDatabase(int actionFeedbackId)
         {
             actionFeedbacks.Clear();
 
@@ -827,7 +819,7 @@ namespace FeedBuf
             }
         }
 
-        private List<ActionFeedback> UpdateActionFeedBackFromDatabase(ActionFeedback actionFeedback)
+        internal List<ActionFeedback> UpdateActionFeedBackFromDatabase(ActionFeedback actionFeedback)
         {
             userActions.Clear();
 

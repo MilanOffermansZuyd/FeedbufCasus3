@@ -38,8 +38,10 @@ namespace FeedBuf
             string body = "";
             ZuydUser student = null;
             ZuydUser author = null;
+            bool OpenForFeedback = false;
 
-            Goal goal = new Goal(id, soft, hard, finished, category, body, student, author);
+
+            Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
 
             
             dal.AddGoalFromDatabase(goal);
