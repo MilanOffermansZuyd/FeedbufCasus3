@@ -496,7 +496,8 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
-                            subGoals.Add(new SubGoal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[9].ToString()));
+                            subGoals.Add(new SubGoal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subid, goal));
                         }
                         return subGoals;
                     }
