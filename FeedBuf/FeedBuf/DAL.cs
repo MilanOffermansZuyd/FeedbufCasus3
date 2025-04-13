@@ -481,23 +481,14 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT G.SubId, G.CategoryId, G.StudentId, G.AuthorId, G.SoftDeadline, G.HardDeadline, G.IsFinished, G.Message, G.openForFeedback, S.GoalId FROM SubGoal S, Goal G WHERE S.GoalId = @Id AND S.GoalId = G.Id";
+                    command.CommandText = "SELECT * FROM SubGoal WHERE GoalId = @Id";
                     command.Parameters.AddWithValue("@Id", id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var subid = int.Parse(reader[0].ToString());
-                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
-                            var softDeadline = DateTime.Parse(reader[4].ToString());
-                            var hardDeadline = DateTime.Parse(reader[5].ToString());
-                            var isFinished = bool.Parse(reader[6].ToString());
-                            var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[9].ToString()));
-                            subGoals.Add(new SubGoal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subid, goal));
+                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            subGoals.Add(new SubGoal(goal.Id, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, (int)goal.SubId, goal));
                         }
                         return subGoals;
                     }
