@@ -481,7 +481,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT* FROM SubGoal WHERE GoalId = @Id";
+                    command.CommandText = "SELECT G.SubId, G.CategoryId, G.StudentId, G.AuthorId, G.SoftDeadline, G.HardDeadline, G.IsFinished, G.Message, G.openForFeedback, S.GoalId FROM SubGoal S, Goal G WHERE S.GoalId = @Id AND S.GoalId = G.Id";
                     command.Parameters.AddWithValue("@Id", id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
