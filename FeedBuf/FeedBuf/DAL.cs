@@ -10,6 +10,7 @@ namespace FeedBuf
         List<ActionFeedback> actionFeedbacks = new List<ActionFeedback>();
         List<Feedback> feedbacks = new List<Feedback>();
         List<Goal> goals = new List<Goal>();
+        List<SubGoal> subGoals = new List<SubGoal>();
         List<Message> messages = new List<Message>();
         List<UserAction> userActions = new List<UserAction>();
         List<ZuydUser> zuydUsers = new List<ZuydUser>();
@@ -468,6 +469,37 @@ namespace FeedBuf
                     command.ExecuteNonQuery();
 
                     return FillGoalsFromDatabase();
+                }
+            }
+        }
+
+        public List<SubGoal> GetSubGoalByGoalId(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM SubGoal WHERE GoalId = @Id";
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var subid = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
+                            subGoals.Add(new SubGoal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                        }
+                        return subGoals;
+                    }
                 }
             }
         }
