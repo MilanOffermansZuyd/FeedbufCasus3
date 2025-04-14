@@ -39,6 +39,9 @@ namespace FeedBuf
 
             // Externe console
             AllocConsole();
+
+            // Action list view load
+            FillActionListView();
         }
 
 
@@ -355,5 +358,22 @@ namespace FeedBuf
             }
 
         }
+
+        private void FillActionListView()
+        {
+            // Clear the ListView
+            ActionListView.Items.Clear();
+            var userActions = dal.FillUserActionsFromDatabase();
+            // Get the data from the database
+            foreach (var action in userActions)
+            {
+                // Create a new ListViewItem
+                ListViewItem item = new ListViewItem();
+                item.Content = action.Text;
+                // Add the item to the ListView
+                ActionListView.Items.Add(item);
+            }
+        }
+
     }
 }

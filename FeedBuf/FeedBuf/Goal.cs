@@ -34,6 +34,18 @@ namespace FeedBuf
             Actions = new List<UserAction>();
         }
 
-        
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
+            : base(id, text, student, author)
+        {
+            Id = id;
+            SoftDeadline = softDeadline;
+            HardDeadline = hardDeadline;
+            IsFinished = isFinished;
+            Category = category;
+            OpenForFeedback = openForFeedback;
+            Feedbacks = new List<Feedback>();
+            Actions = new List<UserAction>();
+        }
+
     }
 }

@@ -61,7 +61,7 @@
         </Border>
 
         <!-- Login Panel-->
-        <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible">
+        <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -119,7 +119,7 @@
         </Border>
 
         <!-- Forgot Password Panel -->
-        <Border x:Name="ForgotPasswordPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="ForgotPasswordPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -143,7 +143,7 @@
         </Border>
 
         <!-- Register Panel -->
-        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -193,7 +193,7 @@
         </Border>
 
         <!-- Dashboard Panel -->
-        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
                 <TextBlock Text="Dashboard" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
@@ -203,15 +203,18 @@
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                <ListView x:Name="ActionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="341" Width="776" SelectionChanged="ActionListView_SelectionChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="380" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadLine}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadLine}" Width="100"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -222,7 +225,7 @@
         </Border>
 
         <!-- Goals Panel -->
-        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"

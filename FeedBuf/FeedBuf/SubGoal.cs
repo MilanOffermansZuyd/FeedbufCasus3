@@ -13,7 +13,7 @@ namespace FeedBuf
         public Goal Goal { get; set; }
 
         public SubGoal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId, Goal goal)
-            : base(id, softDeadline, hardDeadline, isFinished, category, text, student, author, openForFeedback)
+            : base(id, softDeadline, hardDeadline, isFinished, category, text, student, author, openForFeedback, subId)
         {
             Id = id;
             Goal = goal;
