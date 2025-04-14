@@ -20,7 +20,7 @@ namespace FeedBuf
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId)
             : base(id, text, student, author)
         {
             Id = id;
@@ -29,6 +29,7 @@ namespace FeedBuf
             IsFinished = isFinished;
             Category = category;
             OpenForFeedback = openForFeedback;
+            SubId = subId;
             Feedbacks = new List<Feedback>();
             Actions = new List<UserAction>();
         }
