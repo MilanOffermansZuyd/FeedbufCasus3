@@ -39,6 +39,8 @@ namespace FeedBuf
 
             // Externe console
             AllocConsole();
+
+            FillGoalListView(GoalsListView);
         }
 
 
@@ -338,22 +340,10 @@ namespace FeedBuf
 
         }
 
-        private void FillListView(ListView listView)
+        private void FillGoalListView(ListView listView)
         {
-            // Clear the ListView
-            listView.Items.Clear();
-
-            var test = dal.FillGoalsFromDatabase();
-            // Get the data from the database
-            foreach (var goal in test)
-            {
-                // Create a new ListViewItem
-                ListViewItem item = new ListViewItem();
-                item.Content = goal.Text;
-                // Add the item to the ListView
-                listView.Items.Add(item);
-            }
-
+            var goals = dal.FillGoalsFromDatabase();
+            GoalsListView.ItemsSource = goals;
         }
     }
 }
