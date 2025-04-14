@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="av"
     Title="Feedbuf" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+    
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -51,7 +52,7 @@
         </Border>
 
         <!-- Login Panel Comment dit uit als je de login tijdelijk weg wil-->
-        <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible">
+        <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
                 <TextBlock Text="Login" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
                 <TextBox x:Name="EmailBox" Margin="0,5"/>
@@ -103,9 +104,28 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="CreateGoalButton" Content="Create"/>
+                <Button x:Name="CreateGoalButton" Content="Create" Click="CreateGoalButton_Click"/>
                 <Button x:Name="UpdateGoalButton" Content="Update"/>
                 <Button x:Name="DeleteGoalButton" Content="Delete"/>
+            </StackPanel>
+        </Border>
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
+            <StackPanel HorizontalAlignment="Left">
+                <Label x:Name="ShortDescLbl" Content="Short Description:"/>
+                <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
+                <Label x:Name="GoalTextLbl" Content="Goal:"/>
+                <TextBox x:Name="GoalTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
+                <CheckBox x:Name="OpenForFBChckBx" IsThreeState="False" Content="I Want Feedback"/>
+                <ListBox x:Name="CategorySelectionListBx" Height="65" Width="230" HorizontalAlignment="Left">
+                    <ListBoxItem x:Name="PrivateGoalItem" Content="Privé Doel"/>
+                    <ListBoxItem x:Name="PrivateSchoolGoalItem" Content="Privé School Doel"/>
+                    <ListBoxItem x:Name="SchoolGoalItem" Content="School Doel"/>
+                </ListBox>
+                <Label x:Name="SoftDeadlineLbl" Content="Select Soft Deadline:"/>
+                <DatePicker x:Name="SoftDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Label x:Name="HardDeadlineLbl" Content="Select Hard Deadline:"/>
+                <DatePicker x:Name="HardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Button x:Name="AddGoalButton" Content="Add Goal" Click="AddGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
     </Grid>

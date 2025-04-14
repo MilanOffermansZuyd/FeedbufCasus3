@@ -9,6 +9,7 @@ namespace FeedBuf
     public class Message
     {
         public int Id { get; set; }
+        public string ShortDescription { get; set; }
         public string Text { get; set; }
         public ZuydUser Student { get; set; }
         public ZuydUser Author { get; set; }
