@@ -1,0 +1,21 @@
+﻿<Window x:Class="FeedBuf.SubGoalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FeedBuf"
+        mc:Ignorable="d"
+        Title="SubGoalWindow" Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="SubGoalListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,182">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Sub goal" DisplayMemberBinding="{Binding Text}" Width="580" />
+                    <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                    <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
