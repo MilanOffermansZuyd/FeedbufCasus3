@@ -233,7 +233,10 @@
                 <ListView x:Name="GoalsListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
                         </GridView>
                     </ListView.View>
                 </ListView>
