@@ -96,3 +96,4 @@ obj/
 /.vs/FeedbufCasus3/CopilotIndices/17.13.430.18484/SemanticSymbols.db-wal
 /.vs/FeedbufCasus3/CopilotIndices/17.13.430.18484/CodeChunks.db-wal
 *.sqlite-journal
+*.v7.bin
