@@ -1,37 +1,37 @@
-﻿# Build results
+﻿Build results
 bin/
 obj/
 *.exe
 *.dll
 *.pdb
 
-# User-specific files
+User-specific files
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 *.VC.db
 
-# Auto-generated WPF files
+Auto-generated WPF files
 *.g.cs
 *.g.i.cs
 *.resources
 
-# Debug/Release folders
+Debug/Release folders
 Debug/
 Release/
 
-# VS Code & Rider IDEs
+VS Code & Rider IDEs
 .vscode/
 .idea/
 
-# Test results
+Test results
 TestResults/
 *.trx
 *.coverage
 *.coveragexml
 
-# NuGet
+NuGet
 packages/
 *.nupkg
 *.snupkg
@@ -39,60 +39,55 @@ project.assets.json
 project.nuget.cache
 *.nuspec
 
-# Publish output
+Publish output
 publish/
 
-# Backup & temp files
+Backup & temp files
 *.bak
 *.tmp
-*.log
+.log
 
-# Windows-specific files
+Windows-specific files
 Thumbs.db
 desktop.ini
 
-# Resharper
-_ReSharper*/
+Resharper
+_ReSharper/
 *.DotSettings.user
 
-# Rider
+Rider
 .idea/
 
-# Local database files
+Local database files
 *.mdf
 *.ldf
 
-# Entity Framework
+Entity Framework
 *.dbmdl
 Migrations/
 
-# DotCover
-*.dotCover
+DotCover
+.dotCover
 
-# Others
-*.cache
+Others
+.cache
 
-# Keep actual XAML source files
-!*.xaml
-!*.xaml.cs
+Keep actual XAML source files
+!.xaml
+!.xaml.cs
 
-# Ignore auto-generated files
+Ignore auto-generated files
 *.g.cs
 *.g.i.cs
 *.resources
 *.vsidx
 *.Backup.
 *.sqlite
-obj/
 *.v2
-/.vs/FeedbufCasus3/v17/DocumentLayout.backup.json
-/.vs/FeedbufCasus3/v17/.wsuo
-/.vs/FeedbufCasus3/v17/DocumentLayout.json
 *.json
 *.wsuo
-/FeedBuf/.vs/ProjectEvaluation/feedbuf.metadata.v9.bin
-/FeedBuf/.vs/ProjectEvaluation/feedbuf.projects.v9.bin
-/FeedBuf/.vs/ProjectEvaluation/feedbuf.strings.v9.bin
-/.vs/FeedbufCasus3/CopilotIndices/17.13.430.18484/SemanticSymbols.db-wal
-/.vs/FeedbufCasus3/CopilotIndices/17.13.430.18484/CodeChunks.db-wal
 *.sqlite-journal
+*.db
+*.db-wal
+*.db-shm
+*.bin
