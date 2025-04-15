@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FeedBuf
 {
-    class Notification : Message
+    public class Notification : Message
     {
         public int Id { get; set; }
         public string  Title { get; set; }

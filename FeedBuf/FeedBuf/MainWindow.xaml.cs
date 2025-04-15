@@ -346,7 +346,7 @@ namespace FeedBuf
             GoalsPanel.Visibility = Visibility.Hidden;
             ActionPanel.Visibility = Visibility.Hidden;
             NotificationPanel.Visibility = Visibility.Visible;
-            NotificationListView.ItemsSource = dal.GetNotificationsFromDatabaseByStudent(loggedInUser);
+            NotificationListView.ItemsSource = dal.GetNotificationsFromDatabaseByStudent(loggedInUser.Role);
         }
 
         private void FillGoalListView(ListView listView)

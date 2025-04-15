@@ -867,7 +867,7 @@ namespace FeedBuf
             }
         }
 
-        public List<Notification> GetNotificationsFromDatabaseByStudent(ZuydUser LoggedInUser)
+        public List<Notification> GetNotificationsFromDatabaseByStudent(int UserRole)
         {
             Notifications.Clear();
 
@@ -878,22 +878,23 @@ namespace FeedBuf
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM Notification WHERE StudentId = @id";
-                    command.Parameters.AddWithValue("@Id", LoggedInUser.Role);
+                    command.Parameters.AddWithValue("@Id", UserRole);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             var id = int.Parse(reader[0].ToString());
-                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
-                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
-                            var title = reader[7].ToString();
-                            var text = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var title = reader[3].ToString();
+                            var text = reader[4].ToString();
+                            var createdOn = DateTime.Parse(reader[5].ToString());
+                            var isRead = bool.Parse(reader[6].ToString());
 
                             Notifications.Add(new Notification(id, student, author, title, text, createdOn, isRead));
                         }
                     }
-                    return List<Notification>;
+                    return Notifications;
                 }
             }
         }
