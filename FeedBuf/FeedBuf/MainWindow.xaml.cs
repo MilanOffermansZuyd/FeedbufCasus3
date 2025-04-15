@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FeedBuf
 {
@@ -137,28 +138,78 @@ namespace FeedBuf
             Goal goal = null;
             ZuydUser student = null;
             ZuydUser author = null;
+            string shortDescription = "";
 
-            Feedback feedback = new Feedback(id, goal, body, student, author);
+            Feedback feedback = new Feedback(id, goal, body, student, author, shortDescription);
             dal.AddFeedbackFromDatabase(feedback);
         }
 
         //Add Action
         private void AddUserActionButton_Click(object sender, RoutedEventArgs e)
         {
-            int id = 1;
-            Goal goal = null;
-            DateTime createdOn = new DateTime();
-            DateTime soft = new DateTime();
-            DateTime hard = new DateTime();
+            if (User.Role == 0) //Student
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = ActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ActionShortDescTxtBx.Text;
 
-            string body = "";
-            ZuydUser student = null;
-            ZuydUser author = null;
+                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    catType = selectedItem.Content.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+                if (catType != null)
+                {
+                    category = new Category(catType);
+                }
+                string text = ActionTextTxtBx.Text;
+                ZuydUser student = User;
+                ZuydUser author = User;
+                bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+                Goal goal = null;
+                
 
 
-            UserAction Useraction = new UserAction(id, goal, createdOn, soft, hard, body, student, author);
+                UserAction userAction = new UserAction(0, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+                dal.AddUserActionFromDatabase(userAction);
+            }
 
-            dal.AddUserActionFromDatabase(Useraction);
+            else //Teacher
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = ActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ActionShortDescTxtBx.Text;
+                Goal goal = null;
+
+                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    goal = selectedItem;
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+                string text = ActionTextTxtBx.Text;
+                ZuydUser student = User;
+                ZuydUser author = User;
+                bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                UserAction userAction = new UserAction(0, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+
+
+                dal.AddUserActionFromDatabase(userAction);
+
+            }
         }
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
