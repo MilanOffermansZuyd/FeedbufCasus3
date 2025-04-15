@@ -109,7 +109,7 @@
                 <Button x:Name="DeleteGoalButton" Content="Delete"/>
             </StackPanel>
         </Border>
-        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -126,6 +126,21 @@
                 <Label x:Name="HardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="HardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="AddGoalButton" Content="Add Goal" Click="AddGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+        <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
+            <StackPanel HorizontalAlignment="Left">
+                <Label x:Name="ShortDescLbl1" Content="Short Description:"/>
+                <TextBox x:Name="ShortDescTxtBx1" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
+                <Label x:Name="ActionTextLbl" Content="Action:"/>
+                <TextBox x:Name="ActionTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
+                <CheckBox x:Name="OpenForFBChckBx1" IsThreeState="False" Content="I Want Feedback"/>
+                <ListBox x:Name="CategorySelectionListBx1" Height="65" Width="610" HorizontalAlignment="Left"></ListBox>
+                <Label x:Name="SoftDeadlineLbl1" Content="Select Soft Deadline:"/>
+                <DatePicker x:Name="SoftDeadlinePicker1" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Label x:Name="HardDeadlineLbl1" Content="Select Hard Deadline:"/>
+                <DatePicker x:Name="HardDeadlinePicker1" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Button x:Name="AddGoalButton1" Content="Add Goal" Click="AddGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -15,12 +15,13 @@ namespace FeedBuf
         public ZuydUser Author { get; set; }
 
         /// Constructor
-        public Message(int id, string text, ZuydUser student, ZuydUser author)
+        public Message(int id, string text, ZuydUser student, ZuydUser author, string shortDescription)
         {
             Id = id;
             Text = text;
             Student = student;
             Author = author;
+            ShortDescription = shortDescription;
         }
 
     }

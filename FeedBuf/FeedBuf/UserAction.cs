@@ -16,18 +16,20 @@ namespace FeedBuf
         public DateTime SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public List<Feedback> Feedbacks { get; set; }
+        public bool OpenForFeedback { get; set; }
 
 
         // Constructor
-        public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, string text, ZuydUser student, ZuydUser author) 
-            : base(id, text,student , author)
+        public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, bool isFinished, string text, ZuydUser student, ZuydUser author, string shortDescription, bool openForFeedback) 
+            : base(id, text, student, author, shortDescription)
         {
             Id = id;
             Goal = goal;
             CreatedOn = createdOn;
             SoftDeadline = softDeadline;
             HardDeadline = hardDeadline;
-            IsFinished = false;
+            IsFinished = isFinished;
+            OpenForFeedback = openForFeedback;
         }
 
         // Mark as finished

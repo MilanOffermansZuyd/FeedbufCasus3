@@ -62,21 +62,21 @@ namespace FeedBuf
             if (User.Role == 0) //Student
             {
                 int id = 0;
-                DateTime soft = new DateTime();
+                DateTime soft = SoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
                 string catType = null;
+                Category category = null;
+                string shortDescription = ShortDescTxtBx.Text;
 
                 if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
                     catType = selectedItem.Content.ToString();
-                    MessageBox.Show($"Je hebt geselecteerd: {catType}");
                 }
                 else
                 {
                     MessageBox.Show("Geen item geselecteerd.");
                 }
 
-                Category category = null;
                 if (catType != null)
                 {
                     category = new Category(catType);
@@ -88,21 +88,22 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, shortDescription);
                 dal.AddGoalFromDatabase(goal);
             }
 
             else //Teacher
             {
                 int id = 0;
-                DateTime soft = new DateTime();
+                DateTime soft = new DateTime(2000,01,01);
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
                 string catType = null;
+                string shortDescription = ShortDescTxtBx.Text;
+
 
                 if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
                     catType = selectedItem.Content.ToString();
-                    MessageBox.Show($"Je hebt geselecteerd: {catType}");
                 }
                 else
                 {
@@ -121,7 +122,7 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, shortDescription);
 
                 dal.AddGoalFromDatabase(goal);
             }

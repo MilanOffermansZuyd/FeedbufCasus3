@@ -16,8 +16,8 @@ namespace FeedBuf
 
 
         // Constructor
-        public Feedback(int id, Goal goal, string text, ZuydUser student, ZuydUser author)
-            : base(id, text, student, author)
+        public Feedback(int id, Goal goal, string text, ZuydUser student, ZuydUser author, string shortDescription)
+            : base(id, text, student, author, shortDescription)
         {
             Id = id;
             Goal = goal;

@@ -20,8 +20,8 @@ namespace FeedBuf
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
-            : base(id, text, student, author)
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, string shortDescription)
+            : base(id, text, student, author, shortDescription)
         {
             Id = id;
             SoftDeadline = softDeadline;
