@@ -5,8 +5,7 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="av"
-    Title="Feedbuf" Height="600" Width="800" WindowStartupLocation="CenterScreen">
-    
+    Title="Feedbuf" Height="800" Width="1100" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -44,22 +43,153 @@
         <!-- Sidebar -->
         <Border Background="#ebebeb" Grid.Column="0" CornerRadius="10" Margin="10" Padding="10">
             <StackPanel>
+                <TextBlock x:Name="WelcomeTextBlock"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="#444"
+                    Margin="0,0,0,10"
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    MaxWidth="150" 
+                    Text="Welkom!" />
+
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
-                <Button x:Name="LogoutButton" Content="Log Out"/>
+                <Button x:Name="LogoutButton" Content="Log Out" Click="LogoutButton_Click"/>
             </StackPanel>
         </Border>
 
-        <!-- Login Panel Comment dit uit als je de login tijdelijk weg wil-->
+        <!-- Login Panel-->
         <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-                <TextBlock Text="Login" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
-                <TextBox x:Name="EmailBox" Margin="0,5"/>
-                <PasswordBox x:Name="PasswordBox" Margin="0,5"/>
-                <Button Content="Login" Click="Login_Click"/>
-                <TextBlock x:Name="ErrorText" Foreground="Red" TextAlignment="Center" Visibility="Collapsed"/>
-            </StackPanel>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="🔐 Login" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
+                <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                    <TextBlock Text="Emailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBox x:Name="EmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="LoginButton_KeyDown"/>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                    <TextBlock Text="Wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <Grid>
+                        <TextBox x:Name="VisiblePasswordBox"
+                 Height="35"
+                 Padding="5,0"
+                 VerticalContentAlignment="Center"
+                 Visibility="Collapsed"
+                 KeyDown="LoginButton_KeyDown"/>
+
+                        <PasswordBox x:Name="PasswordBox"
+                     Height="35"
+                     Padding="5,0"
+                     VerticalContentAlignment="Center"
+                     KeyDown="LoginButton_KeyDown"/>
+
+                        <Button Content="👁️"
+        Width="30"
+        Height="30"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        Margin="0,0,5,0"
+        PreviewMouseDown="PasswordEye_PreviewMouseDown"
+        PreviewMouseUp="PasswordEye_PreviewMouseUp"
+        />
+
+                    </Grid>
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="3" Margin="0 10 0 0">
+                    <TextBlock x:Name="ErrorText" FontWeight="Bold" Foreground="Red" Margin="0 0 0 10" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Height="20" Visibility="Visible" Text=""/>
+                    <Button Content="Login" Click="LoginButton_Click"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Hyperlink Click="ForgotPassword_Click" >Wachtwoord vergeten?</Hyperlink>
+                    <Run Text=" | "/>
+                    <Hyperlink Click="Register_Click" >Registreren</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Forgot Password Panel -->
+        <Border x:Name="ForgotPasswordPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="🔐 Wachtwoord vergeten" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
+                <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                    <TextBlock Text="Voer je e-mailadres in:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBox x:Name="ForgotEmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="ForgotPassword_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                    <TextBlock x:Name="ForgotPasswordResult" Text="" FontWeight="Bold" Foreground="DarkGreen" TextAlignment="Center" TextWrapping="Wrap" Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="0 10 0 0">
+                    <Button Content="Toon wachtwoord" Click="ShowPassword_Click"/>
+                    <Button Content="Terug naar login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Register Panel -->
+        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="📝 Registreren" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
+                <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                    <TextBlock Text="Voornaam:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBox x:Name="RegisterFirstNameBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                    <TextBlock Text="Achternaam:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBox x:Name="RegisterLastNameBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="0 0 0 10">
+                    <TextBlock Text="Emailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBox x:Name="RegisterEmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Margin="0 0 0 10">
+                    <TextBlock Text="Wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <PasswordBox x:Name="RegisterPasswordBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Margin="0 0 0 10">
+                    <TextBlock Text="Herhaal wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <PasswordBox x:Name="RegisterConfirmPasswordBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="0 0 0 10">
+                    <TextBlock Text="Rol:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="RoleComboBox" Height="22" SelectedIndex="-1" KeyDown="Register_KeyDown">
+                        <ComboBoxItem Content="-- Selecteer rol --" IsEnabled="False" IsSelected="True" />
+                        <ComboBoxItem Content="Student" Tag="0"/>
+                        <ComboBoxItem Content="Docent" Tag="1"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="7" Margin="0 10 0 0">
+                    <TextBlock x:Name="RegisterResultText" FontWeight="Bold" TextWrapping="Wrap" Height="40" TextAlignment="Center"/>
+                    <Button Content="Registreren" Click="RegisterUser_Click"/>
+                    <Button Content="Terug naar login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <!-- Dashboard Panel -->
@@ -73,15 +203,18 @@
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Visible">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                <ListView x:Name="ActionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Actions" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -97,10 +230,13 @@
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView x:Name="GoalsListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
                         </GridView>
                     </ListView.View>
                 </ListView>

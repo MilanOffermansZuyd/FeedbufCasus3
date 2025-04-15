@@ -10,6 +10,7 @@ namespace FeedBuf
         List<ActionFeedback> actionFeedbacks = new List<ActionFeedback>();
         List<Feedback> feedbacks = new List<Feedback>();
         List<Goal> goals = new List<Goal>();
+        List<SubGoal> subGoals = new List<SubGoal>();
         List<Message> messages = new List<Message>();
         List<UserAction> userActions = new List<UserAction>();
         List<ZuydUser> zuydUsers = new List<ZuydUser>();
@@ -468,6 +469,29 @@ namespace FeedBuf
                     command.ExecuteNonQuery();
 
                     return FillGoalsFromDatabase();
+                }
+            }
+        }
+
+        public List<SubGoal> GetSubGoalByGoalId(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * FROM SubGoal WHERE GoalId = @Id";
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            subGoals.Add(new SubGoal(goal.Id, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, (int)goal.SubId, goal));
+                        }
+                        return subGoals;
+                    }
                 }
             }
         }
