@@ -14,6 +14,7 @@ namespace FeedBuf
         List<Message> messages = new List<Message>();
         List<UserAction> userActions = new List<UserAction>();
         List<ZuydUser> zuydUsers = new List<ZuydUser>();
+        List<Notification> Notifications = new List<Notification>();
 
         //Category
         public List<Category> FillCategorysFromDatabase() 
@@ -866,5 +867,35 @@ namespace FeedBuf
             }
         }
 
+        public List<Notification> GetNotificationsFromDatabaseByStudent(ZuydUser LoggedInUser)
+        {
+            Notifications.Clear();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * FROM Notification WHERE StudentId = @id";
+                    command.Parameters.AddWithValue("@Id", LoggedInUser.Role);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var title = reader[7].ToString();
+                            var text = reader[7].ToString();
+                            var openForFeedback = bool.Parse(reader[8].ToString());
+
+                            Notifications.Add(new Notification(id, student, author, title, text, createdOn, isRead));
+                        }
+                    }
+                    return List<Notification>;
+                }
+            }
+        }
     }
 }

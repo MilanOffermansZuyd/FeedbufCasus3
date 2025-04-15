@@ -52,7 +52,9 @@
                     TextAlignment="Center"
                     MaxWidth="150" 
                     Text="Welkom!" />
-
+                <Button Click="NotificationButton_Click" Background="#e7e8e7">
+                    <Image Height="35" Width="35" Source="/Images/Bell.png" />
+                </Button>
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
@@ -143,7 +145,7 @@
         </Border>
 
         <!-- Register Panel -->
-        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -193,7 +195,7 @@
         </Border>
 
         <!-- Dashboard Panel -->
-        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
                 <TextBlock Text="Dashboard" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
@@ -222,7 +224,7 @@
         </Border>
 
         <!-- Goals Panel -->
-        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Visible">
+        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
@@ -240,6 +242,23 @@
                 <Button x:Name="CreateGoalButton" Content="Create"/>
                 <Button x:Name="UpdateGoalButton" Content="Update"/>
                 <Button x:Name="DeleteGoalButton" Content="Delete"/>
+            </StackPanel>
+        </Border>
+        <Border x:Name="NotificationPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Visible">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
+                <TextBlock Text="Notifications panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBlock Text="Notifications" FontSize="14" TextWrapping="Wrap"
+                    Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
+                <ListView x:Name="NotificationListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="475">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="350" />
+                            <GridViewColumn Header="Afzender" DisplayMemberBinding="{Binding Author}" Width="100" />
+                            <GridViewColumn Header="verstuurd" DisplayMemberBinding="{Binding CreatedOn}" Width="100" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
         </Border>
     </Grid>

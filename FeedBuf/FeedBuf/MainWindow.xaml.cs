@@ -320,6 +320,7 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Hidden;
             GoalsPanel.Visibility = Visibility.Hidden;
             ActionPanel.Visibility = Visibility.Visible;
+            NotificationPanel.Visibility = Visibility.Hidden;
         }
 
 
@@ -328,7 +329,7 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Visible;
             GoalsPanel.Visibility = Visibility.Hidden;
             ActionPanel.Visibility = Visibility.Hidden;
-
+            NotificationPanel.Visibility = Visibility.Hidden;
         }
 
         private void GoalButton_Click(object sender, RoutedEventArgs e)
@@ -337,7 +338,15 @@ namespace FeedBuf
             GoalsPanel.Visibility = Visibility.Visible;
             ActionPanel.Visibility = Visibility.Hidden;
             //FillListView(GoalsListView);
-
+            NotificationPanel.Visibility = Visibility.Hidden;
+        }
+        private void NotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Hidden;
+            GoalsPanel.Visibility = Visibility.Hidden;
+            ActionPanel.Visibility = Visibility.Hidden;
+            NotificationPanel.Visibility = Visibility.Visible;
+            NotificationListView.ItemsSource = dal.GetNotificationsFromDatabaseByStudent(loggedInUser);
         }
 
         private void FillGoalListView(ListView listView)
