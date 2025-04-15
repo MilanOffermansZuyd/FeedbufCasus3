@@ -41,6 +41,7 @@ namespace FeedBuf
             AllocConsole();
 
             FillGoalListView(GoalsListView);
+            FillActionListView(ActionListView);
         }
 
 
@@ -345,5 +346,25 @@ namespace FeedBuf
             var goals = dal.FillGoalsFromDatabase();
             GoalsListView.ItemsSource = goals;
         }
+
+        private void FillActionListView(ListView listView)
+        {
+            var actions = dal.FillUserActionsFromDatabase();
+            ActionListView.ItemsSource = actions;
+        }
+
+        private void GoalsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (GoalsListView.SelectedItem is Goal selectedGoal)
+            {
+                // Haal de bijbehorende subgoals op via de DAL
+                var subGoals = dal.GetSubGoalByGoalId(selectedGoal.Id);
+
+                // Open het subgoal venster en geef de lijst door
+                var subGoalWindow = new SubGoalWindow(subGoals);
+                subGoalWindow.Show();
+            }
+        }
+
     }
 }
