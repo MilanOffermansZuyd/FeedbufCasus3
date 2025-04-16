@@ -21,7 +21,7 @@ namespace FeedBuf
 
         // Constructor
         public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId)
-            : base(id, text, student, author)
+            : base(id, text, student, author, string.Empty)
         {
             Id = id;
             SoftDeadline = softDeadline;
@@ -35,7 +35,7 @@ namespace FeedBuf
         }
 
         public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
-            : base(id, text, student, author)
+            : base(id, text, student, author, string.Empty)
         {
             Id = id;
             SoftDeadline = softDeadline;

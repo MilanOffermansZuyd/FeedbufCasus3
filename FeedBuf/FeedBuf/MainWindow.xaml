@@ -203,7 +203,7 @@
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Visible">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
@@ -218,7 +218,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="CreateActionButton" Content="Create"/>
+                <Button x:Name="CreateActionButton" Content="Create" Click="AddUserActionButton_Click"/>
                 <Button x:Name="UpdateActionButton" Content="Update"/>
                 <Button x:Name="DeleteActionButton" Content="Delete"/>
             </StackPanel>
@@ -240,7 +240,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="CreateGoalButton" Content="Create" Click="CreateGoalButton_Click"/>
+                <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click"/>
                 <Button x:Name="UpdateGoalButton" Content="Update"/>
                 <Button x:Name="DeleteGoalButton" Content="Delete"/>
             </StackPanel>
@@ -261,10 +261,10 @@
                 <DatePicker x:Name="SoftDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Label x:Name="HardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="HardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
-                <Button x:Name="AddGoalButton" Content="Add Goal" Click="AddGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="AddGoalButton" Content="Add Goal" Click="CreateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
-        <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
+        <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="ActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -276,7 +276,7 @@
                 <DatePicker x:Name="ActionSoftDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Label x:Name="ActionHardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="ActionHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
-                <Button x:Name="AddActionButton" Content="Add Action" Click="AddActionButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="AddActionButton" Content="Add Action" Click="CreateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
     </Grid>
