@@ -352,14 +352,15 @@ namespace FeedBuf
 
         private int MapCategory(string? category)
         {
-            switch (category) 
+            switch (category)
             {
-                case("prive")
-                : return 1;
-                case ("school")
+                case ("Privé Doel")
+                :
+                    return 1;
+                case ("Privé School Doel")
                 :
                     return 2;
-                case ("zelfschool")
+                case ("School Doel")
                 :
                     return 3;
                 default: return 1;
@@ -399,6 +400,7 @@ namespace FeedBuf
                 else
                 {
                     MessageBox.Show("Geen item geselecteerd.");
+                    return;
                 }
 
                 string text = ActionTextTxtBx.Text;
@@ -411,6 +413,8 @@ namespace FeedBuf
 
                 UserAction userAction = new UserAction(0, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
                 dal.AddUserActionFromDatabase(userAction);
+                FillActionListView(ActionListView);
+                ActionPanel.Visibility = Visibility.Visible;
             }
 
             else //Teacher
@@ -427,6 +431,7 @@ namespace FeedBuf
                 else
                 {
                     MessageBox.Show("Geen item geselecteerd.");
+                    return;
                 }
 
                 string text = ActionTextTxtBx.Text;
@@ -440,7 +445,8 @@ namespace FeedBuf
 
 
                 dal.AddUserActionFromDatabase(userAction);
-
+                FillActionListView(ActionListView);
+                ActionPanel.Visibility = Visibility.Visible;
             }
         }
 
