@@ -203,11 +203,12 @@
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Visible">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
+              
                 <ListView x:Name="ActionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="341" Width="776" SelectionChanged="ActionListView_SelectionChanged">
                     <ListView.View>
                         <GridView>
@@ -215,6 +216,7 @@
                             <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="380" />
                             <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadLine}" Width="100" />
                             <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadLine}" Width="100"/>
+
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -225,12 +227,13 @@
         </Border>
 
         <!-- Goals Panel -->
+
         <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView x:Name="GoalsListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />

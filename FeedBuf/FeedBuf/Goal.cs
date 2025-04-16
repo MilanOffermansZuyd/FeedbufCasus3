@@ -46,6 +46,5 @@ namespace FeedBuf
             Feedbacks = new List<Feedback>();
             Actions = new List<UserAction>();
         }
-
     }
 }

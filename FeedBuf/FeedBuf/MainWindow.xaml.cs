@@ -39,9 +39,11 @@ namespace FeedBuf
 
             // Externe console
             AllocConsole();
-
+            
             // Action list view load
             FillActionListView();
+            FillGoalListView(GoalsListView);
+
         }
 
 
@@ -346,6 +348,7 @@ namespace FeedBuf
             var goals = dal.FillGoalsFromDatabase();
             GoalsListView.ItemsSource = goals;
         }
+
 
         private void FillActionListView()
         {
