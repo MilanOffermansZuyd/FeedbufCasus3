@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FeedBuf
 {
@@ -261,26 +262,96 @@ namespace FeedBuf
         }
 
         //Add goal
-        private void AddGoalButton_Click(object sender, RoutedEventArgs e)
+        private void CreateGoalButton_Click(object sender, RoutedEventArgs e)
         {
-            //placeholder for category type
-            string catType = "";
+            if (loggedInUser.Role == 0) //Student
+            {
+                int id = 0;
+                DateTime soft = SoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = HardDeadlinePicker.SelectedDate.Value;
+                int catType= 0;
+                Category category = null;
+                string shortDescription = ShortDescTxtBx.Text;
 
-            int id = 1;
-            DateTime soft = new DateTime();
-            DateTime hard = new DateTime();
-            bool finished = false;
-            Category category = new Category(catType);
-            string body = "";
-            ZuydUser student = null;
-            ZuydUser author = null;
-            bool OpenForFeedback = false;
+                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    catType = MapCategory(selectedItem.Content.ToString());
+
+                    if (catType > 0)
+                    {
+                        category = new Category(catType, selectedItem.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+                string body = GoalTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = OpenForFBChckBx.IsChecked == true;
+                bool finished = false;
 
 
-            Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                dal.AddGoalFromDatabase(goal);
+            }
 
-            
-            dal.AddGoalFromDatabase(goal);
+            else //Teacher
+            {
+                int id = 0;
+                DateTime soft = new DateTime(2000,01,01);
+                DateTime hard = HardDeadlinePicker.SelectedDate.Value;
+                int catType = 0;
+                string shortDescription = ShortDescTxtBx.Text;
+                Category category = null;
+
+                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    catType = MapCategory(selectedItem.Content.ToString());
+                    if (catType > 0)
+                    {
+                        category = new Category(catType, selectedItem.Content.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+
+
+                string body = GoalTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = OpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+
+                dal.AddGoalFromDatabase(goal);
+                AddGoalPanel.Visibility = Visibility.Hidden;
+                GoalsPanel.Visibility = Visibility.Visible;
+                FillGoalListView(GoalsListView);
+            }
+        }
+
+        private int MapCategory(string? category)
+        {
+            switch (category) 
+            {
+                case("prive")
+                : return 1;
+                case ("school")
+                :
+                    return 2;
+                case ("zelfschool")
+                :
+                    return 3;
+                default: return 1;
+            }
         }
 
         //Add Feedback
@@ -292,28 +363,74 @@ namespace FeedBuf
             Goal goal = null;
             ZuydUser student = null;
             ZuydUser author = null;
+            string shortDescription = "";
 
-            Feedback feedback = new Feedback(id, goal, body, student, author);
+            Feedback feedback = new Feedback(id, goal, body, student, author, shortDescription);
             dal.AddFeedbackFromDatabase(feedback);
         }
 
         //Add Action
-        private void AddUserActionButton_Click(object sender, RoutedEventArgs e)
+        private void CreateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
-            int id = 1;
-            Goal goal = null;
-            DateTime createdOn = new DateTime();
-            DateTime soft = new DateTime();
-            DateTime hard = new DateTime();
+            if (loggedInUser.Role == 0) //Student
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = ActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ActionShortDescTxtBx.Text;
+                Goal goal = null;
+                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    goal = (Goal)selectedItem.Content;
 
-            string body = "";
-            ZuydUser student = null;
-            ZuydUser author = null;
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+                string text = ActionTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+                
 
 
-            UserAction Useraction = new UserAction(id, goal, createdOn, soft, hard, body, student, author);
+                UserAction userAction = new UserAction(0, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+                dal.AddUserActionFromDatabase(userAction);
+            }
 
-            dal.AddUserActionFromDatabase(Useraction);
+            else //Teacher
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = ActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ActionShortDescTxtBx.Text;
+                Goal goal = null;
+
+                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    goal = (Goal)selectedItem.Content;
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                }
+
+                string text = ActionTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                UserAction userAction = new UserAction(0, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+
+
+                dal.AddUserActionFromDatabase(userAction);
+
+            }
         }
 
         private void ActionButton_Click(object sender, RoutedEventArgs e)
@@ -321,6 +438,8 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Hidden;
             GoalsPanel.Visibility = Visibility.Hidden;
             ActionPanel.Visibility = Visibility.Visible;
+            AddActionPanel.Visibility = Visibility.Hidden;
+            AddGoalPanel.Visibility = Visibility.Hidden;
         }
 
 
@@ -329,6 +448,8 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Visible;
             GoalsPanel.Visibility = Visibility.Hidden;
             ActionPanel.Visibility = Visibility.Hidden;
+            AddActionPanel.Visibility = Visibility.Hidden;
+            AddGoalPanel.Visibility = Visibility.Hidden;
 
         }
 
@@ -337,14 +458,38 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Hidden;
             GoalsPanel.Visibility = Visibility.Visible;
             ActionPanel.Visibility = Visibility.Hidden;
+            AddActionPanel.Visibility = Visibility.Hidden;
+            AddGoalPanel.Visibility = Visibility.Hidden;
             //FillListView(GoalsListView);
 
         }
 
+        private void AddGoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Hidden;
+            GoalsPanel.Visibility = Visibility.Hidden;
+            ActionPanel.Visibility = Visibility.Hidden;
+            AddActionPanel.Visibility = Visibility.Hidden;
+            AddGoalPanel.Visibility = Visibility.Visible;
+        }
+
+        private void AddUserActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Hidden;
+            GoalsPanel.Visibility = Visibility.Hidden;
+            ActionPanel.Visibility = Visibility.Hidden;
+            AddActionPanel.Visibility = Visibility.Visible;
+            AddGoalPanel.Visibility = Visibility.Hidden;
+        }
+
         private void FillGoalListView(ListView listView)
         {
+            GoalsListView.Items.Clear();
             var goals = dal.FillGoalsFromDatabase();
-            GoalsListView.ItemsSource = goals;
+            foreach( var item in goals ) 
+            {
+                GoalsListView.Items.Add(item);
+            }
         }
 
         private void FillActionListView(ListView listView)

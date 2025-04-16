@@ -551,7 +551,7 @@ namespace FeedBuf
                             var student = GetZuydUserFromDatabaseBy( int.Parse(reader[3].ToString()));
                             var text = reader[4].ToString();
 
-                            feedbacks.Add(new Feedback(id, goal, text, student, student));
+                            feedbacks.Add(new Feedback(id, goal, text, student, student, string.Empty));
                         }
                     }
                     return feedbacks;
@@ -579,7 +579,7 @@ namespace FeedBuf
                             var student = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
                             var text = reader[4].ToString();
 
-                            return new Feedback(id, goal, text, student, student);
+                            return new Feedback(id, goal, text, student, student, string.Empty);
                         }
                         return null;
                     }
@@ -606,7 +606,7 @@ namespace FeedBuf
                     var Goal = feedback.Goal;
                     var User = feedback.Student;
 
-                    feedbacks.Add(new Feedback(newId, Goal, feedback.Text, User, User ));
+                    feedbacks.Add(new Feedback(newId, Goal, feedback.Text, User, User , string.Empty));
 
                     return feedbacks;
                 }
@@ -681,9 +681,10 @@ namespace FeedBuf
                             var softDeadline = DateTime.Parse(reader[6].ToString());
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
                             var text = reader[8].ToString();
+                            var openForFeedback =bool.Parse( reader[9].ToString());
 
 
-                            userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, text, student, student));
+                            userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback));
                         }
                     }
                     return userActions;
@@ -714,8 +715,9 @@ namespace FeedBuf
                             var softDeadline = DateTime.Parse(reader[6].ToString());
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
                             var text = reader[8].ToString();
+                            var openForFeedback = bool.Parse( reader[9].ToString());
 
-                            return new UserAction(id, goal, createdOn, softDeadline, hardDeadline, text, student, student);
+                            return new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback);
                         }
                         return null;
                     }
@@ -733,7 +735,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message,OpenForFeedback) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message,@OpenForFeedback) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
@@ -742,6 +744,7 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@SoftDeadline", userAction.SoftDeadline);
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
                     command.Parameters.AddWithValue("@Message", userAction.Text);
+                    command.Parameters.AddWithValue("@OpenForFeedback", userAction.OpenForFeedback);
                     var newId = Convert.ToInt32(command.ExecuteScalar());
                     var goal = userAction.Goal;
                     var isFinished = userAction.IsFinished;
@@ -749,9 +752,11 @@ namespace FeedBuf
                     var softDeadline = userAction.SoftDeadline;
                     var hardDeadline = userAction.HardDeadline;
                     var student = userAction.Student;
+                    var author = userAction.Author;
                     var Message = userAction.Text;
+                    var openForFeedback = userAction.OpenForFeedback;
 
-                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, Message, student, student));
+                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, isFinished, Message, student, author, string.Empty, openForFeedback));
 
                     return userActions;
                 }
