@@ -220,7 +220,7 @@
                 </ListView>
                 <Button x:Name="CreateActionButton" Content="Create" Click="AddUserActionButton_Click"/>
                 <Button x:Name="UpdateActionButton" Content="Update"/>
-                <Button x:Name="DeleteActionButton" Content="Delete"/>
+                <Button x:Name="DeleteActionButton" Content="Delete" Click="DeleteUserActionButton_Click"/>
             </StackPanel>
         </Border>
 
@@ -242,7 +242,7 @@
                 </ListView>
                 <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click"/>
                 <Button x:Name="UpdateGoalButton" Content="Update"/>
-                <Button x:Name="DeleteGoalButton" Content="Delete"/>
+                <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click"/>
             </StackPanel>
         </Border>
         <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
@@ -271,7 +271,16 @@
                 <Label x:Name="ActionTextLbl" Content="Action:"/>
                 <TextBox x:Name="ActionTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
                 <CheckBox x:Name="ActionOpenForFBChckBx" IsThreeState="False" Content="I Want Feedback"/>
-                <ListBox x:Name="GoalSelectionListBx" Height="65" Width="610" HorizontalAlignment="Left"></ListBox>
+                <ListView x:Name="GoalsSelectionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Label x:Name="ActionSoftDeadlineLbl" Content="Select Soft Deadline:"/>
                 <DatePicker x:Name="ActionSoftDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Label x:Name="ActionHardDeadlineLbl" Content="Select Hard Deadline:"/>

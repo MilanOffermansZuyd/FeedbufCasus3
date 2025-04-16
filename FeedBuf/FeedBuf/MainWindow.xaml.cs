@@ -38,6 +38,7 @@ namespace FeedBuf
             GoalsPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Collapsed;
 
+
             // Externe console
             AllocConsole();
 
@@ -296,6 +297,13 @@ namespace FeedBuf
 
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
                 dal.AddGoalFromDatabase(goal);
+                AddGoalPanel.Visibility = Visibility.Hidden;
+                SoftDeadlinePicker.SelectedDate = null;
+                HardDeadlinePicker.SelectedDate = null;
+                ShortDescTxtBx.Text = null;
+                GoalTextTxtBx = null;
+                GoalsPanel.Visibility = Visibility.Visible;
+                FillGoalListView(GoalsListView);
             }
 
             else //Teacher
@@ -333,6 +341,10 @@ namespace FeedBuf
 
                 dal.AddGoalFromDatabase(goal);
                 AddGoalPanel.Visibility = Visibility.Hidden;
+                SoftDeadlinePicker.SelectedDate = null;
+                HardDeadlinePicker.SelectedDate = null;
+                ShortDescTxtBx.Text = null;
+                GoalTextTxtBx.Text = null;
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
@@ -379,9 +391,9 @@ namespace FeedBuf
                 DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
                 string shortDescription = ActionShortDescTxtBx.Text;
                 Goal goal = null;
-                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                if (GoalsSelectionListView.SelectedItem is Goal selectedItem)
                 {
-                    goal = (Goal)selectedItem.Content;
+                    goal = selectedItem;
 
                 }
                 else
@@ -408,10 +420,9 @@ namespace FeedBuf
                 DateTime hard = ActionHardDeadlinePicker.SelectedDate.Value;
                 string shortDescription = ActionShortDescTxtBx.Text;
                 Goal goal = null;
-
-                if (GoalSelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                if (GoalsSelectionListView.SelectedItem is Goal selectedItem)
                 {
-                    goal = (Goal)selectedItem.Content;
+                    goal = selectedItem;
                 }
                 else
                 {
@@ -480,15 +491,17 @@ namespace FeedBuf
             ActionPanel.Visibility = Visibility.Hidden;
             AddActionPanel.Visibility = Visibility.Visible;
             AddGoalPanel.Visibility = Visibility.Hidden;
+            FillGoalListView(GoalsSelectionListView);
+
         }
 
         private void FillGoalListView(ListView listView)
         {
-            GoalsListView.Items.Clear();
+            listView.Items.Clear();
             var goals = dal.FillGoalsFromDatabase();
             foreach( var item in goals ) 
             {
-                GoalsListView.Items.Add(item);
+                listView.Items.Add(item);
             }
         }
 
@@ -511,5 +524,32 @@ namespace FeedBuf
             }
         }
 
+        private void DeleteGoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GoalsListView.SelectedItem is Goal selectedGoal)
+            {
+                var goals = dal.DeleteGoalFromDatabase(selectedGoal.Id);
+
+                GoalsListView.Items.Clear();
+                foreach ( var item in goals ) 
+                {
+                    GoalsListView.Items.Add(item);
+                }
+            }
+        }
+
+        private void DeleteUserActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActionListView.SelectedItem is UserAction UserActionList)
+            {
+                var Actioins = dal.DeleteUserActionFromDatabase(UserActionList.Id);
+
+                ActionListView.Items.Clear();
+                foreach (var item in Actioins)
+                {
+                    ActionListView.Items.Add(item);
+                }
+            }
+        }
     }
 }
