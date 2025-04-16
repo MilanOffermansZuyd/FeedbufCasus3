@@ -507,8 +507,12 @@ namespace FeedBuf
 
         private void FillActionListView(ListView listView)
         {
+            listView.Items.Clear();
             var actions = dal.FillUserActionsFromDatabase();
-            ActionListView.ItemsSource = actions;
+            foreach (var item in actions)
+            {
+                listView.Items.Add(item);
+            }
         }
 
         private void GoalsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
