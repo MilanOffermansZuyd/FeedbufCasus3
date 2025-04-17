@@ -501,7 +501,6 @@ namespace FeedBuf
                 USoftDeadlinePicker.Text = selectedGoal.SoftDeadline.ToString();
                 UHardDeadlinePicker.Text= selectedGoal.HardDeadline.ToString();
             }
-
         }
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
         {
@@ -521,6 +520,28 @@ namespace FeedBuf
             AddGoalPanel.Visibility = Visibility.Hidden;
             FillGoalListView(GoalsSelectionListView);
 
+        }
+        private int userActionToUpdate;
+        private void UpdateUserActionButtonView_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActionListView.SelectedItem is UserAction selectedActionUSer)
+            {
+                DashboardPanel.Visibility = Visibility.Hidden;
+                GoalsPanel.Visibility = Visibility.Hidden;
+                ActionPanel.Visibility = Visibility.Hidden;
+                AddActionPanel.Visibility = Visibility.Hidden;
+                AddGoalPanel.Visibility = Visibility.Hidden;
+                UpdateActionPanel.Visibility = Visibility.Visible; 
+                FillGoalListView(UGoalsSelectionListView);
+
+
+                userActionToUpdate = selectedActionUSer.Id;
+                UActionTextLbl.Content = selectedActionUSer.ShortDescription;
+                UActionTextTxtBx.Text = selectedActionUSer.Text;
+                UActionOpenForFBChckBx.IsChecked = selectedActionUSer.OpenForFeedback;
+                UActionSoftDeadlinePicker.Text = selectedActionUSer.SoftDeadline.ToString();
+                UActionHardDeadlinePicker.Text = selectedActionUSer.HardDeadline.ToString();
+            }
         }
 
         private void FillGoalListView(ListView listView)
@@ -668,6 +689,75 @@ namespace FeedBuf
                 UGoalTextTxtBx.Text = null;
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
+            }
+        }
+
+        private void UpdateUserActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (loggedInUser.Role == 0) //Student
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = UActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = UActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ActionShortDescTxtBx.Text;
+                Goal goal = null;
+                if (UGoalsSelectionListView.SelectedItem is Goal selectedItem)
+                {
+                    goal = selectedItem;
+
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                    return;
+                }
+
+                string text = UActionTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = UActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+
+                UserAction userAction = new UserAction(userActionToUpdate, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+                dal.UpdateUserActionFromDatabase(userAction);
+                FillActionListView(ActionListView);
+                ActionPanel.Visibility = Visibility.Visible;
+                UpdateActionPanel.Visibility = Visibility.Hidden;
+            }
+
+            else //Teacher
+            {
+                DateTime createdOn = DateTime.Now;
+                DateTime soft = UActionSoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = UActionHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = UActionShortDescTxtBx.Text;
+                Goal goal = null;
+                if (UGoalsSelectionListView.SelectedItem is Goal selectedItem)
+                {
+                    goal = selectedItem;
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                    return;
+                }
+
+                string text = UActionTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = UActionOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                UserAction userAction = new UserAction(userActionToUpdate, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
+
+
+                dal.UpdateUserActionFromDatabase(userAction);
+                FillActionListView(ActionListView);
+                ActionPanel.Visibility = Visibility.Visible;
+                UpdateActionPanel.Visibility = Visibility.Hidden;
             }
         }
     }
