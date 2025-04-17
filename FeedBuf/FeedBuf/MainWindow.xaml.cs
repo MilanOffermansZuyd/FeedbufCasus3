@@ -457,6 +457,7 @@ namespace FeedBuf
             ActionPanel.Visibility = Visibility.Visible;
             AddActionPanel.Visibility = Visibility.Hidden;
             AddGoalPanel.Visibility = Visibility.Hidden;
+            AddGoalPanel.Visibility = Visibility.Hidden;
         }
 
 
@@ -480,7 +481,28 @@ namespace FeedBuf
             //FillListView(GoalsListView);
 
         }
+        private int goalToUpdate;
+        private void UpdateGoalButtonView_Click(object sender, RoutedEventArgs e)
+        {
+            if (GoalsListView.SelectedItem is Goal selectedGoal)
+            {
+                DashboardPanel.Visibility = Visibility.Hidden;
+                GoalsPanel.Visibility = Visibility.Hidden;
+                ActionPanel.Visibility = Visibility.Hidden;
+                AddActionPanel.Visibility = Visibility.Hidden;
+                AddGoalPanel.Visibility = Visibility.Hidden;
+                UpdateGoalPanel.Visibility = Visibility.Visible;
+                
 
+                goalToUpdate = selectedGoal.Id;
+                UGoalTextLbl.Content = selectedGoal.ShortDescription;
+                UGoalTextTxtBx.Text = selectedGoal.Text;
+                UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback ;
+                USoftDeadlinePicker.Text = selectedGoal.SoftDeadline.ToString();
+                UHardDeadlinePicker.Text= selectedGoal.HardDeadline.ToString();
+            }
+
+        }
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
         {
             DashboardPanel.Visibility = Visibility.Hidden;
@@ -559,6 +581,93 @@ namespace FeedBuf
                 {
                     ActionListView.Items.Add(item);
                 }
+            }
+        }
+
+        private void UpdateGoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (loggedInUser.Role == 0) //Student
+            {
+                int id = goalToUpdate;
+                DateTime soft = USoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
+                Category category = null;
+                string shortDescription = ShortDescTxtBx.Text;
+
+                if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    var catType = MapCategory(selectedItem.Content.ToString());
+
+                    if (catType > 0)
+                    {
+                        category = new Category(catType, selectedItem.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                    return;
+                }
+
+                string body = UGoalTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                dal.UpdateGoalFromDatabase(goal);
+                UpdateGoalPanel.Visibility = Visibility.Hidden;
+                USoftDeadlinePicker.SelectedDate = null;
+                UHardDeadlinePicker.SelectedDate = null;
+                UShortDescTxtBx.Text = null;
+                UGoalTextTxtBx = null;
+                GoalsPanel.Visibility = Visibility.Visible;
+                FillGoalListView(GoalsListView);
+            }
+
+            else //Teacher
+            {
+                int id = goalToUpdate;
+                DateTime soft = USoftDeadlinePicker.SelectedDate.Value;
+                DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
+                string shortDescription = ShortDescTxtBx.Text;
+                Category category = null;
+
+                if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                {
+                    var catType = MapCategory(selectedItem.Content.ToString());
+                    if (catType > 0)
+                    {
+                        category = new Category(catType, selectedItem.Content.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Geen item geselecteerd.");
+                    return;
+                }
+
+
+
+                string body = UGoalTextTxtBx.Text;
+                ZuydUser student = loggedInUser;
+                ZuydUser author = loggedInUser;
+                bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
+                bool finished = false;
+
+
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+
+                dal.UpdateGoalFromDatabase(goal);
+                UpdateGoalPanel.Visibility = Visibility.Hidden;
+                USoftDeadlinePicker.SelectedDate = null;
+                UHardDeadlinePicker.SelectedDate = null;
+                UShortDescTxtBx.Text = null;
+                UGoalTextTxtBx.Text = null;
+                GoalsPanel.Visibility = Visibility.Visible;
+                FillGoalListView(GoalsListView);
             }
         }
     }

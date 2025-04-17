@@ -241,7 +241,7 @@
                     </ListView.View>
                 </ListView>
                 <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click"/>
-                <Button x:Name="UpdateGoalButton" Content="Update"/>
+                <Button x:Name="UpdateGoalButton" Content="Update" Click="UpdateGoalButtonView_Click"/>
                 <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click"/>
             </StackPanel>
         </Border>
@@ -286,6 +286,26 @@
                 <Label x:Name="ActionHardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="ActionHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="AddActionButton" Content="Add Action" Click="CreateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+        <!--Update Panels-->
+        <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Left">
+                <Label x:Name="UShortDescLbl" Content="Short Description:"/>
+                <TextBox x:Name="UShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
+                <Label x:Name="UGoalTextLbl" Content="Goal:"/>
+                <TextBox x:Name="UGoalTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
+                <CheckBox x:Name="UOpenForFBChckBx" IsThreeState="False" Content="I Want Feedback"/>
+                <ListBox x:Name="UCategorySelectionListBx" Height="65" Width="230" HorizontalAlignment="Left">
+                    <ListBoxItem x:Name="UPrivateGoalItem" Content="Privé Doel"/>
+                    <ListBoxItem x:Name="UPrivateSchoolGoalItem" Content="Privé School Doel"/>
+                    <ListBoxItem x:Name="USchoolGoalItem" Content="School Doel"/>
+                </ListBox>
+                <Label x:Name="USoftDeadlineLbl" Content="Select Soft Deadline:"/>
+                <DatePicker x:Name="USoftDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Label x:Name="UHardDeadlineLbl" Content="Select Hard Deadline:"/>
+                <DatePicker x:Name="UHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
+                <Button x:Name="UpdateGoalViewButton" Content="Update Goal" Click="UpdateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
     </Grid>
