@@ -32,6 +32,15 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ClickableTextStyle" TargetType="TextBlock">
+            <Setter Property="TextDecorations" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                    <Setter Property="Foreground" Value="#f10000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -44,14 +53,18 @@
         <Border Background="#ebebeb" Grid.Column="0" CornerRadius="10" Margin="10" Padding="10">
             <StackPanel>
                 <TextBlock x:Name="WelcomeTextBlock"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="#444"
-                    Margin="0,0,0,10"
-                    TextWrapping="Wrap"
-                    TextAlignment="Center"
-                    MaxWidth="150" 
-                    Text="Welkom!" />
+           Style="{StaticResource ClickableTextStyle}"
+           FontSize="14"
+           FontWeight="SemiBold"
+           Cursor="Hand"
+           Foreground="#444"
+           Margin="0,0,0,10"
+           TextWrapping="Wrap"
+           TextAlignment="Center"
+           MaxWidth="150"
+           MouseLeftButtonDown="WelcomeTextBlock_Click"
+           Text="Welkom!" />
+
 
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
@@ -191,6 +204,44 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <!-- Profile edit panel -->
+        <Border x:Name="ProfilePanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Left" Width="400" VerticalAlignment="Top" Margin="20">
+                <TextBlock Text="👤 Profiel aanpassen" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <Label Content="Voornaam:"/>
+                <TextBox x:Name="EditFirstNameBox" Height="30" KeyDown="Profile_KeyDown"/>
+
+                <Label Content="Achternaam:"/>
+                <TextBox x:Name="EditLastNameBox" Height="30" KeyDown="Profile_KeyDown"/>
+
+                <Label Content="Email:"/>
+                <TextBox x:Name="EditEmailBox" Height="30" KeyDown="Profile_KeyDown"/>
+
+                <Label Content="Nieuw wachtwoord:"/>
+                <PasswordBox x:Name="EditPasswordBox" Height="30" KeyDown="Profile_KeyDown"/>
+
+                <Label Content="Herhaal wachtwoord:"/>
+                <PasswordBox x:Name="EditConfirmPasswordBox" Height="30" KeyDown="Profile_KeyDown"/>
+
+                <Label Content="Rol:"/>
+                <ComboBox x:Name="EditRoleComboBox" Height="30" KeyDown="Profile_KeyDown">
+                    <ComboBoxItem Content="Student" Tag="0"/>
+                    <ComboBoxItem Content="Docent" Tag="1"/>
+                </ComboBox>
+
+                <TextBlock x:Name="ProfileErrorText" Foreground="Red" FontWeight="Bold" Height="30"/>
+
+                <Button Content="Wijzigingen Toepassen" Click="ApplyProfileChanges_Click"/>
+                <Button Content="Verwijder Account" Background="DarkRed" Click="DeleteAccount_Click"/>
+                <Button Content="Annuleren" Click="CancelProfileChange_Click" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
+
+
+
 
         <!-- Dashboard Panel -->
         <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">

@@ -26,7 +26,9 @@ namespace FeedBuf
         public static extern bool AllocConsole();
 
         DAL dal = new DAL();
-        private ZuydUser loggedInUser; // Keep track of logged in user
+        private ZuydUser loggedInUser;
+        public ZuydUser LoggedInUser => loggedInUser;
+
 
         public MainWindow()
         {
@@ -37,6 +39,9 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Collapsed;
             GoalsPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Collapsed;
+            WelcomeTextBlock.MouseLeftButtonDown += WelcomeTextBlock_Click;
+            WelcomeTextBlock.Cursor = Cursors.Hand;
+
 
 
             // Externe console
@@ -45,7 +50,6 @@ namespace FeedBuf
             FillGoalListView(GoalsListView);
             FillActionListView(ActionListView);
         }
-
 
         // Login
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -104,6 +108,11 @@ namespace FeedBuf
             DashboardPanel.Visibility = Visibility.Collapsed;
             GoalsPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+            AddGoalPanel.Visibility = Visibility.Collapsed;
+            AddActionPanel.Visibility = Visibility.Collapsed;
+            UpdateGoalPanel.Visibility = Visibility.Collapsed;
+            UpdateActionPanel.Visibility = Visibility.Collapsed;
         }
 
         // Forgot Password
@@ -235,7 +244,6 @@ namespace FeedBuf
             });
         }
 
-
         private void Register_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -243,6 +251,107 @@ namespace FeedBuf
                 RegisterUser_Click(sender, e);
             }
         }
+
+        // Edit Profile / Delete Profile
+
+        private void WelcomeTextBlock_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (loggedInUser != null)
+            {
+                DashboardPanel.Visibility = Visibility.Collapsed;
+                ProfilePanel.Visibility = Visibility.Visible;
+
+                EditFirstNameBox.Text = loggedInUser.FirstName;
+                EditLastNameBox.Text = loggedInUser.LastName;
+                EditEmailBox.Text = loggedInUser.Email;
+                EditPasswordBox.Password = "";
+                EditConfirmPasswordBox.Password = "";
+                ProfileErrorText.Text = "";
+
+                foreach (ComboBoxItem item in EditRoleComboBox.Items)
+                {
+                    if (item.Tag != null && int.Parse(item.Tag.ToString()) == loggedInUser.Role)
+                    {
+                        EditRoleComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ApplyProfileChanges_Click(object sender, RoutedEventArgs e)
+        {
+            string firstName = EditFirstNameBox.Text.Trim();
+            string lastName = EditLastNameBox.Text.Trim();
+            string email = EditEmailBox.Text.Trim();
+            string password = EditPasswordBox.Password.Trim();
+            string confirmPassword = EditConfirmPasswordBox.Password.Trim();
+
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email))
+            {
+                ProfileErrorText.Text = "Vul alle verplichte velden in.";
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(password) && password != confirmPassword)
+            {
+                ProfileErrorText.Text = "Wachtwoorden komen niet overeen.";
+                return;
+            }
+
+            loggedInUser.FirstName = firstName;
+            loggedInUser.LastName = lastName;
+            loggedInUser.Email = email;
+            if (!string.IsNullOrEmpty(password))
+                loggedInUser.Password = password;
+
+            ComboBoxItem selectedRoleItem = EditRoleComboBox.SelectedItem as ComboBoxItem;
+            if (selectedRoleItem == null || selectedRoleItem.Tag == null)
+            {
+                ProfileErrorText.Text = "Selecteer een rol.";
+                return;
+            }
+
+            int role = int.Parse(selectedRoleItem.Tag.ToString());
+            loggedInUser.Role = role;
+
+            dal.UpdateZuydUserFromDatabase(loggedInUser);
+            ProfileErrorText.Text = "";
+            MessageBox.Show("Je profiel is succesvol bijgewerkt!");
+
+            WelcomeTextBlock.Text = $"Welkom {loggedInUser.FirstName} {loggedInUser.LastName}";
+            ProfilePanel.Visibility = Visibility.Collapsed;
+            DashboardPanel.Visibility = Visibility.Visible;
+        }
+        private void DeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Weet je zeker dat je je account wil verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                dal.DeleteZuydUserFromDatabase(loggedInUser.Id);
+                loggedInUser = null;
+                MessageBox.Show("Je account is verwijderd.");
+
+                ProfilePanel.Visibility = Visibility.Collapsed;
+                LoginPanel.Visibility = Visibility.Visible;
+                EmailBox.Text = "";
+                PasswordBox.Password = "";
+            }
+        }
+        private void Profile_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ApplyProfileChanges_Click(sender, e);
+            }
+        }
+        private void CancelProfileChange_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilePanel.Visibility = Visibility.Collapsed;
+            DashboardPanel.Visibility = Visibility.Visible;
+        }
+
 
         // Password Eye
         private void PasswordEye_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -253,6 +362,8 @@ namespace FeedBuf
             VisiblePasswordBox.Focus();
             VisiblePasswordBox.SelectionStart = VisiblePasswordBox.Text.Length;
         }
+
+
 
         private void PasswordEye_PreviewMouseUp(object sender, MouseEventArgs e)
         {
@@ -650,7 +761,7 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
                 dal.UpdateGoalFromDatabase(goal);
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
                 USoftDeadlinePicker.SelectedDate = null;
@@ -692,7 +803,7 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
 
                 dal.UpdateGoalFromDatabase(goal);
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
