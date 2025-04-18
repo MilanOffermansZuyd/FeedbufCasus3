@@ -1,4 +1,5 @@
 ﻿using FeedBuf.Catagory;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -914,7 +915,19 @@ namespace FeedBuf
                     }
                 }
             }
-            DashBoardGoals.ItemsSource = Upcoming;
+
+            if(Upcoming.Count == 0)
+            {
+                InfoBox.Visibility = Visibility.Hidden;
+                DashBoardGoals.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                InfoBox.Visibility = Visibility.Visible;
+                DashBoardGoals.Visibility = Visibility.Visible;
+                DashBoardGoals.ItemsSource = Upcoming;
+            }
+            
         }
     }
 }
