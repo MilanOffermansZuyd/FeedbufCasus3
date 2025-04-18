@@ -5,7 +5,7 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="av"
-    Title="Feedbuf" Height="800" Width="1100" WindowStartupLocation="CenterScreen">
+    Title="Feedbuf" Height="900" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -84,13 +84,13 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="🔐 Login" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
                 <StackPanel Grid.Row="1" Margin="0 0 0 10">
-                    <TextBlock Text="Emailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="E-mailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="EmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="LoginButton_KeyDown"/>
                 </StackPanel>
 
 
                 <StackPanel Grid.Row="2" Margin="0 0 0 10">
-                    <TextBlock Text="Wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Password:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <Grid>
                         <TextBox x:Name="VisiblePasswordBox"
                  Height="35"
@@ -123,9 +123,9 @@
                     <TextBlock x:Name="ErrorText" FontWeight="Bold" Foreground="Red" Margin="0 0 0 10" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Height="20" Visibility="Visible" Text=""/>
                     <Button Content="Login" Click="LoginButton_Click"/>
                     <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <Hyperlink Click="ForgotPassword_Click" >Wachtwoord vergeten?</Hyperlink>
+                    <Hyperlink Click="ForgotPassword_Click" >Forgot Password?</Hyperlink>
                     <Run Text=" | "/>
-                    <Hyperlink Click="Register_Click" >Registreren</Hyperlink>
+                    <Hyperlink Click="Register_Click" >Register</Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </Grid>
@@ -140,17 +140,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="🔐 Wachtwoord vergeten" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
+                <TextBlock Grid.Row="0" Text="🔐 Forgot Password" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
                 <StackPanel Grid.Row="1" Margin="0 0 0 10">
-                    <TextBlock Text="Voer je e-mailadres in:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Enter a valid e-mailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="ForgotEmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="ForgotPassword_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="0 0 0 10">
                     <TextBlock x:Name="ForgotPasswordResult" Text="" FontWeight="Bold" Foreground="DarkGreen" TextAlignment="Center" TextWrapping="Wrap" Height="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="0 10 0 0">
-                    <Button Content="Toon wachtwoord" Click="ShowPassword_Click"/>
-                    <Button Content="Terug naar login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
+                    <Button Content="Show password" Click="ShowPassword_Click"/>
+                    <Button Content="Back to login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -168,39 +168,39 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="📝 Registreren" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
+                <TextBlock Grid.Row="0" Text="📝 Register" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
                 <StackPanel Grid.Row="1" Margin="0 0 0 10">
-                    <TextBlock Text="Voornaam:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="First name:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="RegisterFirstNameBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="0 0 0 10">
-                    <TextBlock Text="Achternaam:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Last name:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="RegisterLastNameBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="0 0 0 10">
-                    <TextBlock Text="Emailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="E-mailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="RegisterEmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Margin="0 0 0 10">
-                    <TextBlock Text="Wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Password:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <PasswordBox x:Name="RegisterPasswordBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Margin="0 0 0 10">
-                    <TextBlock Text="Herhaal wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Repeat Password:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <PasswordBox x:Name="RegisterConfirmPasswordBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="Register_KeyDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Margin="0 0 0 10">
-                    <TextBlock Text="Rol:" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                    <TextBlock Text="Role:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <ComboBox x:Name="RoleComboBox" Height="22" SelectedIndex="-1" KeyDown="Register_KeyDown">
-                        <ComboBoxItem Content="-- Selecteer rol --" IsEnabled="False" IsSelected="True" />
+                        <ComboBoxItem Content="-- Select a role --" IsEnabled="False" IsSelected="True" />
                         <ComboBoxItem Content="Student" Tag="0"/>
-                        <ComboBoxItem Content="Docent" Tag="1"/>
+                        <ComboBoxItem Content="Teacher" Tag="1"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="7" Margin="0 10 0 0">
                     <TextBlock x:Name="RegisterResultText" FontWeight="Bold" TextWrapping="Wrap" Height="40" TextAlignment="Center"/>
-                    <Button Content="Registreren" Click="RegisterUser_Click"/>
-                    <Button Content="Terug naar login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
+                    <Button Content="Register" Click="RegisterUser_Click"/>
+                    <Button Content="Back to login" Margin="0,10,0,0" Click="BackToLogin_Click"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -239,10 +239,6 @@
             </StackPanel>
         </Border>
 
-
-
-
-
         <!-- Dashboard Panel -->
         <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
@@ -255,11 +251,11 @@
 
         <!-- Action Panel -->
         <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
-                           Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView x:Name="ActionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+               Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
+                <ListView x:Name="ActionListView" Height="338">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
@@ -272,16 +268,18 @@
                 <Button x:Name="CreateActionButton" Content="Create" Click="AddUserActionButton_Click"/>
                 <Button x:Name="UpdateActionButtonview" Content="Update" Click="UpdateUserActionButtonView_Click"/>
                 <Button x:Name="DeleteActionButton" Content="Delete" Click="DeleteUserActionButton_Click"/>
+                <Button x:Name="BackToDashboardFromActionButton" Content="Back to Dashboard" Click="BackToDashboardFromAction_Click"/>
             </StackPanel>
+
         </Border>
 
         <!-- Goals Panel -->
         <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
-                           Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+               Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
+                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" Height="338">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
@@ -294,10 +292,11 @@
                 <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click"/>
                 <Button x:Name="UpdateGoalButton" Content="Update" Click="UpdateGoalButtonView_Click"/>
                 <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click"/>
+                <Button x:Name="BackToDashboardFromGoalButton" Content="Back to Dashboard" Click="BackToDashboardFromGoal_Click"/>
             </StackPanel>
         </Border>
         <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="GoalTextLbl" Content="Goal:"/>
@@ -313,10 +312,12 @@
                 <Label x:Name="HardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="HardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="AddGoalButton" Content="Add Goal" Click="CreateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="BackToGoalsFromAddGoalButton" Content="Back to Goals" Click="BackToGoalsFromAddGoal_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
+        <!-- Create Goals panel -->
         <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <Label x:Name="ActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="ActionTextLbl" Content="Action:"/>
@@ -337,11 +338,12 @@
                 <Label x:Name="ActionHardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="ActionHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="AddActionButton" Content="Add Action" Click="CreateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="BackToActionsFromAddActionButton" Content="Back to Actions" Click="BackToActionsFromAddAction_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
         <!--Update Panels-->
         <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <Label x:Name="UShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="UGoalTextLbl" Content="Goal:"/>
@@ -357,10 +359,11 @@
                 <Label x:Name="UHardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="UHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="UpdateGoalViewButton" Content="Update Goal" Click="UpdateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="BackToGoalsFromUpdateGoalButton" Content="Back to Goals" Click="BackToGoalsFromUpdateGoal_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
         <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <Label x:Name="UActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="UActionTextLbl" Content="Action:"/>
@@ -381,6 +384,7 @@
                 <Label x:Name="UActionHardDeadlineLbl" Content="Select Hard Deadline:"/>
                 <DatePicker x:Name="UActionHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="UpdateActionButton" Content="Update Action" Click="UpdateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
+                <Button x:Name="BackToActionsFromUpdateActionButton" Content="Back to Actions" Click="BackToActionsFromUpdateAction_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
     </Grid>
