@@ -75,21 +75,21 @@
 
         <!-- Login Panel-->
         <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" av:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="🔐 Login" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50"/>
-                <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                <TextBlock Grid.Row="0" Text="🔐 Login" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0 0 0 50" av:IsHidden="True"/>
+                <StackPanel Grid.Row="1" Margin="0 0 0 10" av:IsHidden="True">
                     <TextBlock Text="Emailadres:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <TextBox x:Name="EmailBox" Height="35" Padding="5,0" VerticalContentAlignment="Center" KeyDown="LoginButton_KeyDown"/>
                 </StackPanel>
 
 
-                <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                <StackPanel Grid.Row="2" Margin="0 0 0 10" av:IsHidden="True">
                     <TextBlock Text="Wachtwoord:" Margin="0,0,0,5" FontWeight="SemiBold"/>
                     <Grid>
                         <TextBox x:Name="VisiblePasswordBox"
@@ -119,7 +119,7 @@
                 </StackPanel>
 
 
-                <StackPanel Grid.Row="3" Margin="0 10 0 0">
+                <StackPanel Grid.Row="3" Margin="0 10 0 0" av:IsHidden="True">
                     <TextBlock x:Name="ErrorText" FontWeight="Bold" Foreground="Red" Margin="0 0 0 10" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Height="20" Visibility="Visible" Text=""/>
                     <Button Content="Login" Click="LoginButton_Click"/>
                     <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0">
@@ -156,7 +156,7 @@
         </Border>
 
         <!-- Register Panel -->
-        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="RegisterPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -206,7 +206,7 @@
         </Border>
 
         <!-- Profile edit panel -->
-        <Border x:Name="ProfilePanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="ProfilePanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" Width="400" VerticalAlignment="Top" Margin="20">
                 <TextBlock Text="👤 Profiel aanpassen" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
@@ -244,17 +244,26 @@
 
 
         <!-- Dashboard Panel -->
-        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
                 <TextBlock Text="Dashboard" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
-                <TextBlock FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBlock x:Name="_7DayText" Text="Goals die binnen 7 dagen voltooid moeten zijn"  FontSize="18" FontWeight="Bold" TextAlignment="Center"/>
+                <ListView x:Name="_7DayGrid" av:ItemsSource="{av:SampleData ItemCount=5}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="450" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <TextBlock Text="Information" FontSize="14" TextWrapping="Wrap"
                            Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
             </StackPanel>
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Actions" FontSize="14" TextWrapping="Wrap"
@@ -276,7 +285,7 @@
         </Border>
 
         <!-- Goals Panel -->
-        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+        <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Height="544" Width="600">
                 <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
@@ -296,7 +305,7 @@
                 <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click"/>
             </StackPanel>
         </Border>
-        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -315,7 +324,7 @@
                 <Button x:Name="AddGoalButton" Content="Add Goal" Click="CreateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
-        <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="ActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -340,7 +349,7 @@
             </StackPanel>
         </Border>
         <!--Update Panels-->
-        <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="UShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -359,7 +368,7 @@
                 <Button x:Name="UpdateGoalViewButton" Content="Update Goal" Click="UpdateGoalButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
-        <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left">
                 <Label x:Name="UActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -383,5 +392,6 @@
                 <Button x:Name="UpdateActionButton" Content="Update Action" Click="UpdateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
+
     </Grid>
 </Window>

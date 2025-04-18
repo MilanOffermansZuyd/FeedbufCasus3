@@ -66,6 +66,7 @@ namespace FeedBuf
 
                 LoginPanel.Visibility = Visibility.Collapsed;
                 DashboardPanel.Visibility = Visibility.Visible;
+                Populate7DayInfo();
 
                 WelcomeTextBlock.Text = $"Welkom {user.FirstName} {user.LastName}";
 
@@ -579,7 +580,7 @@ namespace FeedBuf
             ActionPanel.Visibility = Visibility.Hidden;
             AddActionPanel.Visibility = Visibility.Hidden;
             AddGoalPanel.Visibility = Visibility.Hidden;
-
+            Populate7DayInfo();
         }
 
         private void GoalButton_Click(object sender, RoutedEventArgs e)
@@ -883,6 +884,37 @@ namespace FeedBuf
                 ActionPanel.Visibility = Visibility.Visible;
                 UpdateActionPanel.Visibility = Visibility.Hidden;
             }
+        }
+        //grijp alle goals die een deadine in de komende 7 dagen hebben en laat deze zien in de dashboard
+        private void Populate7DayInfo()
+        {
+            
+            TextBlock InfoBox = _7DayText;
+            ListView DashBoardGoals = _7DayGrid;
+
+            DateTime Today = DateTime.Today;
+
+            List<Goal> Upcoming = new List<Goal>();
+
+            List<Goal> ToDo = dal.GetAllToDoGoalsFromDatabaseBy(loggedInUser.Id);
+            foreach (Goal goal in ToDo.ToList())
+            {
+                if(goal.SoftDeadline > Today && goal.SoftDeadline < Today.AddDays(7))
+                {
+                    if (!Upcoming.Contains(goal))
+                    {
+                        Upcoming.Add(goal);
+                    }
+                }
+                if (goal.HardDeadline > Today && goal.HardDeadline < Today.AddDays(7))
+                {
+                    if (!Upcoming.Contains(goal))
+                    {
+                        Upcoming.Add(goal);
+                    }
+                }
+            }
+            DashBoardGoals.ItemsSource = Upcoming;
         }
     }
 }
