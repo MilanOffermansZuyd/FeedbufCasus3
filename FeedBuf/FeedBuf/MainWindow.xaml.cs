@@ -295,7 +295,7 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
                 dal.AddGoalFromDatabase(goal);
                 AddGoalPanel.Visibility = Visibility.Hidden;
                 SoftDeadlinePicker.SelectedDate = null;
@@ -337,7 +337,7 @@ namespace FeedBuf
                 bool finished = false;
 
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
 
                 dal.AddGoalFromDatabase(goal);
                 AddGoalPanel.Visibility = Visibility.Hidden;
@@ -504,8 +504,9 @@ namespace FeedBuf
         private void FillGoalListView(ListView listView)
         {
             listView.Items.Clear();
-            var goals = dal.FillGoalsFromDatabase();
-            foreach( var item in goals ) 
+            var allGoals = dal.FillGoalsFromDatabase();
+            var echteGoals = allGoals.Where(g => g.SubId == null).ToList();
+            foreach ( var item in echteGoals ) 
             {
                 listView.Items.Add(item);
             }
@@ -525,14 +526,26 @@ namespace FeedBuf
         {
             if (GoalsListView.SelectedItem is Goal selectedGoal)
             {
-                // Haal de bijbehorende subgoals op via de DAL
-                var subGoals = dal.GetSubGoalByGoalId(selectedGoal.Id);
+                var subGoals = dal.GetSubGoalsForGoal(selectedGoal.Id);
 
-                // Open het subgoal venster en geef de lijst door
-                var subGoalWindow = new SubGoalWindow(subGoals);
-                subGoalWindow.Show();
+                if (subGoals == null)
+                {
+                    MessageBox.Show("subGoals is NULL!"); // debug message
+                    return;
+                }
+
+                if (subGoals.Any())
+                {
+                    var subGoalWindow = new SubGoalWindow(subGoals);
+                    subGoalWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Deze goal heeft geen subgoals.");
+                }
             }
         }
+
 
         private void DeleteGoalButton_Click(object sender, RoutedEventArgs e)
         {
