@@ -369,7 +369,7 @@
                 <Label x:Name="UActionTextLbl" Content="Action:"/>
                 <TextBox x:Name="UActionTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
                 <CheckBox x:Name="UActionOpenForFBChckBx" IsThreeState="False" Content="I Want Feedback"/>
-                <ListView x:Name="UGoalsSelectionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338">
+                <ListView x:Name="UGoalsSelectionListView" av:ItemsSource="{av:SampleData ItemCount=5}" Height="338" Visibility="Collapsed">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
