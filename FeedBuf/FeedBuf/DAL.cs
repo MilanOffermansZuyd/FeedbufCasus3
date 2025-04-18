@@ -432,6 +432,39 @@ namespace FeedBuf
                 }
             }
         }
+        public List<Goal> GetAllToDoGoalsFromDatabaseBy(int Id)
+        {
+            goals.Clear();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * FROM Goal WHERE StudentId = @Id and IsFinished = 0";
+                    command.Parameters.AddWithValue("@Id", Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = bool.Parse(reader[9].ToString());
+
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+                        }
+                        return goals;
+                    }
+                }
+            }
+        }
 
         public List<Goal> AddGoalFromDatabase(Goal goal)
         {

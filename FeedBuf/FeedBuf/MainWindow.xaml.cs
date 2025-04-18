@@ -66,6 +66,7 @@ namespace FeedBuf
 
                 LoginPanel.Visibility = Visibility.Collapsed;
                 DashboardPanel.Visibility = Visibility.Visible;
+                Populate7DayInfo();
 
                 WelcomeTextBlock.Text = $"Welkom {user.FirstName} {user.LastName}";
 
@@ -583,6 +584,7 @@ namespace FeedBuf
             AddGoalPanel.Visibility = Visibility.Hidden;
             UpdateGoalPanel.Visibility = Visibility.Hidden;
             UpdateActionPanel.Visibility = Visibility.Hidden;
+            Populate7DayInfo();
         }
 
         private void GoalButton_Click(object sender, RoutedEventArgs e)
@@ -910,13 +912,6 @@ namespace FeedBuf
             }
         }
 
-
-
-
-
-
-
-
         private void BackToDashboardFromAction_Click(object sender, RoutedEventArgs e)
         {
             DashboardPanel.Visibility = Visibility.Visible;
@@ -938,6 +933,7 @@ namespace FeedBuf
             AddGoalPanel.Visibility = Visibility.Hidden;
             UpdateGoalPanel.Visibility = Visibility.Hidden;
             UpdateActionPanel.Visibility = Visibility.Hidden;
+            Populate7DayInfo();
         }
 
         private void BackToGoalsFromAddGoal_Click(object sender, RoutedEventArgs e)
@@ -983,6 +979,49 @@ namespace FeedBuf
             AddActionPanel.Visibility = Visibility.Hidden;
             UpdateGoalPanel.Visibility = Visibility.Hidden;
             UpdateActionPanel.Visibility = Visibility.Hidden;
+        }
+        //grijp alle goals die een deadine in de komende 7 dagen hebben en laat deze zien in de dashboard
+        private void Populate7DayInfo()
+        {
+
+            TextBlock InfoBox = _7DayText;
+            ListView DashBoardGoals = _7DayGrid;
+
+            DateTime Today = DateTime.Today;
+
+            List<Goal> Upcoming = new List<Goal>();
+
+            List<Goal> ToDo = dal.GetAllToDoGoalsFromDatabaseBy(loggedInUser.Id);
+            foreach (Goal goal in ToDo.ToList())
+            {
+                if (goal.SoftDeadline > Today && goal.SoftDeadline < Today.AddDays(7))
+                {
+                    if (!Upcoming.Contains(goal))
+                    {
+                        Upcoming.Add(goal);
+                    }
+                }
+                if (goal.HardDeadline > Today && goal.HardDeadline < Today.AddDays(7))
+                {
+                    if (!Upcoming.Contains(goal))
+                    {
+                        Upcoming.Add(goal);
+                    }
+                }
+            }
+
+            if (Upcoming.Count == 0)
+            {
+                InfoBox.Visibility = Visibility.Hidden;
+                DashBoardGoals.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                InfoBox.Visibility = Visibility.Visible;
+                DashBoardGoals.Visibility = Visibility.Visible;
+                DashBoardGoals.ItemsSource = Upcoming;
+            }
+
         }
     }
 }
