@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\zuyduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\zuyduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\subgoalwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\subgoalwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\robbi\\desktop\\feedbuf\\feedbuf\\feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,65 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-18T12:12:29.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ZuydUser.cs",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\ZuydUser.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\ZuydUser.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\ZuydUser.cs",
-              "RelativeToolTip": "FeedBuf\\ZuydUser.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Title": "DAL.cs",
+              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\DAL.cs",
+              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeToolTip": "FeedBuf\\DAL.cs",
+              "ViewState": "AgIAAPYAAAAAAAAAAAAswB0BAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T12:08:55.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubGoalWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\SubGoalWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\SubGoalWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T11:51:24.251Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Goal.cs",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\Goal.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\Goal.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\Goal.cs",
-              "RelativeToolTip": "FeedBuf\\Goal.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA9wCcAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T11:47:49.457Z",
+              "WhenOpened": "2025-04-18T14:00:24.245Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAiwKEAAAAoAAAAAAAAAA==",
+              "Title": "ZuydUser.cs",
+              "DocumentMoniker": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\ZuydUser.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\ZuydUser.cs",
+              "ToolTip": "C:\\Users\\robbi\\Desktop\\Feedbuf\\FeedBuf\\FeedBuf\\ZuydUser.cs",
+              "RelativeToolTip": "FeedBuf\\ZuydUser.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA4wDMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T11:40:43.455Z",
+              "WhenOpened": "2025-04-18T13:44:28.204Z",
               "EditorCaption": ""
             }
           ]

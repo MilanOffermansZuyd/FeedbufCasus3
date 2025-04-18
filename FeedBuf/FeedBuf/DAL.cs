@@ -282,8 +282,9 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[5].ToString());
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
+
 
                             if (subId == null)
                             {
@@ -319,8 +320,8 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[5].ToString());
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
 
                             return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId);
                         }
@@ -353,8 +354,8 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[5].ToString());
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
 
                             goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
@@ -387,8 +388,8 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[5].ToString());
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
 
                             goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
@@ -421,8 +422,8 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[5].ToString());
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
-                            var openForFeedback = bool.Parse(reader[8].ToString());
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
 
                             goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
