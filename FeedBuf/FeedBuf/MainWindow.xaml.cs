@@ -548,7 +548,6 @@ namespace FeedBuf
             dal.AddUserActionFromDatabase(userAction);
             FillActionListView(ActionListView);
 
-            // 👉 Velden resetten
             ActionShortDescTxtBx.Text = "";
             ActionTextTxtBx.Text = "";
             ActionOpenForFBChckBx.IsChecked = false;
@@ -556,7 +555,6 @@ namespace FeedBuf
             ActionHardDeadlinePicker.SelectedDate = null;
             GoalsSelectionListView.SelectedItem = null;
 
-            // 👉 Panel switch
             AddActionPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Visible;
         }
@@ -598,6 +596,8 @@ namespace FeedBuf
             UpdateActionPanel.Visibility = Visibility.Hidden;
         }
         private int goalToUpdate;
+        private Goal selectedGoalForUpdate;
+
         private void UpdateGoalButtonView_Click(object sender, RoutedEventArgs e)
         {
             if (GoalsListView.SelectedItem is Goal selectedGoal)
@@ -608,16 +608,36 @@ namespace FeedBuf
                 AddActionPanel.Visibility = Visibility.Hidden;
                 AddGoalPanel.Visibility = Visibility.Hidden;
                 UpdateGoalPanel.Visibility = Visibility.Visible;
-                
 
                 goalToUpdate = selectedGoal.Id;
+                selectedGoalForUpdate = selectedGoal;
+
                 UGoalTextLbl.Content = selectedGoal.ShortDescription;
                 UGoalTextTxtBx.Text = selectedGoal.Text;
-                UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback ;
-                USoftDeadlinePicker.Text = selectedGoal.SoftDeadline.ToString();
-                UHardDeadlinePicker.Text= selectedGoal.HardDeadline.ToString();
+                UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback;
+                USoftDeadlinePicker.SelectedDate = selectedGoal.SoftDeadline;
+                UHardDeadlinePicker.SelectedDate = selectedGoal.HardDeadline;
+
+                UCategorySelectionListBx.SelectedItem = null;
+                switch (selectedGoal.Category.Type)
+                {
+                    case "Privé Doel":
+                        UCategorySelectionListBx.SelectedItem = UPrivateGoalItem;
+                        break;
+                    case "Privé School Doel":
+                        UCategorySelectionListBx.SelectedItem = UPrivateSchoolGoalItem;
+                        break;
+                    case "School Doel":
+                        UCategorySelectionListBx.SelectedItem = USchoolGoalItem;
+                        break;
+                    default:
+                        UCategorySelectionListBx.SelectedItem = null;
+                        break;
+                }
+
             }
         }
+
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
         {
             DashboardPanel.Visibility = Visibility.Hidden;
@@ -638,27 +658,45 @@ namespace FeedBuf
 
         }
         private int userActionToUpdate;
+        private UserAction selectedUserActionForUpdate;
+
         private void UpdateUserActionButtonView_Click(object sender, RoutedEventArgs e)
         {
-            if (ActionListView.SelectedItem is UserAction selectedActionUSer)
+            if (ActionListView.SelectedItem is UserAction selectedActionUser)
             {
                 DashboardPanel.Visibility = Visibility.Hidden;
                 GoalsPanel.Visibility = Visibility.Hidden;
                 ActionPanel.Visibility = Visibility.Hidden;
                 AddActionPanel.Visibility = Visibility.Hidden;
                 AddGoalPanel.Visibility = Visibility.Hidden;
-                UpdateActionPanel.Visibility = Visibility.Visible; 
+                UpdateActionPanel.Visibility = Visibility.Visible;
+
                 FillGoalListView(UGoalsSelectionListView);
 
+                selectedUserActionForUpdate = selectedActionUser;
+                userActionToUpdate = selectedActionUser.Id;
 
-                userActionToUpdate = selectedActionUSer.Id;
-                UActionTextLbl.Content = selectedActionUSer.ShortDescription;
-                UActionTextTxtBx.Text = selectedActionUSer.Text;
-                UActionOpenForFBChckBx.IsChecked = selectedActionUSer.OpenForFeedback;
-                UActionSoftDeadlinePicker.Text = selectedActionUSer.SoftDeadline.ToString();
-                UActionHardDeadlinePicker.Text = selectedActionUSer.HardDeadline.ToString();
+                UActionTextLbl.Content = selectedActionUser.ShortDescription;
+                UActionTextTxtBx.Text = selectedActionUser.Text;
+                UActionOpenForFBChckBx.IsChecked = selectedActionUser.OpenForFeedback;
+                UActionSoftDeadlinePicker.Text = selectedActionUser.SoftDeadline.ToString();
+                UActionHardDeadlinePicker.Text = selectedActionUser.HardDeadline.ToString();
+
+                foreach (var item in UGoalsSelectionListView.Items)
+                {
+                    if (item is Goal goal && goal.Id == selectedActionUser.Goal.Id)
+                    {
+                        UGoalsSelectionListView.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecteer eerst een actie om te bewerken.");
             }
         }
+
 
         private void FillGoalListView(ListView listView)
         {
@@ -689,7 +727,7 @@ namespace FeedBuf
 
                 if (subGoals == null)
                 {
-                    MessageBox.Show("subGoals is NULL!"); // debug message
+                    MessageBox.Show("subGoals is NULL!"); 
                     return;
                 }
 
@@ -710,7 +748,6 @@ namespace FeedBuf
         {
             if (GoalsListView.SelectedItem is Goal selectedGoal)
             {
-                // 👉 Eerst alle gekoppelde acties verwijderen
                 var gekoppeldeActies = dal.FillUserActionsFromDatabase()
                                           .Where(a => a.Goal.Id == selectedGoal.Id)
                                           .ToList();
@@ -720,17 +757,14 @@ namespace FeedBuf
                     dal.DeleteUserActionFromDatabase(actie.Id);
                 }
 
-                // 👉 Dan de goal zelf verwijderen
                 var goals = dal.DeleteGoalFromDatabase(selectedGoal.Id);
 
-                // 👉 Goalslijst verversen
                 GoalsListView.Items.Clear();
                 foreach (var item in goals)
                 {
                     GoalsListView.Items.Add(item);
                 }
 
-                // ✅ Actieslijst verversen
                 var acties = dal.FillUserActionsFromDatabase();
                 ActionListView.Items.Clear();
                 foreach (var actie in acties)
@@ -763,8 +797,8 @@ namespace FeedBuf
                 int id = goalToUpdate;
                 DateTime soft = USoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
-                Category category = null;
                 string shortDescription = ShortDescTxtBx.Text;
+                Category category = null;
 
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
@@ -772,13 +806,20 @@ namespace FeedBuf
 
                     if (catType > 0)
                     {
-                        category = new Category(catType, selectedItem.ToString());
+                        category = dal.FillCategorysFromDatabase().FirstOrDefault(c => c.Id == catType);
                     }
                 }
-                else
+
+                if (category == null)
                 {
-                    MessageBox.Show("Geen item geselecteerd.");
-                    return;
+                    var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
+                    category = originalGoal?.Category;
+
+                    if (category == null)
+                    {
+                        MessageBox.Show("Er is geen categorie geselecteerd en ook geen originele categorie gevonden.");
+                        return;
+                    }
                 }
 
                 string body = UGoalTextTxtBx.Text;
@@ -787,18 +828,19 @@ namespace FeedBuf
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
                 dal.UpdateGoalFromDatabase(goal);
+
+                var selectedGoal = dal.GetGoalFromDatabaseBy(goal.Id);
+
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
                 USoftDeadlinePicker.SelectedDate = null;
                 UHardDeadlinePicker.SelectedDate = null;
                 UShortDescTxtBx.Text = null;
-                UGoalTextTxtBx = null;
+                UGoalTextTxtBx.Text = null;
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
-
             else //Teacher
             {
                 int id = goalToUpdate;
@@ -810,18 +852,24 @@ namespace FeedBuf
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
                     var catType = MapCategory(selectedItem.Content.ToString());
+
                     if (catType > 0)
                     {
-                        category = new Category(catType, selectedItem.Content.ToString());
+                        category = dal.FillCategorysFromDatabase().FirstOrDefault(c => c.Id == catType);
                     }
                 }
-                else
+
+                if (category == null)
                 {
-                    MessageBox.Show("Geen item geselecteerd.");
-                    return;
+                    var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
+                    category = originalGoal?.Category;
+
+                    if (category == null)
+                    {
+                        MessageBox.Show("Er is geen categorie geselecteerd en ook geen originele categorie gevonden.");
+                        return;
+                    }
                 }
-
-
 
                 string body = UGoalTextTxtBx.Text;
                 ZuydUser student = loggedInUser;
@@ -829,10 +877,12 @@ namespace FeedBuf
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
 
                 dal.UpdateGoalFromDatabase(goal);
+
+                var selectedGoal = dal.GetGoalFromDatabaseBy(goal.Id);
+
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
                 USoftDeadlinePicker.SelectedDate = null;
                 UHardDeadlinePicker.SelectedDate = null;
@@ -842,6 +892,8 @@ namespace FeedBuf
                 FillGoalListView(GoalsListView);
             }
         }
+
+
 
         private void UpdateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
