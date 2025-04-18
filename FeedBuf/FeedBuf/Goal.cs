@@ -34,7 +34,7 @@ namespace FeedBuf
             Actions = new List<UserAction>();
         }
 
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback)
+        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int? subId)
             : base(id, text, student, author, string.Empty)
         {
             Id = id;

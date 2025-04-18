@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,8 +15,12 @@
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\subgoalwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\subgoalwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\subgoalwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\juria\\source\\repos\\milanoffermanszuyd\\feedbufcasus3\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,27 +46,67 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DAL.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\DAL.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeToolTip": "FeedBuf\\DAL.cs",
+              "ViewState": "AgIAAAECAAAAAAAAAAAIwGQCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T16:44:08.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAECAAAAAAAAAAAAABYCAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T16:36:21.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Goal.cs",
               "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Goal.cs",
               "RelativeDocumentMoniker": "FeedBuf\\Goal.cs",
               "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Goal.cs",
               "RelativeToolTip": "FeedBuf\\Goal.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAUwDEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwCsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T16:42:39.449Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SubGoalWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml",
-              "RelativeDocumentMoniker": "FeedBuf\\SubGoalWindow.xaml",
-              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml",
-              "RelativeToolTip": "FeedBuf\\SubGoalWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-14T17:29:59.941Z",
+              "DocumentIndex": 2,
+              "Title": "SubGoalWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\SubGoalWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
+              "RelativeToolTip": "FeedBuf\\SubGoalWindow.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T08:02:47.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Message.cs",
+              "RelativeDocumentMoniker": "FeedBuf\\Message.cs",
+              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\Message.cs",
+              "RelativeToolTip": "FeedBuf\\Message.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T08:00:21.52Z",
               "EditorCaption": ""
             },
             {
@@ -79,45 +119,6 @@
               "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-04-14T16:32:25.835Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DAL.cs",
-              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\DAL.cs",
-              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
-              "RelativeToolTip": "FeedBuf\\DAL.cs",
-              "ViewState": "AgIAAAcBAAAAAAAAAAAswCEBAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T16:44:08.994Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
-              "ViewState": "AgIAACYBAAAAAAAAAAAIwG4BAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T16:36:21.578Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubGoalWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
-              "RelativeDocumentMoniker": "FeedBuf\\SubGoalWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\juria\\source\\repos\\MilanOffermansZuyd\\FeedbufCasus3\\FeedBuf\\FeedBuf\\SubGoalWindow.xaml.cs",
-              "RelativeToolTip": "FeedBuf\\SubGoalWindow.xaml.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T17:30:07.962Z",
               "EditorCaption": ""
             }
           ]

@@ -10,7 +10,6 @@ namespace FeedBuf
         List<ActionFeedback> actionFeedbacks = new List<ActionFeedback>();
         List<Feedback> feedbacks = new List<Feedback>();
         List<Goal> goals = new List<Goal>();
-        List<SubGoal> subGoals = new List<SubGoal>();
         List<Message> messages = new List<Message>();
         List<UserAction> userActions = new List<UserAction>();
         List<ZuydUser> zuydUsers = new List<ZuydUser>();
@@ -270,7 +269,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT* FROM Goal";
+                    command.CommandText = "SELECT * FROM Goal";
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -284,14 +283,19 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline,isFinished , category, message, student, author, openForFeedback));
+                            if (subId == null)
+                            {
+                                goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+                            }
                         }
                     }
                     return goals;
                 }
             }
         }
+
 
         public Goal GetGoalFromDatabaseBy(int Id)
         {
@@ -316,8 +320,9 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
 
-                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback);
+                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId);
                         }
                         return null;
                     }
@@ -349,8 +354,9 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
 
-                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
                         return goals;
                     }
@@ -382,8 +388,9 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
                         return goals;
                     }
@@ -415,8 +422,9 @@ namespace FeedBuf
                             var isFinished = bool.Parse(reader[6].ToString());
                             var message = reader[7].ToString();
                             var openForFeedback = bool.Parse(reader[8].ToString());
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback));
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
                         }
                         return goals;
                     }
@@ -434,31 +442,51 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Goal (CategoryId,StudentId,AuthorId,SoftDeadline,HardDeadline, IsFinished,Message,OpenForFeedback) VALUES (@CategoryId,@StudentId,@AuthorId,@SoftDeadline, @HardDeadline, @IsFinished,@Text, @OpenForFeedback) SELECT @@IDENTITY";
-                    command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
-                    command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
+
+                    // Basis van de INSERT-statement
+                    string baseQuery = "INSERT INTO Goal (CategoryId, StudentId, AuthorId, SoftDeadline, HardDeadline, IsFinished, Message, OpenForFeedback";
+
+                    // Als er een SubId is, voeg die toe
+                    if (goal.SubId.HasValue)
+                    {
+                        baseQuery += ", SubId) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @SubId)";
+                    }
+                    else
+                    {
+                        baseQuery += ") VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback)";
+                    }
+
+                    // Voeg SELECT @@IDENTITY toe om het nieuwe ID op te halen
+                    baseQuery += "; SELECT @@IDENTITY";
+
+                    command.CommandText = baseQuery;
+
+                    // Voeg parameters toe
                     command.Parameters.AddWithValue("@CategoryId", goal.Category.Id);
+                    command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
+                    command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
                     command.Parameters.AddWithValue("@SoftDeadline", goal.SoftDeadline);
                     command.Parameters.AddWithValue("@HardDeadline", goal.HardDeadline);
                     command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
                     command.Parameters.AddWithValue("@Text", goal.Text);
                     command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
-                    var newId = Convert.ToInt32(command.ExecuteScalar());
-                    var category = goal.Category;
-                    var student = goal.Student;
-                    var author = goal.Author;
-                    var softDeadline = goal.SoftDeadline;
-                    var hardDeadline = goal.HardDeadline;
-                    var isFinished = goal.IsFinished;
-                    var text = goal.Text;
-                    var openForFeedback = goal.OpenForFeedback;
 
-                    goals.Add(new Goal(newId, softDeadline, hardDeadline, isFinished, category, text, student, author, openForFeedback));
+                    if (goal.SubId.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@SubId", goal.SubId.Value);
+                    }
+
+                    // Haal het nieuwe ID op
+                    int newId = Convert.ToInt32(command.ExecuteScalar());
+
+                    // Voeg de nieuwe goal toe aan de lijst
+                    goals.Add(new Goal(newId, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, goal.SubId));
 
                     return goals;
                 }
             }
         }
+
 
         public List<Goal> DeleteGoalFromDatabase(int goalId)
         {
@@ -506,28 +534,83 @@ namespace FeedBuf
             }
         }
 
-        public List<SubGoal> GetSubGoalByGoalId(int id)
+        public List<Goal> GetSubGoalByGoalId(int goalId)
         {
+            List<Goal> subGoals = new List<Goal>();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM SubGoal WHERE GoalId = @Id";
-                    command.Parameters.AddWithValue("@Id", id);
+                    command.CommandText = "SELECT Id FROM SubGoal WHERE GoalId = @GoalId";
+                    command.Parameters.AddWithValue("@GoalId", goalId);
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
-                            subGoals.Add(new SubGoal(goal.Id, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, (int)goal.SubId, goal));
+                            int subGoalId = Convert.ToInt32(reader["Id"]);
+
+                            // Haal de subgoal op uit de Goal-tabel
+                            Goal subGoal = GetGoalFromDatabaseBy(subGoalId);
+
+                            if (subGoal != null)
+                            {
+                                subGoals.Add(subGoal);
+                            }
                         }
-                        return subGoals;
                     }
                 }
             }
+
+            return subGoals;
         }
+
+        public List<Goal> GetSubGoalsForGoal(int goalId)
+        {
+            List<Goal> subGoals = new List<Goal>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+
+                    command.CommandText = "SELECT * FROM Goal WHERE SubId = @GoalId";
+                    command.Parameters.AddWithValue("@GoalId", goalId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            int categoryId = reader.GetInt32(1);
+                            int studentId = reader.GetInt32(2);
+                            int authorId = reader.GetInt32(3);
+                            DateTime softDeadline = reader.GetDateTime(4);
+                            DateTime hardDeadline = reader.GetDateTime(5);
+                            bool isFinished = reader.GetBoolean(6);
+                            string message = reader.GetString(7);
+                            bool openForFeedback = reader.GetBoolean(8);
+                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+
+                            var category = GetCategoryFromDatabaseBy(categoryId);
+                            var student = GetZuydUserFromDatabaseBy(studentId);
+                            var author = GetZuydUserFromDatabaseBy(authorId);
+
+                            subGoals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+                        }
+                    }
+                }
+            }
+
+            return subGoals;
+        }
+
+
 
         //Feedback
         public List<Feedback> FillFeedbacksFromDatabase()

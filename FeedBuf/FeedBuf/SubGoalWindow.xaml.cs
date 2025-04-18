@@ -19,7 +19,7 @@ namespace FeedBuf
     /// </summary>
     public partial class SubGoalWindow : Window
     {
-        public SubGoalWindow(List<SubGoal> subGoals)
+        public SubGoalWindow(List<Goal> subGoals)
         {
             InitializeComponent();
             SubGoalListView.ItemsSource = subGoals;
