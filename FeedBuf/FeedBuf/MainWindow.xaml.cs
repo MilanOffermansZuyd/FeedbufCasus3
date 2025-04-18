@@ -498,21 +498,6 @@ namespace FeedBuf
             }
         }
 
-        //Add Feedback
-        private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
-        {
-            int id = 1;
-            string body = "";
-
-            Goal goal = null;
-            ZuydUser student = null;
-            ZuydUser author = null;
-            string shortDescription = "";
-
-            Feedback feedback = new Feedback(id, goal, body, student, author, shortDescription);
-            dal.AddFeedbackFromDatabase(feedback);
-        }
-
         //Add Action
         private void CreateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -1074,6 +1059,71 @@ namespace FeedBuf
                 DashBoardGoals.ItemsSource = Upcoming;
             }
 
+        }
+
+
+
+
+
+
+
+        private void FeedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Collapsed;
+            ActionPanel.Visibility = Visibility.Collapsed;
+            GoalsPanel.Visibility = Visibility.Collapsed;
+            FeedbackPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+            AddGoalPanel.Visibility = Visibility.Collapsed;
+            AddActionPanel.Visibility = Visibility.Collapsed;
+            FeedbackPanel.Visibility = Visibility.Visible;
+            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+        }
+
+        private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FeedbackTextBox.Text.Trim() == "") return;
+
+            var selectedGoal = dal.GetAllOpenGoalsFromDatabaseBy(loggedInUser.Id).FirstOrDefault(); // Of via selectie
+            if (selectedGoal == null) return;
+
+            var feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
+            dal.AddFeedbackFromDatabase(feedback);
+            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackTextBox.Text = "";
+        }
+
+        private void UpdateFeedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FeedbackListView.SelectedItem is Feedback selectedFeedback && FeedbackTextBox.Text.Trim() != "")
+            {
+                selectedFeedback.Text = FeedbackTextBox.Text;
+                dal.UpdateFeedbackFromDatabase(selectedFeedback);
+                FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+                FeedbackTextBox.Text = "";
+            }
+        }
+
+        private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FeedbackListView.SelectedItem is Feedback selectedFeedback)
+            {
+                dal.DeleteFeedbackFromDatabase(selectedFeedback.Id);
+                FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+                FeedbackTextBox.Text = "";
+            }
+        }
+
+        private void BackToDashboardFromFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            DashboardPanel.Visibility = Visibility.Collapsed;
+            ActionPanel.Visibility = Visibility.Collapsed;
+            GoalsPanel.Visibility = Visibility.Collapsed;
+            FeedbackPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+            AddGoalPanel.Visibility = Visibility.Collapsed;
+            AddActionPanel.Visibility = Visibility.Collapsed;
+            DashboardPanel.Visibility = Visibility.Visible;
         }
     }
 }
