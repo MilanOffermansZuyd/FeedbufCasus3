@@ -67,11 +67,39 @@
 
 
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
-                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
+                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
+                <Button x:Name="FeedbackButton" Content="Feedback" Click="FeedbackButton_Click"/>
                 <Button x:Name="LogoutButton" Content="Log Out" Click="LogoutButton_Click"/>
             </StackPanel>
         </Border>
+
+        <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+                <TextBlock Text="Feedback panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBlock Text="Feedback geven op doelen of acties" FontSize="14" Margin="0,10,0,10"/>
+
+                <ListView x:Name="FeedbackListView" Height="300">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Goal.Text}" Width="200" />
+                            <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Text}" Width="250" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+                
+                <TextBlock Text="Feedback:" Margin="0,10,0,5"/>
+                <TextBox x:Name="FeedbackTextBox" Height="60" TextWrapping="Wrap"/>
+
+                <Button x:Name="AddFeedbackButton" Content="Add Feedback" Click="AddFeedbackButton_Click"/>
+                <Button x:Name="UpdateFeedbackButton" Content="Update Feedback" Click="UpdateFeedbackButton_Click"/>
+                <Button x:Name="DeleteFeedbackButton" Content="Delete Feedback" Click="DeleteFeedbackButton_Click"/>
+                <Button x:Name="BackToDashboardFromFeedbackButton" Content="Back to Dashboard" Click="BackToDashboardFromFeedback_Click"/>
+            </StackPanel>
+        </Border>
+
 
         <!-- Login Panel-->
         <Border x:Name="LoginPanel" Background="#ebebeb" Grid.ColumnSpan="2" CornerRadius="10" Margin="10" Visibility="Visible" av:IsHidden="True">
@@ -243,8 +271,10 @@
         <Border x:Name="DashboardPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Hidden">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
                 <TextBlock Text="Dashboard" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
-                <TextBlock x:Name="_7DayText" Text="Goals die binnen 7 dagen voltooid moeten zijn"  FontSize="18" FontWeight="Bold" TextAlignment="Center" Visibility="Hidden"/>
-                <ListView x:Name="_7DayGrid" av:ItemsSource="{av:SampleData ItemCount=5}" Visibility="Hidden">
+                <TextBlock Text="Information" FontSize="18" TextWrapping="Wrap" FontWeight="Bold"
+                    Width="400" TextAlignment="Center" Margin="0, 60,0,20"/>
+                <TextBlock x:Name="_7DayText" Text="Goals to complete within 7 days:"  FontSize="18" FontWeight="Bold" TextAlignment="Center" Visibility="Hidden"/>
+                <ListView x:Name="_7DayGrid" av:ItemsSource="{av:SampleData ItemCount=5}" Visibility="Hidden" Margin="0,20,0,0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="450" />
@@ -253,8 +283,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <TextBlock Text="Information" FontSize="14" TextWrapping="Wrap"
-                    Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
+
             </StackPanel>
         </Border>
 
