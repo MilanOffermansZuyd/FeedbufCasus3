@@ -41,22 +41,18 @@ namespace FeedBuf
             ActionPanel.Visibility = Visibility.Collapsed;
             WelcomeTextBlock.MouseLeftButtonDown += WelcomeTextBlock_Click;
             WelcomeTextBlock.Cursor = Cursors.Hand;
-
-
-
-            // Externe console
-            AllocConsole();
-
+        
+            AllocConsole(); // Externe console
             FillGoalListView(GoalsListView);
             FillActionListView(ActionListView);
         }
+
 
         // Login
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string email = EmailBox.Text.Trim().ToLower();
             string password = PasswordBox.Password.Trim();
-
             var users = dal.FillZuydUsersFromDatabase();
             var user = users.FirstOrDefault(u => u.Email.ToLower() == email && u.Password == password);
 
@@ -78,8 +74,6 @@ namespace FeedBuf
                 {
                     Console.WriteLine($"Ingelogd als {user.FirstName} {user.LastName} (teacher).");
                 }
-
-
             }
             else
             {
@@ -87,6 +81,7 @@ namespace FeedBuf
                 ErrorText.Visibility = Visibility.Visible;
             }
         }
+
 
         // Login - Enter down
         private void LoginButton_KeyDown(object sender, KeyEventArgs e)
@@ -97,6 +92,14 @@ namespace FeedBuf
             }
         }
 
+        private void DashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            DashboardPanel.Visibility = Visibility.Visible;
+            Populate7DayInfo();
+        }
+
+
         // Logout
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,16 +108,10 @@ namespace FeedBuf
             PasswordBox.Password = "";
             ErrorText.Text = "";
 
+            HideAllPanels();
             LoginPanel.Visibility = Visibility.Visible;
-            DashboardPanel.Visibility = Visibility.Collapsed;
-            GoalsPanel.Visibility = Visibility.Collapsed;
-            ActionPanel.Visibility = Visibility.Collapsed;
-            ProfilePanel.Visibility = Visibility.Collapsed;
-            AddGoalPanel.Visibility = Visibility.Collapsed;
-            AddActionPanel.Visibility = Visibility.Collapsed;
-            UpdateGoalPanel.Visibility = Visibility.Collapsed;
-            UpdateActionPanel.Visibility = Visibility.Collapsed;
         }
+
 
         // Forgot Password
         private void ForgotPassword_Click(object sender, RoutedEventArgs e)
@@ -162,6 +159,7 @@ namespace FeedBuf
             }
         }
 
+
         // Register
         private void Register_Click(object sender, RoutedEventArgs e)
         {
@@ -184,8 +182,8 @@ namespace FeedBuf
             string email = RegisterEmailBox.Text.Trim().ToLower();
             string password = RegisterPasswordBox.Password.Trim();
             string confirmPassword = RegisterConfirmPasswordBox.Password.Trim();
-
             ComboBoxItem selectedItem = RoleComboBox.SelectedItem as ComboBoxItem;
+
             if (selectedItem == null || selectedItem.Tag == null)
             {
                 RegisterResultText.Foreground = Brushes.Red;
@@ -253,6 +251,7 @@ namespace FeedBuf
             }
         }
 
+
         // Edit Profile / Delete Profile
 
         private void WelcomeTextBlock_Click(object sender, MouseButtonEventArgs e)
@@ -261,7 +260,6 @@ namespace FeedBuf
             {
                 DashboardPanel.Visibility = Visibility.Collapsed;
                 ProfilePanel.Visibility = Visibility.Visible;
-
                 EditFirstNameBox.Text = loggedInUser.FirstName;
                 EditLastNameBox.Text = loggedInUser.LastName;
                 EditEmailBox.Text = loggedInUser.Email;
@@ -364,8 +362,6 @@ namespace FeedBuf
             VisiblePasswordBox.SelectionStart = VisiblePasswordBox.Text.Length;
         }
 
-
-
         private void PasswordEye_PreviewMouseUp(object sender, MouseEventArgs e)
         {
             PasswordBox.Password = VisiblePasswordBox.Text;
@@ -373,6 +369,7 @@ namespace FeedBuf
             PasswordBox.Visibility = Visibility.Visible;
             PasswordBox.Focus();
         }
+
 
         //Add goal
         private void CreateGoalButton_Click(object sender, RoutedEventArgs e)
@@ -498,6 +495,38 @@ namespace FeedBuf
             }
         }
 
+        private void GoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            GoalsPanel.Visibility = Visibility.Visible;
+        }
+
+        private void AddGoalButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            AddGoalPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BackToGoalsFromAddGoal_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            GoalsPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BackToGoalsFromUpdateGoal_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            GoalsPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BackToDashboardFromGoal_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            DashboardPanel.Visibility = Visibility.Visible;
+            Populate7DayInfo();
+        }
+
+
         //Add Action
         private void CreateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -544,42 +573,6 @@ namespace FeedBuf
             ActionPanel.Visibility = Visibility.Visible;
         }
 
-
-        private void ActionButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Visible;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
-        }
-
-
-        private void DashboardButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardPanel.Visibility = Visibility.Visible;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
-            Populate7DayInfo();
-        }
-
-        private void GoalButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Visible;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
-        }
         private int goalToUpdate;
         private Goal selectedGoalForUpdate;
 
@@ -587,22 +580,15 @@ namespace FeedBuf
         {
             if (GoalsListView.SelectedItem is Goal selectedGoal)
             {
-                DashboardPanel.Visibility = Visibility.Hidden;
-                GoalsPanel.Visibility = Visibility.Hidden;
-                ActionPanel.Visibility = Visibility.Hidden;
-                AddActionPanel.Visibility = Visibility.Hidden;
-                AddGoalPanel.Visibility = Visibility.Hidden;
+                HideAllPanels();
                 UpdateGoalPanel.Visibility = Visibility.Visible;
-
                 goalToUpdate = selectedGoal.Id;
                 selectedGoalForUpdate = selectedGoal;
-
                 UGoalTextLbl.Content = selectedGoal.ShortDescription;
                 UGoalTextTxtBx.Text = selectedGoal.Text;
                 UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback;
                 USoftDeadlinePicker.SelectedDate = selectedGoal.SoftDeadline;
                 UHardDeadlinePicker.SelectedDate = selectedGoal.HardDeadline;
-
                 UCategorySelectionListBx.SelectedItem = null;
                 switch (selectedGoal.Category.Type)
                 {
@@ -623,25 +609,6 @@ namespace FeedBuf
             }
         }
 
-        private void AddGoalButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Visible;
-        }
-
-        private void AddUserActionButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Visible;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            FillGoalListView(GoalsSelectionListView);
-
-        }
         private int userActionToUpdate;
         private UserAction selectedUserActionForUpdate;
 
@@ -649,18 +616,11 @@ namespace FeedBuf
         {
             if (ActionListView.SelectedItem is UserAction selectedActionUser)
             {
-                DashboardPanel.Visibility = Visibility.Hidden;
-                GoalsPanel.Visibility = Visibility.Hidden;
-                ActionPanel.Visibility = Visibility.Hidden;
-                AddActionPanel.Visibility = Visibility.Hidden;
-                AddGoalPanel.Visibility = Visibility.Hidden;
+                HideAllPanels();
                 UpdateActionPanel.Visibility = Visibility.Visible;
-
                 FillGoalListView(UGoalsSelectionListView);
-
                 selectedUserActionForUpdate = selectedActionUser;
                 userActionToUpdate = selectedActionUser.Id;
-
                 UActionTextLbl.Content = selectedActionUser.ShortDescription;
                 UActionTextTxtBx.Text = selectedActionUser.Text;
                 UActionOpenForFBChckBx.IsChecked = selectedActionUser.OpenForFeedback;
@@ -681,7 +641,6 @@ namespace FeedBuf
                 MessageBox.Show("Selecteer eerst een actie om te bewerken.");
             }
         }
-
 
         private void FillGoalListView(ListView listView)
         {
@@ -712,7 +671,7 @@ namespace FeedBuf
 
                 if (subGoals == null)
                 {
-                    MessageBox.Show("subGoals is NULL!"); 
+                    MessageBox.Show("subGoals is NULL!");
                     return;
                 }
 
@@ -727,7 +686,6 @@ namespace FeedBuf
                 }
             }
         }
-
 
         private void DeleteGoalButton_Click(object sender, RoutedEventArgs e)
         {
@@ -758,8 +716,6 @@ namespace FeedBuf
                 }
             }
         }
-
-
 
         private void DeleteUserActionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -861,7 +817,6 @@ namespace FeedBuf
                 ZuydUser author = loggedInUser;
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
-
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
 
                 dal.UpdateGoalFromDatabase(goal);
@@ -877,8 +832,6 @@ namespace FeedBuf
                 FillGoalListView(GoalsListView);
             }
         }
-
-
 
         private void UpdateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -914,7 +867,6 @@ namespace FeedBuf
                 ActionPanel.Visibility = Visibility.Visible;
                 UpdateActionPanel.Visibility = Visibility.Hidden;
             }
-
             else //Teacher
             {
                 DateTime createdOn = DateTime.Now;
@@ -937,10 +889,7 @@ namespace FeedBuf
                 ZuydUser author = loggedInUser;
                 bool OpenForFeedback = UActionOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
-
-
                 UserAction userAction = new UserAction(userActionToUpdate, goal, createdOn, soft, hard, finished, text, student, author, shortDescription, OpenForFeedback);
-
 
                 dal.UpdateUserActionFromDatabase(userAction);
                 FillActionListView(ActionListView);
@@ -949,74 +898,41 @@ namespace FeedBuf
             }
         }
 
-        private void BackToDashboardFromAction_Click(object sender, RoutedEventArgs e)
+        private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
-            DashboardPanel.Visibility = Visibility.Visible;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
+            HideAllPanels();
+            ActionPanel.Visibility = Visibility.Visible;
         }
 
-
-        private void BackToDashboardFromGoal_Click(object sender, RoutedEventArgs e)
+        private void AddUserActionButton_Click(object sender, RoutedEventArgs e)
         {
-            DashboardPanel.Visibility = Visibility.Visible;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
-            Populate7DayInfo();
+            HideAllPanels();
+            AddActionPanel.Visibility = Visibility.Visible;
+            FillGoalListView(GoalsSelectionListView);
         }
 
-        private void BackToGoalsFromAddGoal_Click(object sender, RoutedEventArgs e)
+        private void BackToActionsFromUpdateAction_Click(object sender, RoutedEventArgs e)
         {
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Visible;
-            DashboardPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
-        }
-
-        private void BackToGoalsFromUpdateGoal_Click(object sender, RoutedEventArgs e)
-        {
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Visible;
-            DashboardPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Hidden;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
+            HideAllPanels();
+            ActionPanel.Visibility = Visibility.Visible;
         }
 
 
         private void BackToActionsFromAddAction_Click(object sender, RoutedEventArgs e)
         {
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            DashboardPanel.Visibility = Visibility.Hidden;
+            HideAllPanels();
             ActionPanel.Visibility = Visibility.Visible;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
+
         }
 
-        private void BackToActionsFromUpdateAction_Click(object sender, RoutedEventArgs e)
+        private void BackToDashboardFromAction_Click(object sender, RoutedEventArgs e)
         {
-            AddGoalPanel.Visibility = Visibility.Hidden;
-            GoalsPanel.Visibility = Visibility.Hidden;
-            DashboardPanel.Visibility = Visibility.Hidden;
-            ActionPanel.Visibility = Visibility.Visible;
-            AddActionPanel.Visibility = Visibility.Hidden;
-            UpdateGoalPanel.Visibility = Visibility.Hidden;
-            UpdateActionPanel.Visibility = Visibility.Hidden;
+            HideAllPanels();
+            DashboardPanel.Visibility = Visibility.Visible;
+            Populate7DayInfo();
         }
+
+
         //grijp alle goals die een deadine in de komende 7 dagen hebben en laat deze zien in de dashboard
         private void Populate7DayInfo()
         {
@@ -1062,59 +978,100 @@ namespace FeedBuf
         }
 
 
-
-
-
-
-
+        // Feedback
         private void FeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            DashboardPanel.Visibility = Visibility.Collapsed;
-            ActionPanel.Visibility = Visibility.Collapsed;
-            GoalsPanel.Visibility = Visibility.Collapsed;
-            FeedbackPanel.Visibility = Visibility.Collapsed;
-            ProfilePanel.Visibility = Visibility.Collapsed;
-            AddGoalPanel.Visibility = Visibility.Collapsed;
-            AddActionPanel.Visibility = Visibility.Collapsed;
+            HideAllPanels();
             FeedbackPanel.Visibility = Visibility.Visible;
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            GoalComboBox.ItemsSource = dal.FillGoalsFromDatabase().Where(g => g.OpenForFeedback).ToList();
         }
 
         private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
         {
             if (FeedbackTextBox.Text.Trim() == "") return;
 
-            var selectedGoal = dal.GetAllOpenGoalsFromDatabaseBy(loggedInUser.Id).FirstOrDefault(); // Of via selectie
-            if (selectedGoal == null) return;
+            Goal selectedGoal = GoalComboBox.SelectedItem as Goal;
+            if (selectedGoal == null)
+            {
+                MessageBox.Show("Selecteer een doel om feedback op te geven.");
+                return;
+            }
 
-            var feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
+            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
             dal.AddFeedbackFromDatabase(feedback);
+
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.Items.Refresh();
             FeedbackTextBox.Text = "";
+            GoalComboBox.SelectedIndex = -1;
         }
 
         private void UpdateFeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FeedbackListView.SelectedItem is Feedback selectedFeedback && FeedbackTextBox.Text.Trim() != "")
+            if (FeedbackListView.SelectedItem is not Feedback selectedFeedback)
             {
-                selectedFeedback.Text = FeedbackTextBox.Text;
-                dal.UpdateFeedbackFromDatabase(selectedFeedback);
-                FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
-                FeedbackTextBox.Text = "";
+                MessageBox.Show("Selecteer een doel om feedback aan te passen.");
+                return;
             }
+
+            if (FeedbackTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Voer nieuwe feedback in om te kunnen updaten.");
+                return;
+            }
+
+            selectedFeedback.Text = FeedbackTextBox.Text;
+            dal.UpdateFeedbackFromDatabase(selectedFeedback);
+
+            FeedbackListView.ItemsSource = null;
+            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.Items.Refresh();
+
+            FeedbackTextBox.Text = "";
         }
 
         private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FeedbackListView.SelectedItem is Feedback selectedFeedback)
+            if (FeedbackListView.SelectedItem is not Feedback selectedFeedback)
             {
-                dal.DeleteFeedbackFromDatabase(selectedFeedback.Id);
-                FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
-                FeedbackTextBox.Text = "";
+                MessageBox.Show("Selecteer een doel om feedback te kunnen verwijderen.");
+                return;
             }
+
+            dal.DeleteFeedbackFromDatabase(selectedFeedback.Id);
+
+            FeedbackListView.ItemsSource = null;
+            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.Items.Refresh();
+
+            FeedbackTextBox.Text = "";
         }
 
         private void BackToDashboardFromFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            DashboardPanel.Visibility = Visibility.Visible;
+            Populate7DayInfo();
+        }
+
+        private void FeedbackGoalsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (FeedbackListView.SelectedItem is Feedback selectedFeedback)
+            {
+                FullFeedbackTextBox.Text = selectedFeedback.Text;
+                HideAllPanels();
+                ViewFeedbackPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BackToFeedbackFromView_Click(object sender, RoutedEventArgs e)
+        {
+            HideAllPanels();
+            FeedbackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void HideAllPanels()
         {
             DashboardPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Collapsed;
@@ -1123,7 +1080,9 @@ namespace FeedBuf
             ProfilePanel.Visibility = Visibility.Collapsed;
             AddGoalPanel.Visibility = Visibility.Collapsed;
             AddActionPanel.Visibility = Visibility.Collapsed;
-            DashboardPanel.Visibility = Visibility.Visible;
+            UpdateGoalPanel.Visibility = Visibility.Collapsed;
+            UpdateActionPanel.Visibility = Visibility.Collapsed;
+            ViewFeedbackPanel.Visibility = Visibility.Collapsed;
         }
     }
 }
