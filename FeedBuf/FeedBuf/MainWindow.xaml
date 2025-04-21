@@ -68,14 +68,16 @@
 
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
-                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="FeedbackButton" Content="Feedback" Click="FeedbackButton_Click"/>
+                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="LogoutButton" Content="Log Out" Click="LogoutButton_Click"/>
             </StackPanel>
         </Border>
 
         <!-- Feedback Panel-->
+
         <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" av:IsHidden="True">
+
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="FeedbackSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus"/>
                 <TextBlock Text="Feedback panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
@@ -347,8 +349,10 @@
                 <Button x:Name="BackToDashboardFromGoalButton" Content="Back to Dashboard" Click="BackToDashboardFromGoal_Click"/>
             </StackPanel>
         </Border>
+
         <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
+
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="GoalTextLbl" Content="Goal:"/>
@@ -368,8 +372,10 @@
             </StackPanel>
         </Border>
         <!-- Create Goals panel -->
+
         <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+
                 <Label x:Name="ActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="ActionTextLbl" Content="Action:"/>
@@ -394,8 +400,10 @@
             </StackPanel>
         </Border>
         <!--Update Panels-->
+
         <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+
                 <Label x:Name="UShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="UGoalTextLbl" Content="Goal:"/>
@@ -414,8 +422,10 @@
                 <Button x:Name="BackToGoalsFromUpdateGoalButton" Content="Back to Goals" Click="BackToGoalsFromUpdateGoal_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
+
         <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+
                 <Label x:Name="UActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="UActionTextLbl" Content="Action:"/>

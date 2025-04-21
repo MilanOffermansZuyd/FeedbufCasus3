@@ -258,7 +258,7 @@ namespace FeedBuf
         {
             if (loggedInUser != null)
             {
-                DashboardPanel.Visibility = Visibility.Collapsed;
+                HideAllPanels();
                 ProfilePanel.Visibility = Visibility.Visible;
                 EditFirstNameBox.Text = loggedInUser.FirstName;
                 EditLastNameBox.Text = loggedInUser.LastName;
@@ -419,12 +419,9 @@ namespace FeedBuf
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null);
                 dal.AddGoalFromDatabase(goal);
 
+                HideAllPanels();
                 // Reset formulier
-                AddGoalPanel.Visibility = Visibility.Hidden;
-                SoftDeadlinePicker.SelectedDate = null;
-                HardDeadlinePicker.SelectedDate = null;
-                ShortDescTxtBx.Text = null;
-                GoalTextTxtBx.Text = null;
+                ClearAllFields(AddGoalStack);
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
@@ -467,12 +464,9 @@ namespace FeedBuf
                 Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null);
                 dal.AddGoalFromDatabase(goal);
 
+                HideAllPanels();
                 // Reset formulier
-                AddGoalPanel.Visibility = Visibility.Hidden;
-                SoftDeadlinePicker.SelectedDate = null;
-                HardDeadlinePicker.SelectedDate = null;
-                ShortDescTxtBx.Text = null;
-                GoalTextTxtBx.Text = null;
+                ClearAllFields(AddGoalStack);
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
@@ -526,7 +520,6 @@ namespace FeedBuf
             Populate7DayInfo();
         }
 
-
         //Add Action
         private void CreateUserActionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -551,7 +544,7 @@ namespace FeedBuf
             bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
             bool finished = false;
 
-            ZuydUser student = loggedInUser;
+            ZuydUser student = goal.Student;
             ZuydUser author = loggedInUser;
 
             UserAction userAction = new UserAction(
@@ -562,12 +555,7 @@ namespace FeedBuf
             dal.AddUserActionFromDatabase(userAction);
             FillActionListView(ActionListView);
 
-            ActionShortDescTxtBx.Text = "";
-            ActionTextTxtBx.Text = "";
-            ActionOpenForFBChckBx.IsChecked = false;
-            ActionSoftDeadlinePicker.SelectedDate = null;
-            ActionHardDeadlinePicker.SelectedDate = null;
-            GoalsSelectionListView.SelectedItem = null;
+            ClearAllFields(AddActionStack);
 
             AddActionPanel.Visibility = Visibility.Collapsed;
             ActionPanel.Visibility = Visibility.Visible;
@@ -775,10 +763,7 @@ namespace FeedBuf
                 var selectedGoal = dal.GetGoalFromDatabaseBy(goal.Id);
 
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
-                USoftDeadlinePicker.SelectedDate = null;
-                UHardDeadlinePicker.SelectedDate = null;
-                UShortDescTxtBx.Text = null;
-                UGoalTextTxtBx.Text = null;
+                ClearAllFields(UpdateGoalStack);
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
@@ -824,10 +809,7 @@ namespace FeedBuf
                 var selectedGoal = dal.GetGoalFromDatabaseBy(goal.Id);
 
                 UpdateGoalPanel.Visibility = Visibility.Hidden;
-                USoftDeadlinePicker.SelectedDate = null;
-                UHardDeadlinePicker.SelectedDate = null;
-                UShortDescTxtBx.Text = null;
-                UGoalTextTxtBx.Text = null;
+                ClearAllFields(UpdateGoalStack);
                 GoalsPanel.Visibility = Visibility.Visible;
                 FillGoalListView(GoalsListView);
             }
@@ -1084,8 +1066,39 @@ namespace FeedBuf
             UpdateActionPanel.Visibility = Visibility.Collapsed;
             ViewFeedbackPanel.Visibility = Visibility.Collapsed;
         }
-
-        private readonly string placeholderText = "Zoek op student naam...";
+        
+                private void ClearAllFields(StackPanel stackPanel)
+        {
+            foreach (var child in stackPanel.Children)
+            {
+                if (child is TextBox textBox)
+                {
+                    textBox.Clear();
+                }
+                else if (child is PasswordBox passwordBox)
+                {
+                    passwordBox.Clear();
+                }
+                else if (child is ComboBox comboBox)
+                {
+                    comboBox.SelectedIndex = -1;
+                }
+                else if (child is DatePicker datePicker)
+                {
+                    datePicker.SelectedDate = null;
+                }
+                else if (child is CheckBox checkBox)
+                {
+                    checkBox.IsChecked = false;
+                }
+                else if (child is ListView listView)
+                {
+                    listView.Items.Clear();
+                }
+            }
+        }
+        
+                private readonly string placeholderText = "Zoek op student naam...";
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -1125,7 +1138,5 @@ namespace FeedBuf
                 }
             }
         }
-
-
     }
 }
