@@ -1053,7 +1053,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE UserAction SET GoalId = @GoalId,StudentId = StudentId , AuthorId = @AuthorId ,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, Message = @Message WHERE Id = @Id";
+                    command.CommandText = "UPDATE UserAction SET GoalId = @GoalId,StudentId = StudentId , AuthorId = @AuthorId ,IsFinished = @IsFinished, CreatedOn = @CreatedOn ,SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, Message = @Message, ShortDescription = @ShortDescription WHERE Id = @Id";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
@@ -1063,6 +1063,8 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
                     command.Parameters.AddWithValue("@Message", userAction.Text);
                     command.Parameters.AddWithValue("@Id", userAction.Id);
+                    command.Parameters.AddWithValue("@OpenForFeedback", userAction.OpenForFeedback);
+                    command.Parameters.AddWithValue("@ShortDescription", userAction.ShortDescription);
 
                     command.ExecuteNonQuery();
 

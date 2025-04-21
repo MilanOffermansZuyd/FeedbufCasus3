@@ -315,7 +315,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
-                            <GridViewColumn Header="Actions" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Short description" DisplayMemberBinding="{Binding ShortDescription}" Width="350" />
                             <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
                             <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
                         </GridView>
@@ -332,24 +332,24 @@
         <!-- Goals Panel -->
         <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,134,0,0" Width="837" Height="720">
-                <TextBox x:Name="GoalSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="GoalSearchTextBox_KeyDown"/>
-                <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBox x:Name="GoalSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="GoalSearchTextBox_KeyDown" av:IsHidden="True"/>
+                <TextBlock Text="Goals panel" FontSize="24" FontWeight="Bold" TextAlignment="Center" av:IsHidden="True"/>
                 <TextBlock Text="Goals" FontSize="14" TextWrapping="Wrap"
-               Width="400" TextAlignment="Center" Margin="0,10,0,10"/>
-                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" Height="338">
+               Width="400" TextAlignment="Center" Margin="0,10,0,10" av:IsHidden="True"/>
+                <ListView x:Name="GoalsListView" MouseDoubleClick="GoalsListView_MouseDoubleClick" Height="338" av:IsHidden="True">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
-                            <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Text}" Width="350" />
+                            <GridViewColumn Header="Short description" DisplayMemberBinding="{Binding ShortDescription}" Width="350" />
                             <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
                             <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click"/>
+                <Button x:Name="CreateGoalButton" Content="Create" Click="AddGoalButton_Click" av:IsHidden="True"/>
                 <Button x:Name="UpdateGoalButton" Content="Update" Click="UpdateGoalButtonView_Click"/>
-                <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click"/>
-                <Button x:Name="BackToDashboardFromGoalButton" Content="Back to Dashboard" Click="BackToDashboardFromGoal_Click"/>
+                <Button x:Name="DeleteGoalButton" Content="Delete" Click="DeleteGoalButton_Click" av:IsHidden="True"/>
+                <Button x:Name="BackToDashboardFromGoalButton" Content="Back to Dashboard" Click="BackToDashboardFromGoal_Click" av:IsHidden="True"/>
             </StackPanel>
         </Border>
 
