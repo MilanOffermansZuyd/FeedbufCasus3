@@ -533,6 +533,17 @@ namespace FeedBuf
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
         {
             HideAllPanels();
+            if (loggedInUser.Role == 0) // Student
+            {
+                SoftDeadlinePicker.Visibility = Visibility.Visible;
+                SoftDeadlineLbl.Visibility = Visibility.Visible;
+            }
+            else // Teacher
+            {
+                SoftDeadlinePicker.Visibility = Visibility.Collapsed;
+                SoftDeadlineLbl.Visibility = Visibility.Collapsed;
+
+            }
             AddGoalPanel.Visibility = Visibility.Visible;
         }
 
@@ -607,7 +618,7 @@ namespace FeedBuf
                 UpdateGoalPanel.Visibility = Visibility.Visible;
                 goalToUpdate = selectedGoal.Id;
                 selectedGoalForUpdate = selectedGoal;
-                UGoalTextLbl.Content = selectedGoal.ShortDescription;
+                UShortDescTxtBx.Text = selectedGoal.ShortDescription;
                 UGoalTextTxtBx.Text = selectedGoal.Text;
                 UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback;
                 USoftDeadlinePicker.SelectedDate = selectedGoal.SoftDeadline;
