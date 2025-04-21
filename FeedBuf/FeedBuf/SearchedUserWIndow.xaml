@@ -7,12 +7,26 @@
         mc:Ignorable="d"
         Title="SearchedUserWIndow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="SearchedUserListView" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView x:Name="SearchedUserListView">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Text" DisplayMemberBinding="{Binding Text}" Width="560" />
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding ShortDescription}" Width="560" />
                     <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="125" />
                     <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="125" />
+                </GridView>
+            </ListView.View>
+            <ListView Height="100" Width="100" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ListView>
+        <ListView x:Name="SearchedUserFeedbackListView" d:ItemsSource="{d:SampleData ItemCount=5}" d:IsHidden="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding ShortDescription}" Width="800" />
                 </GridView>
             </ListView.View>
         </ListView>

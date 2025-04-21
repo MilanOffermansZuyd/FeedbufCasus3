@@ -1132,7 +1132,7 @@ namespace FeedBuf
 
                 if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Zoek op student naam...")
                 {
-                    var filteredGoals = dal.GetGoalsByStudentName(searchText);
+                    List<Goal> filteredGoals = dal.GetGoalsByStudentName(searchText);
                     SearchedUserWIndow searchedUserWIndow = new SearchedUserWIndow(filteredGoals);
                     searchedUserWIndow.Show();
                 }
@@ -1162,7 +1162,7 @@ namespace FeedBuf
 
                 if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Zoek op student naam...")
                 {
-                    var filteredFeedback = dal.GetFeedbackByStudentName(searchText);
+                    List<Feedback> filteredFeedback = dal.GetFeedbackByStudentName(searchText);
                     SearchedUserWIndow searchedUserWIndow = new SearchedUserWIndow(filteredFeedback);
                     searchedUserWIndow.Show();
                 }
