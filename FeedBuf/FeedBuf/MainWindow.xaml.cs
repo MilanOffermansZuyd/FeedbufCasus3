@@ -443,6 +443,8 @@ namespace FeedBuf
             }
             else // Teacher
             {
+                ZuydUser student = null;
+
                 if (HardDeadlinePicker.SelectedDate == null)
                 {
                     MessageBox.Show("Selecteer een hard deadline.");
@@ -450,19 +452,19 @@ namespace FeedBuf
                 }
 
                 int id = 0;
-                DateTime? soft = null; // default voor docenten
+                DateTime? soft = new DateTime(2000, 01, 01); // default voor docenten
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
 
                 int catType = 0;
                 string shortDescription = ShortDescTxtBx.Text;
                 Category category = null;
 
-                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedCategory)
                 {
-                    catType = MapCategory(selectedItem.Content.ToString());
+                    catType = MapCategory(selectedCategory.Content.ToString());
                     if (catType > 0)
                     {
-                        category = new Category(catType, selectedItem.Content.ToString());
+                        category = new Category(catType, selectedCategory.Content.ToString());
                     }
                 }
                 else
@@ -471,8 +473,17 @@ namespace FeedBuf
                     return;
                 }
 
+                if (SelectStudentListView.SelectedItem is ZuydUser selectedStudent)
+                {
+                    student = selectedStudent;
+                }
+                else
+                {
+                    MessageBox.Show("Geen student geselecteerd.");
+                    return;
+                }
+
                 string body = GoalTextTxtBx.Text;
-                ZuydUser student = loggedInUser;
                 ZuydUser author = loggedInUser;
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
@@ -538,12 +549,16 @@ namespace FeedBuf
             {
                 SoftDeadlinePicker.Visibility = Visibility.Visible;
                 SoftDeadlineLbl.Visibility = Visibility.Visible;
+                SelectStudentListView.Visibility = Visibility.Collapsed;
+                SelectStudentLbl.Visibility = Visibility.Collapsed;
             }
             else // Teacher
             {
                 SoftDeadlinePicker.Visibility = Visibility.Collapsed;
                 SoftDeadlineLbl.Visibility = Visibility.Collapsed;
-
+                SelectStudentListView.Visibility = Visibility.Visible;
+                SelectStudentLbl.Visibility = Visibility.Visible;
+                FillSpecificUsersListView(SelectStudentListView, 0);
             }
             AddGoalPanel.Visibility = Visibility.Visible;
         }
@@ -697,6 +712,17 @@ namespace FeedBuf
             }
         }
 
+        private void FillSpecificUsersListView(ListView listView, int Role)
+        {
+            listView.Items.Clear();
+            List<ZuydUser> allUsers;
+            allUsers = dal.GetZuydUsersFromDatabaseByRole(Role);
+            foreach (var item in allUsers)
+            {
+                listView.Items.Add(item);
+            }
+        }
+
         private void FillActionListView(ListView listView)
         {
             listView.Items.Clear();
@@ -800,10 +826,10 @@ namespace FeedBuf
             {
                 dal.DeleteUserActionFromDatabase(UserActionList.Id);
 
-                var Actioins = loggedInUser.Role == 0 ? dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id) ;
+                var Actions = loggedInUser.Role == 0 ? dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id) ;
 
                 ActionListView.Items.Clear();
-                foreach (var item in Actioins)
+                foreach (var item in Actions)
                 {
                     ActionListView.Items.Add(item);
                 }

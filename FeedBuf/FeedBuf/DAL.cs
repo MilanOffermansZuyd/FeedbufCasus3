@@ -186,6 +186,37 @@ namespace FeedBuf
             }
         }
 
+        public List<ZuydUser> GetZuydUsersFromDatabaseByRole(int Role)
+        {
+            zuydUsers.Clear();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM ZuydUser WHERE Role = @Role";
+                    command.Parameters.AddWithValue("@Role", Role);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var firstname = reader[1].ToString();
+                            var lastName = reader[2].ToString();
+                            var email = reader[3].ToString();
+                            var password = reader[4].ToString();
+                            var role = int.Parse(reader[5].ToString());
+
+                            zuydUsers.Add(new ZuydUser(id, firstname, lastName, email, password, role));
+                        }
+                    }
+                    return zuydUsers;
+                }
+            }
+        }
+
         public List<ZuydUser> AddZuydUserFromDatabase(ZuydUser zuydUser)
         {
             categories.Clear();

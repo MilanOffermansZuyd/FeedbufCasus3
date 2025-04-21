@@ -352,9 +352,18 @@
             </StackPanel>
         </Border>
         <!-- Add Goal Panel-->
-        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
             <StackPanel x:Name="AddGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
-
+                <Label x:Name="SelectStudentLbl" Content="Select Student:" Visibility="Collapsed"/>
+                <ListView x:Name="SelectStudentListView" Height="100" HorizontalAlignment="Left" Margin="0,5,0,20" Width="400" Visibility="Collapsed">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FirstName}" Width="150" />
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}" Width="200" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
                 <Label x:Name="GoalTextLbl" Content="Goal:"/>
