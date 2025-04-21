@@ -351,7 +351,7 @@
         </Border>
 
         <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
+            <StackPanel x:Name="AddGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
 
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -374,7 +374,7 @@
         <!-- Create Goals panel -->
 
         <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+            <StackPanel x:Name="AddActionStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
                 <Label x:Name="ActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="ActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -402,7 +402,7 @@
         <!--Update Panels-->
 
         <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+            <StackPanel x:Name="UpdateGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
                 <Label x:Name="UShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
@@ -424,7 +424,7 @@
         </Border>
 
         <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
+            <StackPanel x:Name="UpdateActionStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
                 <Label x:Name="UActionShortDescLbl" Content="Short Description:"/>
                 <TextBox x:Name="UActionShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28"/>
