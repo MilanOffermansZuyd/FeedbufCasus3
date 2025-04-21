@@ -443,6 +443,8 @@ namespace FeedBuf
             }
             else // Teacher
             {
+                ZuydUser student = null;
+
                 if (HardDeadlinePicker.SelectedDate == null)
                 {
                     MessageBox.Show("Selecteer een hard deadline.");
@@ -450,29 +452,25 @@ namespace FeedBuf
                 }
 
                 int id = 0;
-                DateTime? soft = null; // default voor docenten
+                DateTime? soft = new DateTime(2000, 01, 01); // default voor docenten
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
 
-                int catType = 0;
-                string shortDescription = ShortDescTxtBx.Text;
-                Category category = null;
+                int catType = 3;
+                Category category = new Category(catType, "Shool Doel");
 
-                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
+                string shortDescription = ShortDescTxtBx.Text;
+
+                if (SelectStudentListView.SelectedItem is ZuydUser selectedStudent)
                 {
-                    catType = MapCategory(selectedItem.Content.ToString());
-                    if (catType > 0)
-                    {
-                        category = new Category(catType, selectedItem.Content.ToString());
-                    }
+                    student = selectedStudent;
                 }
                 else
                 {
-                    MessageBox.Show("Geen categorie geselecteerd.");
+                    MessageBox.Show("Geen student geselecteerd.");
                     return;
                 }
 
                 string body = GoalTextTxtBx.Text;
-                ZuydUser student = loggedInUser;
                 ZuydUser author = loggedInUser;
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
@@ -538,12 +536,19 @@ namespace FeedBuf
             {
                 SoftDeadlinePicker.Visibility = Visibility.Visible;
                 SoftDeadlineLbl.Visibility = Visibility.Visible;
+                SelectStudentListView.Visibility = Visibility.Collapsed;
+                SelectStudentLbl.Visibility = Visibility.Collapsed;
+                CategorySelectionListBx.Visibility = Visibility.Visible;
             }
             else // Teacher
             {
                 SoftDeadlinePicker.Visibility = Visibility.Collapsed;
                 SoftDeadlineLbl.Visibility = Visibility.Collapsed;
+                SelectStudentListView.Visibility = Visibility.Visible;
+                SelectStudentLbl.Visibility = Visibility.Visible;
+                CategorySelectionListBx.Visibility = Visibility.Collapsed;
 
+                FillSpecificUsersListView(SelectStudentListView, 0);
             }
             AddGoalPanel.Visibility = Visibility.Visible;
         }
@@ -697,6 +702,17 @@ namespace FeedBuf
             }
         }
 
+        private void FillSpecificUsersListView(ListView listView, int Role)
+        {
+            listView.Items.Clear();
+            List<ZuydUser> allUsers;
+            allUsers = dal.GetZuydUsersFromDatabaseByRole(Role);
+            foreach (var item in allUsers)
+            {
+                listView.Items.Add(item);
+            }
+        }
+
         private void FillActionListView(ListView listView)
         {
             listView.Items.Clear();
@@ -800,10 +816,10 @@ namespace FeedBuf
             {
                 dal.DeleteUserActionFromDatabase(UserActionList.Id);
 
-                var Actioins = loggedInUser.Role == 0 ? dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id) ;
+                var Actions = loggedInUser.Role == 0 ? dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id) ;
 
                 ActionListView.Items.Clear();
-                foreach (var item in Actioins)
+                foreach (var item in Actions)
                 {
                     ActionListView.Items.Add(item);
                 }
@@ -819,6 +835,7 @@ namespace FeedBuf
                 DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
                 string shortDescription = UShortDescTxtBx.Text;
                 Category category = null;
+                var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
 
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
@@ -832,7 +849,6 @@ namespace FeedBuf
 
                 if (category == null)
                 {
-                    var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
                     category = originalGoal?.Category;
 
                     if (category == null)
@@ -844,7 +860,7 @@ namespace FeedBuf
 
                 string body = UGoalTextTxtBx.Text;
                 ZuydUser student = loggedInUser;
-                ZuydUser author = loggedInUser;
+                ZuydUser author = originalGoal.Author;
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
