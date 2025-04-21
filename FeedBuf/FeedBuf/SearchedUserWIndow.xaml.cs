@@ -30,7 +30,7 @@ namespace FeedBuf
             SearchedUserListView.ItemsSource = goals;
         }
 
-        public SearchedUserWIndow(List<Action> actions)
+        public SearchedUserWIndow(List<UserAction> actions)
         {
             InitializeComponent();
             SearchedUserListView.ItemsSource = actions;

@@ -848,6 +848,45 @@ namespace FeedBuf
             }
         }
 
+        public List<UserAction> GetUserActionsByStudentName(string name)
+        {
+            List<UserAction> results = new List<UserAction>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @"
+                    SELECT * FROM UserAction 
+                    JOIN ZuydUser ON UserAction.StudentId = ZuydUser.Id
+                    WHERE ZuydUser.FirstName LIKE @FirstName";
+
+                command.Parameters.AddWithValue("@FirstName", "%" + name + "%");
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var id = int.Parse(reader[0].ToString());
+                        var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                        var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                        var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                        var isFinished = bool.Parse(reader[4].ToString());
+                        var createdOn = DateTime.Parse(reader[5].ToString());
+                        var softDeadline = DateTime.Parse(reader[6].ToString());
+                        var hardDeadline = DateTime.Parse(reader[7].ToString());
+                        var text = reader[8].ToString();
+                        var openForFeedback = bool.Parse(reader[9].ToString());
+
+                        results.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback));
+                    }
+                }
+            }
+
+            return results;
+        }
+
         public UserAction GetUserActionFromDatabaseBy(int Id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
