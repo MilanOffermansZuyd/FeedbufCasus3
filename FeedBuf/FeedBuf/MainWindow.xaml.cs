@@ -980,12 +980,13 @@ namespace FeedBuf
                 return;
             }
 
-            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
+            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, FeedbackTitleTextBox.Text);
             dal.AddFeedbackFromDatabase(feedback);
 
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
             FeedbackListView.Items.Refresh();
             FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
             GoalComboBox.SelectedIndex = -1;
         }
 

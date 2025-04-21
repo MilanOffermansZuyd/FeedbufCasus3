@@ -76,7 +76,7 @@
 
         <!-- Feedback Panel-->
 
-        <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" av:IsHidden="True">
+        <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10">
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="FeedbackSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="FeedbackSearchTextBox_KeyDown"/>
@@ -88,12 +88,15 @@
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
                             <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Goal.Text}" Width="200" />
-                            <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Text}" Width="250" />
+                            <GridViewColumn Header="Message" DisplayMemberBinding="{Binding ShortDescription}" Width="250" />
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Text}" Width="250" />
                         </GridView>
                     </ListView.View>
                 </ListView>
                 <TextBlock Text="Select a Goal to add feedback:" Margin="0,10,0,5"/>
                 <ComboBox x:Name="GoalComboBox" Width="300" DisplayMemberPath="Text" SelectedValuePath="Id" HorizontalAlignment="Left"/>
+                <TextBlock Text="Title:" Margin="0,10,0,5"/>
+                <TextBox x:Name="FeedbackTitleTextBox" Height="25" TextWrapping="Wrap"/>
                 <TextBlock Text="Feedback:" Margin="0,10,0,5"/>
                 <TextBox x:Name="FeedbackTextBox" Height="60" TextWrapping="Wrap"/>
                 <Button x:Name="AddFeedbackButton" Content="Add Feedback" Click="AddFeedbackButton_Click"/>
@@ -302,7 +305,7 @@
         </Border>
 
         <!-- Action Panel -->
-        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10">
+        <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" av:IsHidden="True">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="ActionSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="ActionSearchTextBox_KeyDown"/>
                 <TextBlock Text="Action panel" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
