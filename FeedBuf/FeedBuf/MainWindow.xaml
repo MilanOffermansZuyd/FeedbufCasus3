@@ -352,7 +352,7 @@
             </StackPanel>
         </Border>
         <!-- Add Goal Panel-->
-        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
             <StackPanel x:Name="AddGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
 
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
@@ -361,7 +361,15 @@
                 <TextBox x:Name="GoalTextTxtBx" TextWrapping="Wrap" Width="610" Height="97"/>
                 <CheckBox x:Name="OpenForFBChckBx" IsThreeState="False" Content="I Want Feedback"/>
                 <CheckBox x:Name="SubIdChckBx" IsThreeState="False" Content="Sub goal" Checked="SubIdChecked" Unchecked="SubIdUnchecked"/>
-                <TextBox x:Name="SubIdTxtBx" Width="35" Height="15" HorizontalAlignment="Left" Foreground="Gray" Text="SubId" Visibility="Hidden" GotFocus="SubIdTxtBx_GotFocus" LostFocus="SubIdTxtBx_LostFocus" av:IsHidden="True"/>
+                <Label x:Name="SubGoalTextLbl" Content="Select Main Goal:" Visibility="Collapsed"/>
+                <ListView x:Name="AddGoalGoalsListView" Height="100" HorizontalAlignment="Left" Margin="0,5,0,5" Width="400" Visibility="Collapsed">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Short description" DisplayMemberBinding="{Binding ShortDescription}" Width="350" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <ListBox x:Name="CategorySelectionListBx" Height="65" Width="230" HorizontalAlignment="Left">
                     <ListBoxItem x:Name="PrivateGoalItem" Content="Privé Doel"/>
                     <ListBoxItem x:Name="PrivateSchoolGoalItem" Content="Privé School Doel"/>

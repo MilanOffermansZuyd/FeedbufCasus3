@@ -1,5 +1,6 @@
 ﻿using FeedBuf.Catagory;
 using Microsoft.Data.SqlClient;
+using System;
 
 namespace FeedBuf
 {
@@ -535,11 +536,11 @@ namespace FeedBuf
                     // Als er een SubId is, voeg die toe
                     if (goal.SubId.HasValue)
                     {
-                        baseQuery += ", SubId) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @SubId, @ShortDescription)";
+                        baseQuery = "INSERT INTO Goal (CategoryId, StudentId, AuthorId, SoftDeadline, HardDeadline, IsFinished, Message, SubId, OpenForFeedback, ShortDescription) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @SubId, @OpenForFeedback, @ShortDescription)";
                     }
                     else
                     {
-                        baseQuery += ") VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @ShortDescription)";
+                        baseQuery = "INSERT INTO Goal (CategoryId, StudentId, AuthorId, SoftDeadline, HardDeadline, IsFinished, Message, OpenForFeedback, ShortDescription) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @ShortDescription)";
                     }
 
                     // Voeg SELECT @@IDENTITY toe om het nieuwe ID op te halen
@@ -557,6 +558,8 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@Text", goal.Text);
                     command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
                     command.Parameters.AddWithValue("@ShortDescription", goal.ShortDescription);
+
+
 
 
                     if (goal.SubId.HasValue)
@@ -684,8 +687,8 @@ namespace FeedBuf
                             DateTime hardDeadline = reader.GetDateTime(5);
                             bool isFinished = reader.GetBoolean(6);
                             string message = reader.GetString(7);
-                            bool openForFeedback = reader.GetBoolean(8);
-                            int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            bool openForFeedback = reader.GetBoolean(9);
                             var shortDescription = reader[10].ToString();
 
 
