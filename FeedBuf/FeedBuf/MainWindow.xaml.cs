@@ -726,7 +726,7 @@ namespace FeedBuf
                 int id = goalToUpdate;
                 DateTime soft = USoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
-                string shortDescription = ShortDescTxtBx.Text;
+                string shortDescription = UShortDescTxtBx.Text;
                 Category category = null;
 
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
@@ -772,7 +772,7 @@ namespace FeedBuf
                 int id = goalToUpdate;
                 DateTime soft = USoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
-                string shortDescription = ShortDescTxtBx.Text;
+                string shortDescription = UShortDescTxtBx.Text;
                 Category category = null;
 
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
@@ -822,7 +822,7 @@ namespace FeedBuf
                 DateTime createdOn = DateTime.Now;
                 DateTime soft = UActionSoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = UActionHardDeadlinePicker.SelectedDate.Value;
-                string shortDescription = ActionShortDescTxtBx.Text;
+                string shortDescription = UActionShortDescTxtBx.Text;
                 Goal goal = null;
                 if (UGoalsSelectionListView.SelectedItem is Goal selectedItem)
                 {
@@ -890,7 +890,6 @@ namespace FeedBuf
         {
             HideAllPanels();
             AddActionPanel.Visibility = Visibility.Visible;
-            FillGoalListView(GoalsSelectionListView);
         }
 
         private void BackToActionsFromUpdateAction_Click(object sender, RoutedEventArgs e)
@@ -904,7 +903,6 @@ namespace FeedBuf
         {
             HideAllPanels();
             ActionPanel.Visibility = Visibility.Visible;
-
         }
 
         private void BackToDashboardFromAction_Click(object sender, RoutedEventArgs e)
