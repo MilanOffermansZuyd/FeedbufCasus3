@@ -259,7 +259,7 @@ namespace FeedBuf
         }
 
         //Goal
-        public List<Goal> FillGoalsFromDatabase()
+        public List<Goal> FillGoalsFromDatabaseStudentBy(int StudentId)
         {
             goals.Clear();
 
@@ -269,7 +269,47 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Goal";
+                    command.CommandText = "SELECT * FROM Goal WHERE StudentId = @StudentId";
+                    command.Parameters.AddWithValue("@StudentId", StudentId);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var category = GetCategoryFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var softDeadline = DateTime.Parse(reader[4].ToString());
+                            var hardDeadline = DateTime.Parse(reader[5].ToString());
+                            var isFinished = bool.Parse(reader[6].ToString());
+                            var message = reader[7].ToString();
+                            int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                            var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
+
+
+                            if (subId == null)
+                            {
+                                goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
+                            }
+                        }
+                    }
+                    return goals;
+                }
+            }
+        }
+        public List<Goal> FillGoalsFromDatabaseDocentBy(int DocentId)
+        {
+            goals.Clear();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * FROM Goal WHERE AuthorId = @DocentId";
+                    command.Parameters.AddWithValue("@DocentId", DocentId);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -576,7 +616,7 @@ namespace FeedBuf
         }
 
 
-        public List<Goal> DeleteGoalFromDatabase(int goalId)
+        public void DeleteGoalFromDatabase(int goalId)
         {
             goals.Clear();
 
@@ -589,15 +629,12 @@ namespace FeedBuf
                     command.CommandText = "DELETE FROM Goal WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", goalId);
                     command.ExecuteNonQuery();
-
-                    return FillGoalsFromDatabase();
                 }
             }
         }
 
-        public List<Goal> UpdateGoalFromDatabase(Goal goal)
+        public void UpdateGoalFromDatabase(Goal goal)
         {
-            goals.Clear();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -618,8 +655,6 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@ShortDescription", goal.ShortDescription);
 
                     command.ExecuteNonQuery();
-
-                    return FillGoalsFromDatabase();
                 }
             }
         }
@@ -705,7 +740,7 @@ namespace FeedBuf
 
 
         //Feedback
-        public List<Feedback> FillFeedbacksFromDatabase()
+        public List<Feedback> FillFeedbacksFromDatabaseStudentBy(int StudentId)
         {
             feedbacks.Clear();
 
@@ -715,7 +750,39 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT* FROM Feedback";
+                    command.CommandText = "SELECT* FROM Feedback WHERE StudentId = @StudentId";
+                    command.Parameters.AddWithValue("@StudentId", StudentId);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var text = reader[4].ToString();
+                            var description = reader[5].ToString();
+
+                            feedbacks.Add(new Feedback(id, goal, text, student, student, description));
+                        }
+                    }
+                    return feedbacks;
+                }
+            }
+        }
+
+        public List<Feedback> FillFeedbacksFromDatabaseDocentBy(int DocentId)
+        {
+            feedbacks.Clear();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM Feedback WHERE AuthorId = @DocentId";
+                    command.Parameters.AddWithValue("DocentId", DocentId);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -826,7 +893,7 @@ namespace FeedBuf
             }
         }
 
-        public List<Feedback> DeleteFeedbackFromDatabase(int feedBackId)
+        public void DeleteFeedbackFromDatabase(int feedBackId)
         {
             feedbacks.Clear();
 
@@ -839,13 +906,11 @@ namespace FeedBuf
                     command.CommandText = "DELETE FROM Feedback WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", feedBackId);
                     command.ExecuteNonQuery();
-
-                    return FillFeedbacksFromDatabase();
                 }
             }
         }
 
-        public List<Feedback> UpdateFeedbackFromDatabase(Feedback feedback)
+        public void UpdateFeedbackFromDatabase(Feedback feedback)
         {
             feedbacks.Clear();
 
@@ -864,14 +929,12 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@Description", feedback.ShortDescription);
 
                     command.ExecuteNonQuery();
-
-                    return FillFeedbacksFromDatabase();
                 }
             }
         }
 
         //UserAction
-        public List<UserAction> FillUserActionsFromDatabase()
+        public List<UserAction> FillUserActionsFromDatabaseDocentBy(int DocentId)
         {
             userActions.Clear();
 
@@ -881,7 +944,45 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT* FROM UserAction";
+                    command.CommandText = "SELECT* FROM UserAction WHERE AuthorId = @DocentId";
+                    command.Parameters.AddWithValue("@DocentId", DocentId);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var id = int.Parse(reader[0].ToString());
+                            var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                            var student = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                            var author = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                            var isFinished = bool.Parse(reader[4].ToString());
+                            var createdOn = DateTime.Parse(reader[5].ToString());
+                            var softDeadline = DateTime.Parse(reader[6].ToString());
+                            var hardDeadline = DateTime.Parse(reader[7].ToString());
+                            var text = reader[8].ToString();
+                            var openForFeedback = bool.Parse(reader[9].ToString());
+                            var shortDescription = reader[10].ToString();
+
+
+
+                            userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, shortDescription, openForFeedback));
+                        }
+                    }
+                    return userActions;
+                }
+            }
+        }
+        public List<UserAction> FillUserActionsFromDatabaseStudentBy(int StudentId)
+        {
+            userActions.Clear();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT* FROM UserAction WHERE StudentId = @StudentId";
+                    command.Parameters.AddWithValue("@StudentId", StudentId);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -1024,7 +1125,7 @@ namespace FeedBuf
             }
         }
 
-        public List<UserAction> DeleteUserActionFromDatabase(int userActionId)
+        public void DeleteUserActionFromDatabase(int userActionId)
         {
             userActions.Clear();
 
@@ -1037,13 +1138,11 @@ namespace FeedBuf
                     command.CommandText = "DELETE FROM UserAction WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", userActionId);
                     command.ExecuteNonQuery();
-
-                    return FillUserActionsFromDatabase();
                 }
             }
         }
 
-        public List<UserAction> UpdateUserActionFromDatabase(UserAction userAction)
+        public void UpdateUserActionFromDatabase(UserAction userAction)
         {
             userActions.Clear();
 
@@ -1068,7 +1167,6 @@ namespace FeedBuf
 
                     command.ExecuteNonQuery();
 
-                    return FillUserActionsFromDatabase();
                 }
             }
         }
