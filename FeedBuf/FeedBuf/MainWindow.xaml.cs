@@ -394,7 +394,6 @@ namespace FeedBuf
 
                 int catType = 0;
                 Category category = null;
-                string shortDescription = ShortDescTxtBx.Text;
 
                 if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
@@ -411,12 +410,13 @@ namespace FeedBuf
                 }
 
                 string body = GoalTextTxtBx.Text;
+                string shortDescription = ShortDescTxtBx.Text;
                 ZuydUser student = loggedInUser;
                 ZuydUser author = loggedInUser;
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
                 dal.AddGoalFromDatabase(goal);
 
                 HideAllPanels();
@@ -461,7 +461,7 @@ namespace FeedBuf
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
                 dal.AddGoalFromDatabase(goal);
 
                 HideAllPanels();
@@ -757,7 +757,7 @@ namespace FeedBuf
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null, shortDescription);
                 dal.UpdateGoalFromDatabase(goal);
 
                 var selectedGoal = dal.GetGoalFromDatabaseBy(goal.Id);
@@ -802,7 +802,7 @@ namespace FeedBuf
                 ZuydUser author = loggedInUser;
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null);
+                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, OpenForFeedback, null, shortDescription);
 
                 dal.UpdateGoalFromDatabase(goal);
 
