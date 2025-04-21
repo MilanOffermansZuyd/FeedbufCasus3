@@ -1005,6 +1005,7 @@ namespace FeedBuf
             }
 
             selectedFeedback.Text = FeedbackTextBox.Text;
+            selectedFeedback.ShortDescription = FeedbackTitleTextBox.Text;
             dal.UpdateFeedbackFromDatabase(selectedFeedback);
 
             FeedbackListView.ItemsSource = null;
@@ -1012,6 +1013,7 @@ namespace FeedBuf
             FeedbackListView.Items.Refresh();
 
             FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
         }
 
         private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)

@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\kylel\\documents\\github\\feedbufcasus3\\feedbuf\\feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\kylel\\documents\\github\\feedbufcasus3\\feedbuf\\feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\kylel\\documents\\github\\feedbufcasus3\\feedbuf\\feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\kylel\\documents\\github\\feedbufcasus3\\feedbuf\\feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|solutionrelative:feedbuf\\dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821731C8-BA1F-4655-AE5F-21FB92DA59F7}|FeedBuf\\FeedBuf.csproj|c:\\users\\kylel\\documents\\github\\feedbufcasus3\\feedbuf\\feedbuf\\goal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 298,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,37 +54,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml",
               "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml*",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml*",
+              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-04-21T16:57:16.243Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "FeedBuf\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs*",
-              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs*",
-              "ViewState": "AgIAALoDAAAAAAAAAAAIwNwDAAAlAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FeedBuf\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAM4DAAAAAAAAAAAcwOIDAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:21:03.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "DAL.cs",
               "DocumentMoniker": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
               "RelativeDocumentMoniker": "FeedBuf\\DAL.cs",
-              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs*",
-              "RelativeToolTip": "FeedBuf\\DAL.cs*",
+              "ToolTip": "C:\\Users\\kylel\\Documents\\GitHub\\FeedbufCasus3\\FeedBuf\\FeedBuf\\DAL.cs",
+              "RelativeToolTip": "FeedBuf\\DAL.cs",
               "ViewState": "AgIAAA8DAAAAAAAAAAAYwFkDAACzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T10:41:17.545Z",

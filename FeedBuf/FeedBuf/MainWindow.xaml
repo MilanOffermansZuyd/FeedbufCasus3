@@ -76,7 +76,7 @@
 
         <!-- Feedback Panel-->
 
-        <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10">
+        <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" av:IsHidden="True">
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="FeedbackSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="FeedbackSearchTextBox_KeyDown"/>
@@ -88,8 +88,8 @@
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
                             <GridViewColumn Header="Goal" DisplayMemberBinding="{Binding Goal.Text}" Width="200" />
-                            <GridViewColumn Header="Message" DisplayMemberBinding="{Binding ShortDescription}" Width="250" />
-                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Text}" Width="250" />
+                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding ShortDescription}" Width="270" />
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Text}" Width="75" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -353,7 +353,7 @@
             </StackPanel>
         </Border>
 
-        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
+        <Border x:Name="AddGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed">
             <StackPanel x:Name="AddGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
 
                 <Label x:Name="ShortDescLbl" Content="Short Description:"/>
