@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="SearchedUserWIndow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SubGoalWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

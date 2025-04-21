@@ -1084,5 +1084,48 @@ namespace FeedBuf
             UpdateActionPanel.Visibility = Visibility.Collapsed;
             ViewFeedbackPanel.Visibility = Visibility.Collapsed;
         }
+
+        private readonly string placeholderText = "Zoek op student naam...";
+
+        private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (textBox.Text == placeholderText)
+                {
+                    textBox.Text = "";
+                    textBox.Foreground = Brushes.Black;
+                }
+            }
+        }
+
+        private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholderText;
+                    textBox.Foreground = Brushes.Gray;
+                }
+            }
+        }
+
+        private void GoalSearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchText = GoalSearchTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Zoek op student naam...")
+                {
+                    var filteredGoals = dal.GetGoalsByStudentName(searchText);
+                    SearchedUserWIndow searchedUserWIndow = new SearchedUserWIndow(filteredGoals);
+                    searchedUserWIndow.Show();
+                }
+            }
+        }
+
+
     }
 }
