@@ -933,8 +933,9 @@ namespace FeedBuf
                         var hardDeadline = DateTime.Parse(reader[7].ToString());
                         var text = reader[8].ToString();
                         var openForFeedback = bool.Parse(reader[9].ToString());
+                        var shortDescription = reader[10].ToString();
 
-                        results.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback));
+                        results.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, shortDescription, openForFeedback));
                     }
                 }
             }

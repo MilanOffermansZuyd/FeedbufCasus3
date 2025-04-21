@@ -27,19 +27,37 @@ namespace FeedBuf
         public SearchedUserWIndow(List<Goal> goals)
         {
             InitializeComponent();
+            SearchedUserListView.Items.Clear();
             SearchedUserListView.ItemsSource = goals;
+            ShowListView();
         }
 
         public SearchedUserWIndow(List<UserAction> actions)
         {
             InitializeComponent();
+            SearchedUserListView.Items.Clear();
             SearchedUserListView.ItemsSource = actions;
+            ShowListView();
         }
 
         public SearchedUserWIndow(List<Feedback> feedback)
         {
             InitializeComponent();
-            SearchedUserListView.ItemsSource = feedback;
+            SearchedUserFeedbackListView.Items.Clear();
+            SearchedUserFeedbackListView.ItemsSource = feedback;
+            ShowFeedbackListView();
+        }
+
+        public void ShowListView()
+        {
+            SearchedUserFeedbackListView.Visibility = Visibility.Collapsed;
+            SearchedUserListView.Visibility = Visibility.Visible;
+        }
+
+        public void ShowFeedbackListView()
+        {
+            SearchedUserListView.Visibility = Visibility.Collapsed;
+            SearchedUserFeedbackListView.Visibility = Visibility.Visible;
         }
     }
 }
