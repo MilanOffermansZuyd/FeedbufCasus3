@@ -455,23 +455,10 @@ namespace FeedBuf
                 DateTime? soft = new DateTime(2000, 01, 01); // default voor docenten
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
 
-                int catType = 0;
-                string shortDescription = ShortDescTxtBx.Text;
-                Category category = null;
+                int catType = 3;
+                Category category = new Category(catType, "Shool Doel");
 
-                if (CategorySelectionListBx.SelectedItem is ListBoxItem selectedCategory)
-                {
-                    catType = MapCategory(selectedCategory.Content.ToString());
-                    if (catType > 0)
-                    {
-                        category = new Category(catType, selectedCategory.Content.ToString());
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Geen categorie geselecteerd.");
-                    return;
-                }
+                string shortDescription = ShortDescTxtBx.Text;
 
                 if (SelectStudentListView.SelectedItem is ZuydUser selectedStudent)
                 {
@@ -551,6 +538,7 @@ namespace FeedBuf
                 SoftDeadlineLbl.Visibility = Visibility.Visible;
                 SelectStudentListView.Visibility = Visibility.Collapsed;
                 SelectStudentLbl.Visibility = Visibility.Collapsed;
+                CategorySelectionListBx.Visibility = Visibility.Visible;
             }
             else // Teacher
             {
@@ -558,6 +546,8 @@ namespace FeedBuf
                 SoftDeadlineLbl.Visibility = Visibility.Collapsed;
                 SelectStudentListView.Visibility = Visibility.Visible;
                 SelectStudentLbl.Visibility = Visibility.Visible;
+                CategorySelectionListBx.Visibility = Visibility.Collapsed;
+
                 FillSpecificUsersListView(SelectStudentListView, 0);
             }
             AddGoalPanel.Visibility = Visibility.Visible;
@@ -845,6 +835,7 @@ namespace FeedBuf
                 DateTime hard = UHardDeadlinePicker.SelectedDate.Value;
                 string shortDescription = UShortDescTxtBx.Text;
                 Category category = null;
+                var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
 
                 if (UCategorySelectionListBx.SelectedItem is ListBoxItem selectedItem)
                 {
@@ -858,7 +849,6 @@ namespace FeedBuf
 
                 if (category == null)
                 {
-                    var originalGoal = dal.GetGoalFromDatabaseBy(goalToUpdate);
                     category = originalGoal?.Category;
 
                     if (category == null)
@@ -870,7 +860,7 @@ namespace FeedBuf
 
                 string body = UGoalTextTxtBx.Text;
                 ZuydUser student = loggedInUser;
-                ZuydUser author = loggedInUser;
+                ZuydUser author = originalGoal.Author;
                 bool OpenForFeedback = UOpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
