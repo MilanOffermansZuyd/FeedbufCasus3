@@ -258,7 +258,7 @@ namespace FeedBuf
         {
             if (loggedInUser != null)
             {
-                DashboardPanel.Visibility = Visibility.Collapsed;
+                HideAllPanels();
                 ProfilePanel.Visibility = Visibility.Visible;
                 EditFirstNameBox.Text = loggedInUser.FirstName;
                 EditLastNameBox.Text = loggedInUser.LastName;
@@ -544,7 +544,7 @@ namespace FeedBuf
             bool OpenForFeedback = ActionOpenForFBChckBx.IsChecked == true;
             bool finished = false;
 
-            ZuydUser student = loggedInUser;
+            ZuydUser student = goal.Student;
             ZuydUser author = loggedInUser;
 
             UserAction userAction = new UserAction(

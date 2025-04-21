@@ -68,8 +68,8 @@
 
                 <Button x:Name="DashboardButton" Content="Dashboard" Click="DashboardButton_Click"/>
                 <Button x:Name="GoalButton" Content="Goal" Click="GoalButton_Click"/>
-                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="FeedbackButton" Content="Feedback" Click="FeedbackButton_Click"/>
+                <Button x:Name="ActionButton" Content="Action" Click="ActionButton_Click"/>
                 <Button x:Name="LogoutButton" Content="Log Out" Click="LogoutButton_Click"/>
             </StackPanel>
         </Border>
