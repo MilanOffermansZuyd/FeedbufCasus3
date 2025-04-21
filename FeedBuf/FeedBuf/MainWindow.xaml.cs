@@ -41,8 +41,6 @@ namespace FeedBuf
             WelcomeTextBlock.Cursor = Cursors.Hand;
         
             AllocConsole(); // Externe console
-            FillGoalListView(GoalsListView);
-            FillActionListView(ActionListView);
         }
 
 
@@ -63,6 +61,9 @@ namespace FeedBuf
                 Populate7DayInfo();
 
                 WelcomeTextBlock.Text = $"Welkom {user.FirstName} {user.LastName}";
+
+                FillGoalListView(GoalsListView);
+                FillActionListView(ActionListView);
 
                 if (user.Role == 0)
                 {
@@ -679,7 +680,16 @@ namespace FeedBuf
         private void FillGoalListView(ListView listView)
         {
             listView.Items.Clear();
-            var allGoals = dal.FillGoalsFromDatabase();
+            List<Goal> allGoals;
+            if (loggedInUser.Role == 0)
+            {
+                allGoals = dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id);
+            }
+            else
+            {
+                allGoals = dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id);
+            }
+
             var echteGoals = allGoals.Where(g => g.SubId == null).ToList();
             foreach ( var item in echteGoals ) 
             {
@@ -690,7 +700,15 @@ namespace FeedBuf
         private void FillActionListView(ListView listView)
         {
             listView.Items.Clear();
-            var actions = dal.FillUserActionsFromDatabase();
+            List<UserAction> actions;             
+            if (loggedInUser.Role == 0)
+            {
+                actions = dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id);
+            }
+            else
+            {
+                actions = dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id);
+            }
             foreach (var item in actions)
             {
                 listView.Items.Add(item);
@@ -725,16 +743,32 @@ namespace FeedBuf
         {
             if (GoalsListView.SelectedItem is Goal selectedGoal)
             {
-                var gekoppeldeActies = dal.FillUserActionsFromDatabase()
-                                          .Where(a => a.Goal.Id == selectedGoal.Id)
-                                          .ToList();
+                var gekoppeldeActies = loggedInUser.Role == 0 ? 
+                    dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id)
+                    .Where(a => a.Goal.Id == selectedGoal.Id)
+                    .ToList()
+                    : 
+                    dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id)
+                    .Where(a => a.Goal.Id == selectedGoal.Id)
+                    .ToList();
 
                 foreach (var actie in gekoppeldeActies)
                 {
                     dal.DeleteUserActionFromDatabase(actie.Id);
                 }
 
-                var goals = dal.DeleteGoalFromDatabase(selectedGoal.Id);
+                dal.DeleteGoalFromDatabase(selectedGoal.Id);
+
+                List<Goal> goals;
+                if (loggedInUser.Role == 0)
+                {
+                    goals = dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id);
+                }
+                else
+                {
+                    goals = dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id);
+
+                }
 
                 GoalsListView.Items.Clear();
                 foreach (var item in goals)
@@ -742,7 +776,16 @@ namespace FeedBuf
                     GoalsListView.Items.Add(item);
                 }
 
-                var acties = dal.FillUserActionsFromDatabase();
+                List<UserAction> acties;
+                if (loggedInUser.Role == 0)
+                {
+                    acties = dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id);
+                }
+                else
+                {
+                    acties = dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id);
+                }
+
                 ActionListView.Items.Clear();
                 foreach (var actie in acties)
                 {
@@ -755,7 +798,9 @@ namespace FeedBuf
         {
             if (ActionListView.SelectedItem is UserAction UserActionList)
             {
-                var Actioins = dal.DeleteUserActionFromDatabase(UserActionList.Id);
+                dal.DeleteUserActionFromDatabase(UserActionList.Id);
+
+                var Actioins = loggedInUser.Role == 0 ? dal.FillUserActionsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillUserActionsFromDatabaseDocentBy(loggedInUser.Id) ;
 
                 ActionListView.Items.Clear();
                 foreach (var item in Actioins)
@@ -936,6 +981,12 @@ namespace FeedBuf
         {
             HideAllPanels();
             AddActionPanel.Visibility = Visibility.Visible;
+            GoalsSelectionListView.Items.Clear();
+            var goalsByUser = loggedInUser.Role == 0 ? dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id);
+            foreach (var item in goalsByUser)
+            {
+                GoalsSelectionListView.Items.Add(item);
+            }
         }
 
         private void BackToActionsFromUpdateAction_Click(object sender, RoutedEventArgs e)
@@ -1009,8 +1060,8 @@ namespace FeedBuf
         {
             HideAllPanels();
             FeedbackPanel.Visibility = Visibility.Visible;
-            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
-            GoalComboBox.ItemsSource = dal.FillGoalsFromDatabase().Where(g => g.OpenForFeedback).ToList();
+            FeedbackListView.ItemsSource = loggedInUser.Role == 0 ? dal.FillFeedbacksFromDatabaseStudentBy(loggedInUser.Id) : dal.FillFeedbacksFromDatabaseDocentBy(loggedInUser.Id);
+            GoalComboBox.ItemsSource = loggedInUser.Role == 0 ? dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList(): dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList();
         }
 
         private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
@@ -1027,7 +1078,7 @@ namespace FeedBuf
             Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, FeedbackTitleTextBox.Text);
             dal.AddFeedbackFromDatabase(feedback);
 
-            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.ItemsSource = loggedInUser.Role == 0 ? dal.FillFeedbacksFromDatabaseStudentBy(loggedInUser.Id) : dal.FillFeedbacksFromDatabaseDocentBy(loggedInUser.Id);
             FeedbackListView.Items.Refresh();
             FeedbackTextBox.Text = "";
             FeedbackTitleTextBox.Text = "";
@@ -1053,7 +1104,7 @@ namespace FeedBuf
             dal.UpdateFeedbackFromDatabase(selectedFeedback);
 
             FeedbackListView.ItemsSource = null;
-            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.ItemsSource = loggedInUser.Role == 0 ? dal.FillFeedbacksFromDatabaseStudentBy(loggedInUser.Id) : dal.FillFeedbacksFromDatabaseDocentBy(loggedInUser.Id);
             FeedbackListView.Items.Refresh();
 
             FeedbackTextBox.Text = "";
@@ -1071,7 +1122,7 @@ namespace FeedBuf
             dal.DeleteFeedbackFromDatabase(selectedFeedback.Id);
 
             FeedbackListView.ItemsSource = null;
-            FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
+            FeedbackListView.ItemsSource = loggedInUser.Role == 0 ? dal.FillFeedbacksFromDatabaseStudentBy(loggedInUser.Id) : dal.FillFeedbacksFromDatabaseDocentBy(loggedInUser.Id);
             FeedbackListView.Items.Refresh();
 
             FeedbackTextBox.Text = "";
