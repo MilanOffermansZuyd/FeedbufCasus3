@@ -1095,13 +1095,12 @@ namespace FeedBuf
             }
         }
         
-                private readonly string placeholderText = "Zoek op student naam...";
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox textBox)
             {
-                if (textBox.Text == placeholderText)
+                if (textBox.Text == "Zoek op student naam...")
                 {
                     textBox.Text = "";
                     textBox.Foreground = Brushes.Black;
@@ -1115,7 +1114,7 @@ namespace FeedBuf
             {
                 if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    textBox.Text = placeholderText;
+                    textBox.Text = "Zoek op student naam...";
                     textBox.Foreground = Brushes.Gray;
                 }
             }
@@ -1174,6 +1173,30 @@ namespace FeedBuf
         private void SubIdUnchecked(object sender, RoutedEventArgs e)
         {
             SubIdTxtBx.Visibility = Visibility.Collapsed;
+        }
+        private void SubIdTxtBx_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (textBox.Text == "SubId")
+                {
+                    textBox.Text = "";
+                    textBox.Foreground = Brushes.Black;
+                }
+            }
+        }
+
+        private void SubIdTxtBx_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = "SubId";
+                    textBox.Foreground = Brushes.Gray;
+
+                }
+            }
         }
     }
 }
