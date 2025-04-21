@@ -13,14 +13,14 @@ namespace FeedBuf
         public Goal Goal { get; set; }
         public bool IsFinished { get; set; }
         public DateTime CreatedOn { get; set; }
-        public DateTime SoftDeadline { get; set; }
+        public DateTime? SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public List<Feedback> Feedbacks { get; set; }
         public bool OpenForFeedback { get; set; }
 
 
         // Constructor
-        public UserAction(int id, Goal goal, DateTime createdOn, DateTime softDeadline, DateTime hardDeadline, bool isFinished, string text, ZuydUser student, ZuydUser author, string shortDescription, bool openForFeedback) 
+        public UserAction(int id, Goal goal, DateTime createdOn, DateTime? softDeadline, DateTime hardDeadline, bool isFinished, string text, ZuydUser student, ZuydUser author, string shortDescription, bool openForFeedback) 
             : base(id, text, student, author, shortDescription)
         {
             Id = id;

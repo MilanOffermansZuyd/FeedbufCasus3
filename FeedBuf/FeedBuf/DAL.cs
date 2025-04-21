@@ -284,11 +284,12 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
 
 
                             if (subId == null)
                             {
-                                goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+                                goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                             }
                         }
                     }
@@ -327,8 +328,10 @@ namespace FeedBuf
                         var message = reader[7].ToString();
                         int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                         var openForFeedback = Convert.ToBoolean(reader[9]);
+                        var shortDescription = reader[10].ToString();
 
-                        results.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+
+                        results.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                     }
                 }
             }
@@ -361,8 +364,10 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
 
-                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId);
+
+                            return new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription);
                         }
                         return null;
                     }
@@ -395,8 +400,10 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
 
-                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+
+                            goals.Add( new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                         }
                         return goals;
                     }
@@ -429,8 +436,10 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                         }
                         return goals;
                     }
@@ -463,8 +472,10 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = Convert.ToBoolean(reader[9]);
+                            var shortDescription = reader[10].ToString();
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                         }
                         return goals;
                     }
@@ -496,8 +507,10 @@ namespace FeedBuf
                             var message = reader[7].ToString();
                             int? subId = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
                             var openForFeedback = bool.Parse(reader[9].ToString());
+                            var shortDescription = reader[10].ToString();
 
-                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+
+                            goals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                         }
                         return goals;
                     }
@@ -517,16 +530,16 @@ namespace FeedBuf
                     command.Connection = connection;
 
                     // Basis van de INSERT-statement
-                    string baseQuery = "INSERT INTO Goal (CategoryId, StudentId, AuthorId, SoftDeadline, HardDeadline, IsFinished, Message, OpenForFeedback";
+                    string baseQuery = "INSERT INTO Goal (CategoryId, StudentId, AuthorId, SoftDeadline, HardDeadline, IsFinished, Message, OpenForFeedback, ShortDescription";
 
                     // Als er een SubId is, voeg die toe
                     if (goal.SubId.HasValue)
                     {
-                        baseQuery += ", SubId) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @SubId)";
+                        baseQuery += ", SubId) VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @SubId, @ShortDescription)";
                     }
                     else
                     {
-                        baseQuery += ") VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback)";
+                        baseQuery += ") VALUES (@CategoryId, @StudentId, @AuthorId, @SoftDeadline, @HardDeadline, @IsFinished, @Text, @OpenForFeedback, @ShortDescription)";
                     }
 
                     // Voeg SELECT @@IDENTITY toe om het nieuwe ID op te halen
@@ -543,6 +556,8 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
                     command.Parameters.AddWithValue("@Text", goal.Text);
                     command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
+                    command.Parameters.AddWithValue("@ShortDescription", goal.ShortDescription);
+
 
                     if (goal.SubId.HasValue)
                     {
@@ -553,7 +568,7 @@ namespace FeedBuf
                     int newId = Convert.ToInt32(command.ExecuteScalar());
 
                     // Voeg de nieuwe goal toe aan de lijst
-                    goals.Add(new Goal(newId, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, goal.SubId));
+                    goals.Add(new Goal(newId, goal.SoftDeadline, goal.HardDeadline, goal.IsFinished, goal.Category, goal.Text, goal.Student, goal.Author, goal.OpenForFeedback, goal.SubId, goal.ShortDescription));
 
                     return goals;
                 }
@@ -590,7 +605,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Goal SET AuthorId = @AuthorId, StudentId = @StudentId, SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, CategoryId = @CategoryId, Message = @Text, OpenForFeedback = @OpenForFeedback WHERE Id = @Id";
+                    command.CommandText = "UPDATE Goal SET AuthorId = @AuthorId, StudentId = @StudentId, SoftDeadline = @SoftDeadline, HardDeadline = @HardDeadline, IsFinished = @IsFinished, CategoryId = @CategoryId, Message = @Text, OpenForFeedback = @OpenForFeedback, ShortDescription = @ShortDescription WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", goal.Id);
                     command.Parameters.AddWithValue("@AuthorId", goal.Author.Id);
                     command.Parameters.AddWithValue("@StudentId", goal.Student.Id);
@@ -600,6 +615,8 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@IsFinished", goal.IsFinished);
                     command.Parameters.AddWithValue("@Text", goal.Text);
                     command.Parameters.AddWithValue("@OpenForFeedback", goal.OpenForFeedback);
+                    command.Parameters.AddWithValue("@ShortDescription", goal.ShortDescription);
+
                     command.ExecuteNonQuery();
 
                     return FillGoalsFromDatabase();
@@ -669,12 +686,14 @@ namespace FeedBuf
                             string message = reader.GetString(7);
                             bool openForFeedback = reader.GetBoolean(8);
                             int? subId = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9);
+                            var shortDescription = reader[10].ToString();
+
 
                             var category = GetCategoryFromDatabaseBy(categoryId);
                             var student = GetZuydUserFromDatabaseBy(studentId);
                             var author = GetZuydUserFromDatabaseBy(authorId);
 
-                            subGoals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId));
+                            subGoals.Add(new Goal(id, softDeadline, hardDeadline, isFinished, category, message, student, author, openForFeedback, subId, shortDescription));
                         }
                     }
                 }
@@ -872,9 +891,11 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
                             var text = reader[8].ToString();
                             var openForFeedback =bool.Parse( reader[9].ToString());
+                            var shortDescription = reader[10].ToString();
 
 
-                            userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback));
+
+                            userActions.Add(new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, shortDescription, openForFeedback));
                         }
                     }
                     return userActions;
@@ -945,8 +966,10 @@ namespace FeedBuf
                             var hardDeadline = DateTime.Parse(reader[7].ToString());
                             var text = reader[8].ToString();
                             var openForFeedback = bool.Parse( reader[9].ToString());
+                            var shortDescription = reader[10].ToString();
 
-                            return new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, string.Empty, openForFeedback);
+
+                            return new UserAction(id, goal, createdOn, softDeadline, hardDeadline, isFinished, text, student, author, shortDescription, openForFeedback);
                         }
                         return null;
                     }
@@ -964,7 +987,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message,OpenForFeedback) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message,@OpenForFeedback) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message,OpenForFeedback,ShortDescription) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message,@OpenForFeedback) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
@@ -974,6 +997,8 @@ namespace FeedBuf
                     command.Parameters.AddWithValue("@HardDeadline", userAction.HardDeadline);
                     command.Parameters.AddWithValue("@Message", userAction.Text);
                     command.Parameters.AddWithValue("@OpenForFeedback", userAction.OpenForFeedback);
+                    command.Parameters.AddWithValue("@ShortDescription", userAction.ShortDescription);
+
                     var newId = Convert.ToInt32(command.ExecuteScalar());
                     var goal = userAction.Goal;
                     var isFinished = userAction.IsFinished;
@@ -984,8 +1009,9 @@ namespace FeedBuf
                     var author = userAction.Author;
                     var Message = userAction.Text;
                     var openForFeedback = userAction.OpenForFeedback;
+                    var shortDescription = userAction.ShortDescription;
 
-                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, isFinished, Message, student, author, string.Empty, openForFeedback));
+                    userActions.Add(new UserAction(newId, goal, createdOn, softDeadline, hardDeadline, isFinished, Message, student, author, shortDescription, openForFeedback));
 
                     return userActions;
                 }
