@@ -411,8 +411,27 @@ namespace FeedBuf
                 ZuydUser author = loggedInUser;
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
+                Goal goal = null;
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
+                if (SubIdChckBx.IsChecked == true)
+                {
+                    if (AddGoalGoalsListView.SelectedItem is not Goal selectedMainGoal)
+                    {
+                        MessageBox.Show("Geen hoofddoel geselecteerd.");
+                        return;
+                    }
+                    else
+                    {
+                        int subid = selectedMainGoal.Id;
+                        goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, subid, shortDescription);
+                    }
+
+                }
+                else
+                {
+                    goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
+                }
+
                 dal.AddGoalFromDatabase(goal);
 
                 HideAllPanels();
@@ -430,7 +449,7 @@ namespace FeedBuf
                 }
 
                 int id = 0;
-                DateTime soft = new DateTime(2000, 01, 01); // default voor docenten
+                DateTime? soft = null; // default voor docenten
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
 
                 int catType = 0;
@@ -457,7 +476,27 @@ namespace FeedBuf
                 bool openForFeedback = OpenForFBChckBx.IsChecked == true;
                 bool finished = false;
 
-                Goal goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
+                Goal goal = null;
+
+                if (SubIdChckBx.IsChecked == true)
+                {
+                    if (AddGoalGoalsListView.SelectedItem is not Goal selectedMainGoal)
+                    {
+                        MessageBox.Show("Geen hoofddoel geselecteerd.");
+                        return;
+                    }
+                    else
+                    {
+                        int subid = selectedMainGoal.Id;
+                        goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, subid, shortDescription);
+                    }
+
+                }
+                else
+                {
+                    goal = new Goal(id, soft, hard, finished, category, body, student, author, openForFeedback, null, shortDescription);
+                }
+
                 dal.AddGoalFromDatabase(goal);
 
                 HideAllPanels();
@@ -494,6 +533,17 @@ namespace FeedBuf
         private void AddGoalButton_Click(object sender, RoutedEventArgs e)
         {
             HideAllPanels();
+            if (loggedInUser.Role == 0) // Student
+            {
+                SoftDeadlinePicker.Visibility = Visibility.Visible;
+                SoftDeadlineLbl.Visibility = Visibility.Visible;
+            }
+            else // Teacher
+            {
+                SoftDeadlinePicker.Visibility = Visibility.Collapsed;
+                SoftDeadlineLbl.Visibility = Visibility.Collapsed;
+
+            }
             AddGoalPanel.Visibility = Visibility.Visible;
         }
 
@@ -568,7 +618,7 @@ namespace FeedBuf
                 UpdateGoalPanel.Visibility = Visibility.Visible;
                 goalToUpdate = selectedGoal.Id;
                 selectedGoalForUpdate = selectedGoal;
-                UGoalTextLbl.Content = selectedGoal.ShortDescription;
+                UShortDescTxtBx.Text = selectedGoal.ShortDescription;
                 UGoalTextTxtBx.Text = selectedGoal.Text;
                 UOpenForFBChckBx.IsChecked = selectedGoal.OpenForFeedback;
                 USoftDeadlinePicker.SelectedDate = selectedGoal.SoftDeadline;
@@ -1064,7 +1114,7 @@ namespace FeedBuf
             ViewFeedbackPanel.Visibility = Visibility.Collapsed;
         }
         
-                private void ClearAllFields(StackPanel stackPanel)
+        private void ClearAllFields(StackPanel stackPanel)
         {
             foreach (var child in stackPanel.Children)
             {
@@ -1167,36 +1217,16 @@ namespace FeedBuf
 
         private void SubIdChecked(object sender, RoutedEventArgs e)
         {
-            SubIdTxtBx.Visibility = Visibility.Visible;
+            AddGoalGoalsListView.Visibility = Visibility.Visible;
+            SubGoalTextLbl.Visibility = Visibility.Visible;
+            FillGoalListView(AddGoalGoalsListView);
         }
 
         private void SubIdUnchecked(object sender, RoutedEventArgs e)
         {
-            SubIdTxtBx.Visibility = Visibility.Collapsed;
-        }
-        private void SubIdTxtBx_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                if (textBox.Text == "SubId")
-                {
-                    textBox.Text = "";
-                    textBox.Foreground = Brushes.Black;
-                }
-            }
-        }
-
-        private void SubIdTxtBx_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = "SubId";
-                    textBox.Foreground = Brushes.Gray;
-
-                }
-            }
+            AddGoalGoalsListView.Visibility = Visibility.Collapsed;
+            SubGoalTextLbl.Visibility = Visibility.Collapsed;
+            AddGoalGoalsListView.Items.Clear();
         }
     }
 }
