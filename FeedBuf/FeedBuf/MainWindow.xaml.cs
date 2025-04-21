@@ -35,10 +35,8 @@ namespace FeedBuf
             InitializeComponent();
 
             // Login
+            HideAllPanels();
             LoginPanel.Visibility = Visibility.Visible;
-            DashboardPanel.Visibility = Visibility.Collapsed;
-            GoalsPanel.Visibility = Visibility.Collapsed;
-            ActionPanel.Visibility = Visibility.Collapsed;
             WelcomeTextBlock.MouseLeftButtonDown += WelcomeTextBlock_Click;
             WelcomeTextBlock.Cursor = Cursors.Hand;
         
@@ -387,7 +385,6 @@ namespace FeedBuf
                     MessageBox.Show("Selecteer een hard deadline.");
                     return;
                 }
-
                 int id = 0;
                 DateTime soft = SoftDeadlinePicker.SelectedDate.Value;
                 DateTime hard = HardDeadlinePicker.SelectedDate.Value;
@@ -408,7 +405,6 @@ namespace FeedBuf
                     MessageBox.Show("Geen categorie geselecteerd.");
                     return;
                 }
-
                 string body = GoalTextTxtBx.Text;
                 string shortDescription = ShortDescTxtBx.Text;
                 ZuydUser student = loggedInUser;
@@ -1165,6 +1161,16 @@ namespace FeedBuf
                     searchedUserWIndow.Show();
                 }
             }
+        }
+
+        private void SubIdChecked(object sender, RoutedEventArgs e)
+        {
+            SubIdTxtBx.Visibility = Visibility.Visible;
+        }
+
+        private void SubIdUnchecked(object sender, RoutedEventArgs e)
+        {
+            SubIdTxtBx.Visibility = Visibility.Collapsed;
         }
     }
 }
