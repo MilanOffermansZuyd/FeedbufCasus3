@@ -725,8 +725,9 @@ namespace FeedBuf
                             var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                             var student = GetZuydUserFromDatabaseBy( int.Parse(reader[3].ToString()));
                             var text = reader[4].ToString();
+                            var description = reader[5].ToString();
 
-                            feedbacks.Add(new Feedback(id, goal, text, student, student, string.Empty));
+                            feedbacks.Add(new Feedback(id, goal, text, student, student, description));
                         }
                     }
                     return feedbacks;
@@ -759,8 +760,9 @@ namespace FeedBuf
                         var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                         var student = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
                         var text = reader[4].ToString();
+                        var description = reader[5].ToString();
 
-                        results.Add(new Feedback(id, goal, text, student, student, string.Empty));
+                        results.Add(new Feedback(id, goal, text, student, student, description));
                     }
                 }
             }
@@ -787,8 +789,9 @@ namespace FeedBuf
                             var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
                             var student = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
                             var text = reader[4].ToString();
+                            var description = reader[5].ToString();
 
-                            return new Feedback(id, goal, text, student, student, string.Empty);
+                            return new Feedback(id, goal, text, student, student, description);
                         }
                         return null;
                     }
@@ -806,16 +809,17 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Feedback (GoalId,StudentId,AuthorId,Message) VALUES (@GoalId, @StudentId, @AuthorId,@Message) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO Feedback (GoalId,StudentId,AuthorId,Message,ShortDescription) VALUES (@GoalId, @StudentId, @AuthorId, @Message, @Description) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", feedback.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", feedback.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", feedback.Author.Id);
                     command.Parameters.AddWithValue("@Message", feedback.Text);
+                    command.Parameters.AddWithValue("@Description", feedback.ShortDescription);
                     var newId = Convert.ToInt32(command.ExecuteScalar());
                     var Goal = feedback.Goal;
                     var User = feedback.Student;
 
-                    feedbacks.Add(new Feedback(newId, Goal, feedback.Text, User, User , string.Empty));
+                    feedbacks.Add(new Feedback(newId, Goal, feedback.Text, User, User , feedback.ShortDescription));
 
                     return feedbacks;
                 }
@@ -851,12 +855,13 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE Feedback SET GoalId = @GoalId, StudentId = @StudentId, AuthorId = @AuthorId , Message = @Message WHERE Id = @Id";
+                    command.CommandText = "UPDATE Feedback SET GoalId = @GoalId, StudentId = @StudentId, AuthorId = @AuthorId , Message = @Message, ShortDescription = @Description WHERE Id = @Id";
                     command.Parameters.AddWithValue("@Id", feedback.Id);
                     command.Parameters.AddWithValue("@GoalId", feedback.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", feedback.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", feedback.Author.Id);
                     command.Parameters.AddWithValue("@Message", feedback.Text);
+                    command.Parameters.AddWithValue("@Description", feedback.ShortDescription);
 
                     command.ExecuteNonQuery();
 

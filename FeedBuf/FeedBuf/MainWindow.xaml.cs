@@ -974,12 +974,13 @@ namespace FeedBuf
                 return;
             }
 
-            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
+            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, FeedbackTitleTextBox.Text);
             dal.AddFeedbackFromDatabase(feedback);
 
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
             FeedbackListView.Items.Refresh();
             FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
             GoalComboBox.SelectedIndex = -1;
         }
 
@@ -998,6 +999,7 @@ namespace FeedBuf
             }
 
             selectedFeedback.Text = FeedbackTextBox.Text;
+            selectedFeedback.ShortDescription = FeedbackTitleTextBox.Text;
             dal.UpdateFeedbackFromDatabase(selectedFeedback);
 
             FeedbackListView.ItemsSource = null;
@@ -1005,6 +1007,7 @@ namespace FeedBuf
             FeedbackListView.Items.Refresh();
 
             FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
         }
 
         private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
