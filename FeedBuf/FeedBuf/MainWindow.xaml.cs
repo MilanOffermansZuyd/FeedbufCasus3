@@ -1147,7 +1147,7 @@ namespace FeedBuf
 
                 if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Zoek op student naam...")
                 {
-                    var filteredActions = dal.GetUserActionsByStudentName(searchText);
+                    List<UserAction> filteredActions = dal.GetUserActionsByStudentName(searchText);
                     SearchedUserWIndow searchedUserWIndow = new SearchedUserWIndow(filteredActions);
                     searchedUserWIndow.Show();
                 }

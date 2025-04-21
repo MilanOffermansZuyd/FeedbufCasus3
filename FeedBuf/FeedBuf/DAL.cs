@@ -987,7 +987,7 @@ namespace FeedBuf
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message,OpenForFeedback,ShortDescription) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message,@OpenForFeedback) SELECT @@IDENTITY";
+                    command.CommandText = "INSERT INTO UserAction (GoalId,StudentId,AuthorId,IsFinished,CreatedOn,SoftDeadline,HardDeadline,Message,OpenForFeedback,ShortDescription) VALUES (@GoalId,@StudentId, @AuthorId, @IsFinished,@CreatedOn,@SoftDeadline,@HardDeadline,@Message,@OpenForFeedback, @ShortDescription) SELECT @@IDENTITY";
                     command.Parameters.AddWithValue("@GoalId", userAction.Goal.Id);
                     command.Parameters.AddWithValue("@StudentId", userAction.Student.Id);
                     command.Parameters.AddWithValue("@AuthorId", userAction.Author.Id);
