@@ -10,7 +10,7 @@ namespace FeedBuf
     public class Goal : Message
     {
         public int Id { get; set; }
-        public DateTime SoftDeadline { get; set; }
+        public DateTime? SoftDeadline { get; set; }
         public DateTime HardDeadline { get; set; }
         public bool IsFinished { get; set; }
         public bool OpenForFeedback { get; set; }
@@ -20,8 +20,8 @@ namespace FeedBuf
         public List<UserAction> Actions { get; set; }
 
         // Constructor
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId)
-            : base(id, text, student, author, string.Empty)
+        public Goal(int id, DateTime? softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int subId, string shortDescription)
+            : base(id, text, student, author, shortDescription)
         {
             Id = id;
             SoftDeadline = softDeadline;
@@ -34,8 +34,8 @@ namespace FeedBuf
             Actions = new List<UserAction>();
         }
 
-        public Goal(int id, DateTime softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int? subId)
-            : base(id, text, student, author, string.Empty)
+        public Goal(int id, DateTime? softDeadline, DateTime hardDeadline, bool isFinished, Category category, string text, ZuydUser student, ZuydUser author, bool openForFeedback, int? subId, string shortDescription)
+            : base(id, text, student, author, shortDescription)
         {
             Id = id;
             SoftDeadline = softDeadline;
