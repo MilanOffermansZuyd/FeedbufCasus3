@@ -971,7 +971,8 @@ namespace FeedBuf
 
         private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FeedbackTextBox.Text.Trim() == "") return;
+            if (FeedbackTitleTextBox.Text.Trim() == "") return;
+            if (FeedbackDescriptionTextBox.Text.Trim() == "") return;
 
             Goal selectedGoal = GoalComboBox.SelectedItem as Goal;
             if (selectedGoal == null)
@@ -980,12 +981,13 @@ namespace FeedBuf
                 return;
             }
 
-            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTextBox.Text, loggedInUser, loggedInUser, "");
+            Feedback feedback = new Feedback(0, selectedGoal, FeedbackTitleTextBox.Text, loggedInUser, loggedInUser, FeedbackDescriptionTextBox.Text);
             dal.AddFeedbackFromDatabase(feedback);
 
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
             FeedbackListView.Items.Refresh();
-            FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
+            FeedbackDescriptionTextBox.Text = "";
             GoalComboBox.SelectedIndex = -1;
         }
 
@@ -997,20 +999,20 @@ namespace FeedBuf
                 return;
             }
 
-            if (FeedbackTextBox.Text.Trim() == "")
+            if (FeedbackTitleTextBox.Text.Trim() == "")
             {
                 MessageBox.Show("Voer nieuwe feedback in om te kunnen updaten.");
                 return;
             }
 
-            selectedFeedback.Text = FeedbackTextBox.Text;
+            selectedFeedback.Text = FeedbackTitleTextBox.Text;
             dal.UpdateFeedbackFromDatabase(selectedFeedback);
 
             FeedbackListView.ItemsSource = null;
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
             FeedbackListView.Items.Refresh();
 
-            FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
         }
 
         private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
@@ -1027,7 +1029,7 @@ namespace FeedBuf
             FeedbackListView.ItemsSource = dal.FillFeedbacksFromDatabase();
             FeedbackListView.Items.Refresh();
 
-            FeedbackTextBox.Text = "";
+            FeedbackTitleTextBox.Text = "";
         }
 
         private void BackToDashboardFromFeedback_Click(object sender, RoutedEventArgs e)
