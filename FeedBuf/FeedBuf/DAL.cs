@@ -715,6 +715,40 @@ namespace FeedBuf
             }
         }
 
+        public List<Feedback> GetFeedbackByStudentName(string name)
+        {
+            List<Feedback> results = new List<Feedback>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @"
+                    SELECT * FROM Feedback 
+                    JOIN ZuydUser ON Feedback.StudentId = ZuydUser.Id
+                    WHERE ZuydUser.FirstName LIKE @FirstName";
+
+                command.Parameters.AddWithValue("@FirstName", "%" + name + "%");
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var id = int.Parse(reader[0].ToString());
+                        var goal = GetGoalFromDatabaseBy(int.Parse(reader[1].ToString()));
+                        var author = GetZuydUserFromDatabaseBy(int.Parse(reader[2].ToString()));
+                        var student = GetZuydUserFromDatabaseBy(int.Parse(reader[3].ToString()));
+                        var text = reader[4].ToString();
+
+                        results.Add(new Feedback(id, goal, text, student, student, string.Empty));
+                    }
+                }
+            }
+
+            return results;
+        }
+
         public Feedback GetFeedbackFromDatabaseBy(int Id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
