@@ -1138,5 +1138,20 @@ namespace FeedBuf
                 }
             }
         }
+
+        private void ActionSearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchText = ActionSearchTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Zoek op student naam...")
+                {
+                    var filteredActions = dal.GetUserActionsByStudentName(searchText);
+                    SearchedUserWIndow searchedUserWIndow = new SearchedUserWIndow(filteredActions);
+                    searchedUserWIndow.Show();
+                }
+            }
+        }
     }
 }
