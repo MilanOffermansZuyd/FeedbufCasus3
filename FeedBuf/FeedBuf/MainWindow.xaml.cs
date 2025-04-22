@@ -695,8 +695,26 @@ namespace FeedBuf
                 allGoals = dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id);
             }
 
-            var echteGoals = allGoals.Where(g => g.SubId == null).ToList();
-            foreach ( var item in echteGoals ) 
+            var realGoals = allGoals.Where(g => g.SubId == null).ToList();
+            foreach ( var item in realGoals ) 
+            {
+                listView.Items.Add(item);
+            }
+        }
+
+        private void FillAllGoalListView(ListView listView)
+        {
+            listView.Items.Clear();
+            List<Goal> allGoals;
+            if (loggedInUser.Role == 0)
+            {
+                allGoals = dal.FillAllGoalsFromDatabaseStudentBy(loggedInUser.Id);
+            }
+            else
+            {
+                allGoals = dal.FillAllGoalsFromDatabaseDocentBy(loggedInUser.Id);
+            }
+            foreach (var item in allGoals)
             {
                 listView.Items.Add(item);
             }
@@ -737,20 +755,37 @@ namespace FeedBuf
             {
                 var subGoals = dal.GetSubGoalsForGoal(selectedGoal.Id);
 
-                if (subGoals == null)
-                {
-                    MessageBox.Show("subGoals is NULL!");
-                    return;
-                }
+                HideAllPanels();
+                ClearAllFields(ReadGoalStack);
+                ReadGoalPanel.Visibility = Visibility.Visible;
+
+                DateTime? soft = selectedGoal.SoftDeadline;
+                DateTime? hard = selectedGoal.HardDeadline;
+
+
+                ReadGoalStudentTxtBx.Text = selectedGoal.Student.FirstName + " " + selectedGoal.Student.LastName;
+                ReadGoalShortDescTxtBx.Text = selectedGoal.ShortDescription;
+                ReadGoalTextTxtBx.Text = selectedGoal.Text;
+                ReadGoalCategoryTxtBx.Text = selectedGoal.Category.Type;
+                ReadGoalFeedbackTxtBx.Text = selectedGoal.OpenForFeedback ? "Yes" : "No";
+                ReadGoalSoftTxtBx.Text = soft.HasValue ? soft.Value.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
+                ReadGoalHardTxtBx.Text = hard.HasValue ? hard.Value.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
+                UCategorySelectionListBx.SelectedItem = null;
 
                 if (subGoals.Any())
                 {
-                    var subGoalWindow = new SubGoalWindow(subGoals);
-                    subGoalWindow.Show();
+                    ReadGoalSubGoalsLbl.Visibility = Visibility.Visible;
+                    ReadGoalSubGoalListView.Visibility = Visibility.Visible;
+                    ReadGoalSubGoalListView.Items.Clear();
+                    foreach (var subGoal in subGoals)
+                    {
+                        ReadGoalSubGoalListView.Items.Add(subGoal);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Deze goal heeft geen subgoals.");
+                    ReadGoalSubGoalListView.Visibility = Visibility.Collapsed;
+                    ReadGoalSubGoalsLbl.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -1179,6 +1214,8 @@ namespace FeedBuf
             UpdateGoalPanel.Visibility = Visibility.Collapsed;
             UpdateActionPanel.Visibility = Visibility.Collapsed;
             ViewFeedbackPanel.Visibility = Visibility.Collapsed;
+            ReadGoalPanel.Visibility = Visibility.Collapsed;
+
         }
         
         private void ClearAllFields(StackPanel stackPanel)
@@ -1286,7 +1323,7 @@ namespace FeedBuf
         {
             AddGoalGoalsListView.Visibility = Visibility.Visible;
             SubGoalTextLbl.Visibility = Visibility.Visible;
-            FillGoalListView(AddGoalGoalsListView);
+            FillAllGoalListView(AddGoalGoalsListView);
         }
 
         private void SubIdUnchecked(object sender, RoutedEventArgs e)
@@ -1294,6 +1331,52 @@ namespace FeedBuf
             AddGoalGoalsListView.Visibility = Visibility.Collapsed;
             SubGoalTextLbl.Visibility = Visibility.Collapsed;
             AddGoalGoalsListView.Items.Clear();
+        }
+
+        private void ReadGoalSubGoalListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ReadGoalSubGoalListView.SelectedItem is Goal selectedGoal)
+            {
+                var subGoals = dal.GetSubGoalsForGoal(selectedGoal.Id);
+
+                HideAllPanels();
+                ClearAllFields(ReadGoalStack);
+                ReadGoalPanel.Visibility = Visibility.Visible;
+
+                DateTime? soft = selectedGoal.SoftDeadline;
+                DateTime? hard = selectedGoal.HardDeadline;
+
+
+                ReadGoalStudentTxtBx.Text = selectedGoal.Student.FirstName + " " + selectedGoal.Student.LastName;
+                ReadGoalShortDescTxtBx.Text = selectedGoal.ShortDescription;
+                ReadGoalTextTxtBx.Text = selectedGoal.Text;
+                ReadGoalCategoryTxtBx.Text = selectedGoal.Category.Type;
+                ReadGoalFeedbackTxtBx.Text = selectedGoal.OpenForFeedback ? "Yes" : "No";
+                ReadGoalSoftTxtBx.Text = soft.HasValue ? soft.Value.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
+                ReadGoalHardTxtBx.Text = hard.HasValue ? hard.Value.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
+                UCategorySelectionListBx.SelectedItem = null;
+
+                if (subGoals.Any())
+                {
+                    ReadGoalSubGoalsLbl.Visibility = Visibility.Visible;
+                    ReadGoalSubGoalListView.Visibility = Visibility.Visible;
+                    ReadGoalSubGoalListView.Items.Clear();
+                    foreach (var subGoal in subGoals)
+                    {
+                        ReadGoalSubGoalListView.Items.Add(subGoal);
+                    }
+                }
+                else
+                {
+                    ReadGoalSubGoalListView.Visibility = Visibility.Collapsed;
+                    ReadGoalSubGoalsLbl.Visibility = Visibility.Collapsed;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een subdoel om te bekijken.");
+            }
         }
     }
 }
