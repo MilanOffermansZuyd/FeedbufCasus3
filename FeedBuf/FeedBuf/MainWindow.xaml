@@ -74,7 +74,7 @@
             </StackPanel>
         </Border>
 
-        <!-- Feedback Panel-->
+        <!-- Feedback Overview Panel-->
 
         <Border x:Name="FeedbackPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
 
@@ -303,7 +303,7 @@
             </StackPanel>
         </Border>
 
-        <!-- Action Panel -->
+        <!-- Action Overview Panel -->
         <Border x:Name="ActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10" Visibility="Collapsed">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="ActionSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="ActionSearchTextBox_KeyDown"/>
@@ -328,7 +328,7 @@
 
         </Border>
 
-        <!-- Goals Panel -->
+        <!-- Goals Overview Panel -->
         <Border x:Name="GoalsPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
                 <TextBox x:Name="GoalSearchTextBox" Width="600" Height="30" VerticalContentAlignment="Center" Padding="5" Foreground="Gray" Text="Zoek op student naam..." GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" KeyDown="GoalSearchTextBox_KeyDown" av:IsHidden="True"/>
@@ -393,7 +393,6 @@
             </StackPanel>
         </Border>
         <!-- Create Goals panel -->
-
         <Border x:Name="AddActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" av:IsHidden="True" Visibility="Collapsed">
             <StackPanel x:Name="AddActionStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
@@ -421,7 +420,8 @@
             </StackPanel>
         </Border>
         <!--Update Panels-->
-
+        
+        <!--Update Goal-->
         <Border x:Name="UpdateGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" av:IsHidden="True" Visibility="Collapsed">
             <StackPanel x:Name="UpdateGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
@@ -444,7 +444,7 @@
                 <Button x:Name="BackToGoalsFromUpdateGoalButton" Content="Back to Goals" Click="BackToGoalsFromUpdateGoal_Click" Width="131" HorizontalAlignment="Left"/>
             </StackPanel>
         </Border>
-
+        <!--Update Action-->
         <Border x:Name="UpdateActionPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10" Visibility="Collapsed" av:IsHidden="True">
             <StackPanel x:Name="UpdateActionStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="600">
 
@@ -469,6 +469,38 @@
                 <DatePicker x:Name="UActionHardDeadlinePicker" Height="43" Width="229" HorizontalAlignment="Left"/>
                 <Button x:Name="UpdateActionButton" Content="Update Action" Click="UpdateUserActionButton_Click" Width="131" HorizontalAlignment="Left"/>
                 <Button x:Name="BackToActionsFromUpdateActionButton" Content="Back to Actions" Click="BackToActionsFromUpdateAction_Click" Width="131" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+        <!-- Read Goals -->
+        <Border x:Name="ReadGoalPanel" Background="#ebebeb" Grid.Column="1" CornerRadius="10" Margin="10,10,10,10">
+            <StackPanel x:Name="ReadGoalStack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
+                <Label x:Name="SelectStudentLbl1" Content="Student:" Visibility="Visible"/>
+                <TextBox x:Name="ReadGoalStudentTxtBx" TextWrapping="Wrap" Width="610" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalShortDescLbl" Content="Short Description:"/>
+                <TextBox x:Name="ReadGoalShortDescTxtBx" TextWrapping="Wrap" Width="610" HorizontalAlignment="Left" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalTextLbl" Content="Goal:"/>
+                <TextBox x:Name="ReadGoalTextTxtBx" TextWrapping="Wrap" Width="610" Height="97" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalFeedbackLbl" Content="Feedback Allowed:"/>
+                <TextBox x:Name="ReadGoalFeedbackTxtBx" TextWrapping="Wrap" Width="610" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalCategoryLbl" Content="Category:"/>
+                <TextBox x:Name="ReadGoalCategoryTxtBx" TextWrapping="Wrap" Width="610" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalSoftDeadlineLbl" Content="Soft Deadline:"/>
+                <TextBox x:Name="ReadGoalSoftTxtBx" TextWrapping="Wrap" Width="610" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalHardDeadlineLbl" Content="Hard Deadline:"/>
+                <TextBox x:Name="ReadGoalHardTxtBx" TextWrapping="Wrap" Width="610" Height="28" IsReadOnly="True"/>
+                <Label x:Name="ReadGoalSubGoalsLbl" Content="Sub-Goals:"/>
+                <ListView x:Name="ReadGoalSubGoalListView" MouseDoubleClick="ReadGoalSubGoalListView_MouseDoubleClick" Height="250">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                            <GridViewColumn Header="Short description" DisplayMemberBinding="{Binding ShortDescription}" Width="350" />
+                            <GridViewColumn Header="Soft deadline" DisplayMemberBinding="{Binding SoftDeadline}" Width="100" />
+                            <GridViewColumn Header="Hard deadline" DisplayMemberBinding="{Binding HardDeadline}" Width="100" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="BackToGoalsFromReadGoal" Content="Back to Goals" Click="BackToGoalsFromAddGoal_Click" Width="131" HorizontalAlignment="Left"/>
+
             </StackPanel>
         </Border>
     </Grid>
