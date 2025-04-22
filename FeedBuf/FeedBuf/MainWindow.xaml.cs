@@ -661,7 +661,7 @@ namespace FeedBuf
                 FillGoalListView(UGoalsSelectionListView);
                 selectedUserActionForUpdate = selectedActionUser;
                 userActionToUpdate = selectedActionUser.Id;
-                UActionTextLbl.Content = selectedActionUser.ShortDescription;
+                UActionShortDescTxtBx.Text = selectedActionUser.ShortDescription;
                 UActionTextTxtBx.Text = selectedActionUser.Text;
                 UActionOpenForFBChckBx.IsChecked = selectedActionUser.OpenForFeedback;
                 UActionSoftDeadlinePicker.Text = selectedActionUser.SoftDeadline.ToString();
@@ -1033,7 +1033,7 @@ namespace FeedBuf
             HideAllPanels();
             AddActionPanel.Visibility = Visibility.Visible;
             GoalsSelectionListView.Items.Clear();
-            var goalsByUser = loggedInUser.Role == 0 ? dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id);
+            var goalsByUser = loggedInUser.Role == 0 ? dal.FillAllGoalsFromDatabaseStudentBy(loggedInUser.Id) : dal.FillAllGoalsFromDatabaseDocentBy(loggedInUser.Id);
             foreach (var item in goalsByUser)
             {
                 GoalsSelectionListView.Items.Add(item);
@@ -1112,7 +1112,7 @@ namespace FeedBuf
             HideAllPanels();
             FeedbackPanel.Visibility = Visibility.Visible;
             FeedbackListView.ItemsSource = loggedInUser.Role == 0 ? dal.FillFeedbacksFromDatabaseStudentBy(loggedInUser.Id) : dal.FillFeedbacksFromDatabaseDocentBy(loggedInUser.Id);
-            GoalComboBox.ItemsSource = loggedInUser.Role == 0 ? dal.FillGoalsFromDatabaseStudentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList(): dal.FillGoalsFromDatabaseDocentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList();
+            GoalComboBox.ItemsSource = loggedInUser.Role == 0 ? dal.FillAllGoalsFromDatabaseStudentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList(): dal.FillAllGoalsFromDatabaseDocentBy(loggedInUser.Id).Where(g => g.OpenForFeedback).ToList();
         }
 
         private void AddFeedbackButton_Click(object sender, RoutedEventArgs e)
